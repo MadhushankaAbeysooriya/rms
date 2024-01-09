@@ -2,17 +2,21 @@
 
 namespace App\Http\Controllers\master;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\master\LocationType;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreLocationTypeRequest;
+use App\DataTables\master\LocationTypeDataTable;
+use App\Http\Requests\UpdateLocationTypeRequest;
 
 class LocationTypeController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(LocationTypeDataTable $dataTable)
     {
-        //
+        return $dataTable->render('master.location_types.index');
     }
 
     /**
@@ -20,46 +24,55 @@ class LocationTypeController extends Controller
      */
     public function create()
     {
-        //
+        return view('master.location_types.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreLocationTypeRequest $request)
     {
-        //
+        LocationType::create($request->all());
+        return redirect()->route('location_types.index')->with('success','Location Type Created');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($id)
     {
-        //
+        $locationType = LocationType::find($id);
+
+        return view('master.location_types.show',compact('locationType'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($id)
     {
-        //
+        $locationType = LocationType::find($id);
+
+        return view('master.location_types.edit',compact('locationType'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateLocationTypeRequest $request, LocationType $locationType)
     {
-        //
+        $locationType->update($request->toArray());
+        return redirect()->route('location_types.index')->with('message', 'Location Type Updated');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        //
+        $locationType = LocationType::find($id);
+        $locationType->delete();
+        return redirect()->route('location_types.index')
+            ->with('danger', 'Location Type Deleted successfully');
     }
 }

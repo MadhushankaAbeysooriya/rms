@@ -7,8 +7,8 @@
 </li>
 
 
-@can('province-list','district-list','hospital-list')
-    <li class="nav-item {{ request()->routeIs('district*','province*','hospitals*')?'menu-open':'' }}">
+
+    <li class="nav-item {{ request()->routeIs('location_types*')?'menu-open':'' }}">
         <a href="#" class="nav-link">
             <i class="nav-icon fas fa-cogs text-blue"></i>
             <p>
@@ -16,45 +16,19 @@
                 <i class="right fas fa-angle-left text-blue"></i>
             </p>
         </a>
-
-        @can('province-list')    
+   
             <ul class="nav nav-treeview">
                 <li class="nav-item">
-                    <a href="{{route('province.index')}}" class="nav-link
-                    {{ request()->routeIs('province*')?'active':'' }}">
+                    <a href="{{route('location_types.index')}}" class="nav-link
+                    {{ request()->routeIs('location_types*')?'active':'' }}">
                         <i class="far fa-circle nav-icon text-blue"></i>
-                        <p>Province</p>
+                        <p>Location Type</p>
                     </a>
                 </li>
             </ul>
-        @endcan
-
-        @can('district-list')    
-            <ul class="nav nav-treeview">
-                <li class="nav-item">
-                    <a href="{{route('district.index')}}" class="nav-link
-                    {{ request()->routeIs('district*')?'active':'' }}">
-                        <i class="far fa-circle nav-icon text-blue"></i>
-                        <p>District</p>
-                    </a>
-                </li>
-            </ul>
-        @endcan
-       
-        @can('hospital-list')
-            <ul class="nav nav-treeview">
-                <li class="nav-item">
-                    <a href="{{route('hospitals.index')}}" class="nav-link
-                    {{ request()->routeIs('hospitals*')?'active':'' }}">
-                        <i class="far fa-circle nav-icon text-blue"></i>
-                        <p>Hospital</p>
-                    </a>
-                </li>
-            </ul>
-        @endcan
-
+        
     </li>
-@endcan
+
 
 @can('role-list','user-list','logindetail-list','searchdetail-list')
     <li class="nav-item {{ request()->routeIs('users*', 'roles*','logindetails.index','searchdetails.index')?'menu-open':'' }}">
