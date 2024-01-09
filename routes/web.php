@@ -53,6 +53,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::prefix('master/')->group(function (){
         Route::resource('location_types',LocationTypeController::class);
         Route::resource('locations',LocationController::class);
+        Route::resource('locations',LocationController::class);
         Route::resource('ration_categories',RationCategoryController::class);
     });
 });
