@@ -15,6 +15,7 @@ use App\Http\Controllers\SearchDetailController;
 use App\Http\Controllers\UserHospitalController;
 use App\Http\Controllers\ChangePasswordController;
 use App\Http\Controllers\master\LocationTypeController;
+use App\Http\Controllers\master\LocationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -49,6 +50,7 @@ Route::group(['middleware' => ['auth']], function() {
     
     Route::prefix('master/')->group(function (){
         Route::resource('location_types',LocationTypeController::class);
+        Route::resource('locations',LocationController::class);
     });
 });
 
