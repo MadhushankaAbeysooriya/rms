@@ -79,8 +79,11 @@ class LocationController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        //
+        $location = Location::find($id);
+        $location->delete();
+        return redirect()->route('locations.index')
+            ->with('danger', 'Location Deleted successfully');
     }
 }
