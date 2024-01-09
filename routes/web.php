@@ -14,6 +14,7 @@ use App\Http\Controllers\LoginDetailController;
 use App\Http\Controllers\SearchDetailController;
 use App\Http\Controllers\UserHospitalController;
 use App\Http\Controllers\ChangePasswordController;
+use App\Http\Controllers\master\LocationTypeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,32 +43,12 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('users', UserController::class);
     
     Route::get('/change-password',  [ChangePasswordController::class,'index'])->name('change.index');
-    Route::post('/change-password', [ChangePasswordController::class,'store'])->name('change.password');
-
-    Route::get('/province/inactive/{id}',[ProvinceController::class,'inactive'])->name('province.inactive');
-    Route::get('/province/activate/{id}',[ProvinceController::class,'activate'])->name('province.activate');
-    Route::resource('province', ProvinceController::class);    
-
-    Route::get('/district/inactive/{id}',[DistrictController::class,'inactive'])->name('district.inactive');
-    Route::get('/district/activate/{id}',[DistrictController::class,'activate'])->name('district.activate');
-    Route::resource('district', DistrictController::class);
-
-    Route::get('/dsdivision/inactive/{id}',[DSDivisionController::class,'inactive'])->name('dsdivision.inactive');
-    Route::get('/dsdivision/activate/{id}',[DSDivisionController::class,'activate'])->name('dsdivision.activate');
-    Route::resource('dsdivision', DSDivisionController::class);
-
-    Route::get('/hospital/inactive/{id}',[HospitalController::class,'inactive'])->name('hospitals.inactive');
-    Route::get('/hospital/activate/{id}',[HospitalController::class,'activate'])->name('hospitals.activate');
-    Route::resource('hospitals', HospitalController::class);
-
-    Route::post('/searchdetails',[HomeController::class,'searchdetail'])->name('searchdetail');
+    Route::post('/change-password', [ChangePasswordController::class,'store'])->name('change.password');    
 
     Route::get('/logindetails',[LoginDetailController::class,'index'])->name('logindetails.index');
-
-    Route::get('/searchdetails',[SearchDetailController::class,'index'])->name('searchdetails.index');
     
-    Route::prefix('hospital/{hospital}')->group(function (){
-        Route::resource('userhospitals',UserHospitalController::class);
+    Route::prefix('master/')->group(function (){
+        Route::resource('location_types',LocationTypeController::class);
     });
 });
 
