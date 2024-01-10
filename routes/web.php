@@ -18,6 +18,7 @@ use App\Http\Controllers\master\LocationTypeController;
 use App\Http\Controllers\master\RationCategoryController;
 use App\Http\Controllers\master\BrandController;
 use App\Http\Controllers\master\QuarterController;
+use App\Http\Controllers\master\MeasurementController;
 
 /*
 |--------------------------------------------------------------------------
@@ -55,6 +56,7 @@ Route::group(['middleware' => ['auth']], function() {
         Route::resource('ration_categories',RationCategoryController::class);
         Route::resource('brands',BrandController::class);
         Route::resource('quarters',QuarterController::class);
+        Route::resource('measurements',MeasurementController::class);
     });
 });
 
