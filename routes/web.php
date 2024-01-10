@@ -64,9 +64,11 @@ Route::group(['middleware' => ['auth']], function() {
         Route::resource('location_types',LocationTypeController::class);
         Route::resource('locations',LocationController::class);
         Route::resource('item_categories',ItemCategoryController::class);
+
         Route::get('/items/add_alternative_items/{id}',[ItemController::class,'addAlternativeView'])->name('items.add_alternative_view');
         Route::post('/items/save_alternative_items/{id}',[ItemController::class,'saveAlternative'])->name('items.save_alternative');
         Route::delete('/items/delete_alternative_item/{id}',[ItemController::class,'deleteAlternative'])->name('items.delete_alternative');
+
         Route::resource('items',ItemController::class);
         Route::resource('ration_dates',RationDateController::class);
         Route::resource('ration_types',RationTypeController::class);

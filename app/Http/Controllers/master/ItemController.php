@@ -116,8 +116,7 @@ class ItemController extends Controller
     public function saveAlternative(StoreAlternativeItemRequest $request, $id)
     {
 
-
-
+//        dd('pass');
         AlternativeItem::create($request->all());
 
         $items = Item::get();
@@ -135,8 +134,20 @@ class ItemController extends Controller
     }
 
 
-    public function deleteAlternative($id)
+    public function deleteAlternative(Request $request, $id)
     {
-        AlternativeItem::find($id)->forceDelete();
+
+        AlternativeItem::where('id', $id)->forceDelete();
+
+        $items = Item::get();
+        $item =  Item::with(['itemCategory', 'measurement', 'rationCategory'])
+            ->where('id', $request->item_id)
+            ->select('id', 'name', 'item_category_id', 'measurement_id', 'ration_category_id')
+            ->first();
+        $alternativeItems = AlternativeItem::with(['Item'])
+            ->where('item_id',$request->item_id)
+            ->get();
+
+        return view('master.items.create_alternative_items',compact('item','items','alternativeItems'));
     }
 }

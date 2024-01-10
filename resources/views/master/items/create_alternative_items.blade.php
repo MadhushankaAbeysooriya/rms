@@ -72,35 +72,37 @@
                                     <div class="card-body">
 
                                         <table class="table">
-                                <thead>
-                                <tr>
-                                    <th scope="col" width="10%">#</th>
-                                    <th scope="col" width="80%">Alternative Item</th>
-                                    <th class="col">Action</th>
-                                </tr>
-                                </thead>
-                                <tbody>
 
-                                   <?php $i=1 ?>
-                                    @foreach($alternativeItems as $alternativeItem)
-                                        <tr>
-                                            <td>{{$i++}}</td>
-                                            <td>{{$alternativeItem->item->name}}</td>
-                                            <td class="">
+                                            <thead>
+                                            <tr>
+                                                <th scope="col" width="10%">#</th>
+                                                <th scope="col" width="80%">Alternative Item</th>
+                                                <th class="col">Action</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
 
-                                                <form action="{{ route('items.delete_alternative', $alternativeItem->id) }}" method="POST" class="d-inline">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn bg-danger btn-xs dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700" onclick="return confirm('Do you need to delete this');">
-                                                        <i class="fa fa-trash-alt"></i>
-                                                    </button>
-                                                </form>
-                                            </td>
-                                        </tr>
-                                    @endforeach
+                                               <?php $i=1 ?>
+                                                @foreach($alternativeItems as $alternativeItem)
+                                                    <tr>
+                                                        <td>{{$i++}}</td>
+                                                        <td>{{$alternativeItem->item->name}}</td>
+                                                        <td class="">
 
-                                </tbody>
-                            </table>
+                                                            <form action="{{ route('items.delete_alternative', $alternativeItem->id) }}" method="POST" class="d-inline">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <input type="hidden" name="item_id" value="{{$item->id}}">
+                                                                <button type="submit" class="btn bg-danger btn-xs dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700" onclick="return confirm('Do you need to delete this');">
+                                                                    <i class="fa fa-trash-alt"></i>
+                                                                </button>
+                                                            </form>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+
+                                            </tbody>
+                                        </table>
 
                                     </div>
                                 </div>
