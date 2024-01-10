@@ -57,7 +57,7 @@ class BrandController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdatebrandRequest $request, Brand $brand)
+    public function update(UpdateBrandRequest $request, Brand $brand)
     {
         $brand->update($request->toArray());
         return redirect()->route('brands.index')->with('message', 'Brand Updated');
