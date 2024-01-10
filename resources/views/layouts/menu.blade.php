@@ -6,6 +6,14 @@
     </a>
 </li>
 
+<li class="nav-item">
+    <a href="{{route('annual_demands.index')}}" class="nav-link
+    {{ request()->routeIs('annual_demands*')?'active':'' }}">
+        <i class="nav-icon fas fa-user-graduate"></i>
+            <p>Annual Demand</p>
+    </a>
+</li>
+
 
 
     <li class="nav-item {{ request()->routeIs('location_types*') || request()->routeIs('ration_categories*') || request()->routeIs('brands*') || request()->routeIs('quarters*') || request()->routeIs('measurements*') || request()->routeIs('receipt_types*')?'menu-open':'' }}">

@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\master\AnnualDemand;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AjaxController;
@@ -11,18 +12,19 @@ use App\Http\Controllers\HospitalController;
 use App\Http\Controllers\ProvinceController;
 use App\Http\Controllers\DSDivisionController;
 use App\Http\Controllers\LoginDetailController;
+use App\Http\Controllers\AnnualDemandController;
+use App\Http\Controllers\master\BrandController;
 use App\Http\Controllers\SearchDetailController;
 use App\Http\Controllers\UserHospitalController;
 use App\Http\Controllers\ChangePasswordController;
+use App\Http\Controllers\master\QuarterController;
 use App\Http\Controllers\master\RationDateController;
 use App\Http\Controllers\master\RationTimeController;
 use App\Http\Controllers\master\RationTypeController;
-use App\Http\Controllers\master\LocationTypeController;
-use App\Http\Controllers\master\RationCategoryController;
-use App\Http\Controllers\master\BrandController;
-use App\Http\Controllers\master\QuarterController;
 use App\Http\Controllers\master\MeasurementController;
 use App\Http\Controllers\master\ReceiptTypeController;
+use App\Http\Controllers\master\LocationTypeController;
+use App\Http\Controllers\master\RationCategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -66,6 +68,8 @@ Route::group(['middleware' => ['auth']], function() {
         Route::resource('measurements',MeasurementController::class);
         Route::resource('receipt_types',ReceiptTypeController::class);
     });
+
+    Route::resource('annual_demands',AnnualDemandController::class);
 });
 
 Route::get('/ajax/getDistricts',[AjaxController::class,'getDistricts'])->name('ajax.getDistricts');
