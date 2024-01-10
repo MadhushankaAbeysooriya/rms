@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers\master;
 
+use App\DataTables\master\ItemCategoryDataTable;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreItemCategoryRequest;
+use App\Http\Requests\UpdateItemCategoryRequest;
+use App\Models\master\ItemCategory;
 use Illuminate\Http\Request;
 
 class ItemCategoryController extends Controller
@@ -10,9 +14,9 @@ class ItemCategoryController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(ItemCategoryDataTable $dataTable)
     {
-        //
+        return $dataTable->render('master.Item_Categories.index');
     }
 
     /**
@@ -20,46 +24,53 @@ class ItemCategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('master.Item_Categories.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreItemCategoryRequest $request)
     {
-        //
+        ItemCategory::create($request->all());
+        return redirect()->route('item_categories.index')->with('success','Item Category Created');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($id)
     {
-        //
+        $ItemCategory = ItemCategory::find($id);
+        return view('master.item_categories.show',compact('ItemCategory'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($id)
     {
-        //
+        $ItemCategory = ItemCategory::find($id);
+        return view('master.item_categories.edit',compact('ItemCategory'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateItemCategoryRequest $request, ItemCategory $itemCategory)
     {
-        //
+        $itemCategory->update($request->toArray());
+        return redirect()->route('item_categories.index')->with('message', 'Item Category Updated');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        //
+        $itemCategory = ItemCategory::find($id);
+        $itemCategory->delete();
+        return redirect()->route('item_categories.index')
+            ->with('danger', 'Item Category Deleted successfully');
     }
 }

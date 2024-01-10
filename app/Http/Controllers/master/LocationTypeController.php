@@ -42,7 +42,6 @@ class LocationTypeController extends Controller
     public function show($id)
     {
         $locationType = LocationType::find($id);
-
         return view('master.location_types.show',compact('locationType'));
     }
 
@@ -52,7 +51,6 @@ class LocationTypeController extends Controller
     public function edit($id)
     {
         $locationType = LocationType::find($id);
-
         return view('master.location_types.edit',compact('locationType'));
     }
 
