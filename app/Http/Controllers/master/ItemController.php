@@ -4,8 +4,10 @@ namespace App\Http\Controllers\master;
 
 use App\DataTables\master\ItemDataTable;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreAlternativeItemRequest;
 use App\Http\Requests\StoreItemRequest;
 use App\Http\Requests\UpdateItemRequest;
+use App\Models\master\AlternativeItem;
 use App\Models\master\Item;
 use App\Models\master\ItemCategory;
 use App\Models\master\Measurement;
@@ -95,5 +97,46 @@ class ItemController extends Controller
         $items->delete();
         return redirect()->route('items.index')
             ->with('danger', 'Item Deleted successfully');
+    }
+
+    public function addAlternativeView($id)
+    {
+        $items = Item::get();
+        $item =  Item::with(['itemCategory', 'measurement', 'rationCategory'])
+            ->where('id', $id)
+            ->select('id', 'name', 'item_category_id', 'measurement_id', 'ration_category_id')
+            ->first();
+        $alternativeItems = AlternativeItem::with(['Item'])
+            ->where('item_id',$id)
+            ->get();
+
+        return view('master.items.create_alternative_items',compact('item','items','alternativeItems'));
+    }
+
+    public function saveAlternative(StoreAlternativeItemRequest $request, $id)
+    {
+
+
+
+        AlternativeItem::create($request->all());
+
+        $items = Item::get();
+        $item =  Item::with(['itemCategory', 'measurement', 'rationCategory'])
+            ->where('id', $id)
+            ->select('id', 'name', 'item_category_id', 'measurement_id', 'ration_category_id')
+            ->first();
+
+        $alternativeItems = AlternativeItem::with(['Item'])
+            ->where('item_id',$id)
+            ->get();
+
+        return view('master.items.create_alternative_items',compact('item','items','alternativeItems'))->with('message', 'Alternative');
+
+    }
+
+
+    public function deleteAlternative($id)
+    {
+        AlternativeItem::find($id)->forceDelete();
     }
 }

@@ -27,6 +27,11 @@ class ItemDataTable extends DataTable
                 $id = $item->id;
                 $btn = '';
 
+                $btn .= '<a href="'.route('items.add_alternative_view',$id).'"
+                    class="btn btn-xs btn-success" data-toggle="tooltip" title="Add Alternatives">
+                    <i class="fas fa-plus"></i> </a> ';
+
+
                 $btn .= '<a href="'.route('items.edit',$id).'"
                     class="btn btn-xs btn-info" data-toggle="tooltip" title="Edit">
                     <i class="fa fa-pen-alt"></i> </a> ';
