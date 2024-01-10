@@ -8,8 +8,8 @@
 
 
 
-    <li class="nav-item {{ request()->routeIs('location_types*') || request()->routeIs('locations*') || request()->routeIs('item_categories*') ||
-    request()->routeIs('ration_categories*')?'menu-open':'' }}">
+<li class="nav-item {{ request()->routeIs('items*') || request()->routeIs('location_types*') || request()->routeIs('locations*') || request()->routeIs('item_categories*') || request()->routeIs('ration_categories*')?'menu-open':'' }}">
+    <li class="nav-item {{ request()->routeIs('items*') || request()->routeIs('location_types*') || request()->routeIs('locations*') || request()->routeIs('item_categories*') || request()->routeIs('ration_categories*') || request()->routeIs('brands*') || request()->routeIs('quarters*') || request()->routeIs('measurements*') || request()->routeIs('receipt_types*')?'menu-open':'' }}">
         <a href="#" class="nav-link">
             <i class="nav-icon fas fa-cogs text-blue"></i>
             <p>
@@ -45,6 +45,71 @@
                     {{ request()->routeIs('item_categories*')?'active':'' }}">
                         <i class="far fa-circle nav-icon text-blue"></i>
                         <p>Item Category</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route('items.index')}}" class="nav-link
+                    {{ request()->routeIs('items*')?'active':'' }}">
+                        <i class="far fa-circle nav-icon text-blue"></i>
+                        <p>Item</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route('brands.index')}}" class="nav-link
+                    {{ request()->routeIs('brands*')?'active':'' }}">
+                        <i class="far fa-circle nav-icon text-blue"></i>
+                        <p>Brand</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route('quarters.index')}}" class="nav-link
+                    {{ request()->routeIs('quarters*')?'active':'' }}">
+                        <i class="far fa-circle nav-icon text-blue"></i>
+                        <p>Quarter</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route('measurements.index')}}" class="nav-link
+                    {{ request()->routeIs('measurements*')?'active':'' }}">
+                        <i class="far fa-circle nav-icon text-blue"></i>
+                        <p>Measurement</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route('receipt_types.index')}}" class="nav-link
+                    {{ request()->routeIs('receipt_types*')?'active':'' }}">
+                        <i class="far fa-circle nav-icon text-blue"></i>
+                        <p>Receipt Type</p>
+                    </a>
+                </li>
+            </ul>
+
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="{{route('ration_dates.index')}}" class="nav-link
+                    {{ request()->routeIs('ration_dates*')?'active':'' }}">
+                        <i class="far fa-circle nav-icon text-blue"></i>
+                        <p>Ration Dates</p>
+                    </a>
+                </li>
+            </ul>
+
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="{{route('ration_types.index')}}" class="nav-link
+                    {{ request()->routeIs('ration_types*')?'active':'' }}">
+                        <i class="far fa-circle nav-icon text-blue"></i>
+                        <p>Ration Types</p>
+                    </a>
+                </li>
+            </ul>
+
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="{{route('ration_times.index')}}" class="nav-link
+                    {{ request()->routeIs('ration_times*')?'active':'' }}">
+                        <i class="far fa-circle nav-icon text-blue"></i>
+                        <p>Ration Times</p>
                     </a>
                 </li>
             </ul>

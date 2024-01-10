@@ -21,11 +21,16 @@ class Item extends Model
 
     public function ItemCategory()
     {
-        return $this->belongsTo(ItemCategory::class,'id','item_category_id');
+        return $this->belongsTo(ItemCategory::class,'item_category_id','id');
     }
 
     public function Measurement()
     {
-        return $this->belongsTo(Measurement::class,'id','measurement_id');
+        return $this->belongsTo(Measurement::class,'measurement_id','id');
+    }
+
+    public function RationCategory()
+    {
+        return $this->belongsTo(RationCategory::class,'ration_category_id','id');
     }
 }

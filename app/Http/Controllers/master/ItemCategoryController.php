@@ -48,7 +48,7 @@ class ItemCategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($id)
     {
         $ItemCategory = ItemCategory::find($id);
         return view('master.item_categories.edit',compact('ItemCategory'));

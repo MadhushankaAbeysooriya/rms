@@ -48,7 +48,7 @@ class ItemDataTable extends DataTable
      */
     public function query(Item $model): QueryBuilder
     {
-        return $model->newQuery()->with(['ItemCategory']);
+        return $model->newQuery()->with(['ItemCategory','Measurement','RationCategory']);
     }
 
     /**
@@ -79,22 +79,11 @@ class ItemDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-            Column::computed('action')
-                  ->exportable(false)
-                  ->printable(false)
-                  ->width(60)
-                  ->addClass('text-center'),
-            Column::make('id'),
-            Column::make('add your columns'),
-            Column::make('created_at'),
-            Column::make('updated_at'),
-        ];
-
-        return [
             Column::make('DT_RowIndex')->title('#')->searchable(false)->orderColumn(false)->width(40),
             Column::make('name')->data('name')->title('Name'),
-            Column::make('ItemCategory.name')->data('ItemCategory.name')->title('Item Category'),
-            Column::make('Measurement.name')->data('Measurement.name')->title('Measurement'),
+            Column::make('item_category.name')->data('item_category.name')->title('Category'),
+            Column::make('measurement.name')->data('measurement.name')->title('Measurement'),
+            Column::make('ration_category.name')->data('ration_category.name')->title('Ration Category'),
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)

@@ -7,13 +7,13 @@
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Location Type</h1>
+                <h1>Item Category</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                   <li class="breadcrumb-item"><a href="#">Home</a></li>
                   <li class="breadcrumb-item ">Master Data</li>
-                  <li class="breadcrumb-item ">Location Type Management</li>
+                  <li class="breadcrumb-item ">Item Category Management</li>
                   <li class="breadcrumb-item active">View</li>
                 </ol>
             </div>
@@ -26,9 +26,9 @@
         <div class="col-md-12">
             <div class="card card-teal">
                 <div class="card-header">
-                    <h3 class="card-title">View Location Type</h3>
+                    <h3 class="card-title">View Item Category</h3>
                     <div class="card-tools">
-                        <a class="btn btn-primary" href="{{ route('location_types.index') }}"> Back</a>
+                        <a class="btn btn-primary" href="{{ route('item_categories.index') }}"> Back</a>
                     </div>
                 </div>
 
@@ -39,7 +39,7 @@
                             <strong>Name:</strong>
                         </label>
                         <div class="col-sm-10">
-                            {{ $locationType->name }}
+                            {{ $ItemCategory->name }}
                         </div>
                     </div>
 
