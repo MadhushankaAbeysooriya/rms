@@ -2,7 +2,7 @@
 
 namespace App\DataTables\master;
 
-use App\Models\master\Location;
+use App\Models\master\ItemCategory;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
@@ -12,7 +12,7 @@ use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class LocationDataTable extends DataTable
+class ItemCategoryDataTable extends DataTable
 {
     /**
      * Build the DataTable class.
@@ -23,15 +23,15 @@ class LocationDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
             ->addIndexColumn()
-            ->addColumn('action', function ($location) {
-                $id = $location->id;
+            ->addColumn('action', function ($itemCategory) {
+                $id = $itemCategory->id;
                 $btn = '';
 
-                $btn .= '<a href="'.route('locations.edit',$id).'"
+                $btn .= '<a href="'.route('item_categories.edit',$id).'"
                     class="btn btn-xs btn-info" data-toggle="tooltip" title="Edit">
                     <i class="fa fa-pen-alt"></i> </a> ';
 
-                $btn .= '<form  action="' . route('locations.destroy', $id) . '" method="POST" class="d-inline" >
+                $btn .= '<form  action="' . route('item_categories.destroy', $id) . '" method="POST" class="d-inline" >
                             ' . csrf_field() . '
                                 ' . method_field("DELETE") . '
                             <button type="submit"  class="btn bg-danger btn-xs  dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700" onclick="return confirm(\'Do you need to delete this\');">
@@ -46,9 +46,9 @@ class LocationDataTable extends DataTable
     /**
      * Get the query source of dataTable.
      */
-    public function query(Location $model): QueryBuilder
+    public function query(ItemCategory $model): QueryBuilder
     {
-        return $model->newQuery()->with(['locationtype']);
+        return $model->newQuery();
     }
 
     /**
@@ -57,7 +57,7 @@ class LocationDataTable extends DataTable
     public function html(): HtmlBuilder
     {
         return $this->builder()
-                    ->setTableId('location-table')
+                    ->setTableId('itemcategory-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     //->dom('Bfrtip')
@@ -65,7 +65,6 @@ class LocationDataTable extends DataTable
                     ->selectStyleSingle()
                     ->buttons([
                         Button::make('add'),
-                        Button::make('excel'),
                         Button::make('csv'),
                         Button::make('pdf'),
                         Button::make('print'),
@@ -81,7 +80,6 @@ class LocationDataTable extends DataTable
         return [
             Column::make('DT_RowIndex')->title('#')->searchable(false)->orderColumn(false)->width(40),
             Column::make('name')->data('name')->title('Name'),
-            Column::make('locationtype.name')->data('locationtype.name')->title('Location Type'),
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)
@@ -95,6 +93,6 @@ class LocationDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'Location_' . date('YmdHis');
+        return 'ItemCategory_' . date('YmdHis');
     }
 }

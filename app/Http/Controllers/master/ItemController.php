@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\master;
 
+use App\DataTables\master\ItemDataTable;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -10,9 +11,9 @@ class ItemController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(ItemDataTable $dataTable)
     {
-        //
+        return $dataTable->render('master.items.index');
     }
 
     /**

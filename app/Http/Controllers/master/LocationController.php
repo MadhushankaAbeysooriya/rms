@@ -17,7 +17,7 @@ class LocationController extends Controller
      */
     public function index(LocationDataTable $dataTable)
     {
-        return $dataTable->render('master.locations.index');
+        return $dataTable->render('master.items.index');
     }
 
     /**
@@ -44,11 +44,9 @@ class LocationController extends Controller
     public function show($id)
     {
 
-
         $location = Location::join('location_types','location_types.id','=','locations.location_type_id')
         ->where('locations.id',$id)
         ->get(['locations.name','location_types.name as locationTypes']);
-
 
         return view('master.locations.show',compact('location'));
     }
