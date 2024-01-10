@@ -1,0 +1,17 @@
+<?php
+
+namespace App\Models\master;
+
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+
+class RationTime extends Model
+{
+    use HasFactory, SoftDeletes;
+
+    protected $table = 'ration_times';
+    protected $fillable = [
+        'name',        
+    ];
+}
