@@ -2,17 +2,17 @@
 
 namespace App\DataTables\master;
 
+use App\Models\master\Location;
+use Illuminate\Database\Eloquent\Builder as QueryBuilder;
+use Yajra\DataTables\EloquentDataTable;
+use Yajra\DataTables\Html\Builder as HtmlBuilder;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
-use App\Models\master\LocationType;
-use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
-use Yajra\DataTables\Html\Builder as HtmlBuilder;
-use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 
-class LocationTypeDataTable extends DataTable
+class LocationDataTable extends DataTable
 {
     /**
      * Build the DataTable class.
@@ -23,15 +23,15 @@ class LocationTypeDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
             ->addIndexColumn()
-            ->addColumn('action', function ($locationType) {
-                $id = $locationType->id;
+            ->addColumn('action', function ($location) {
+                $id = $location->id;
                 $btn = '';
 
-                    $btn .= '<a href="'.route('location_types.edit',$id).'"
+                $btn .= '<a href="'.route('locations.edit',$id).'"
                     class="btn btn-xs btn-info" data-toggle="tooltip" title="Edit">
                     <i class="fa fa-pen-alt"></i> </a> ';
-                    
-                    $btn .= '<form  action="' . route('location_types.destroy', $id) . '" method="POST" class="d-inline" >
+
+                $btn .= '<form  action="' . route('locations.destroy', $id) . '" method="POST" class="d-inline" >
                             ' . csrf_field() . '
                                 ' . method_field("DELETE") . '
                             <button type="submit"  class="btn bg-danger btn-xs  dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700" onclick="return confirm(\'Do you need to delete this\');">
@@ -46,9 +46,9 @@ class LocationTypeDataTable extends DataTable
     /**
      * Get the query source of dataTable.
      */
-    public function query(LocationType $model): QueryBuilder
+    public function query(Location $model): QueryBuilder
     {
-        return $model->newQuery();
+        return $model->newQuery()->with(['locationtype']);
     }
 
     /**
@@ -57,7 +57,7 @@ class LocationTypeDataTable extends DataTable
     public function html(): HtmlBuilder
     {
         return $this->builder()
-                    ->setTableId('locationtype-table')
+                    ->setTableId('location-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     //->dom('Bfrtip')
@@ -69,7 +69,7 @@ class LocationTypeDataTable extends DataTable
                         Button::make('csv'),
                         Button::make('pdf'),
                         Button::make('print'),
-                        Button::make('reset')
+                        Button::make('reset'),
                     ]);
     }
 
@@ -79,13 +79,14 @@ class LocationTypeDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-            Column::make('DT_RowIndex')->title('#')->searchable(false)->orderColumn(false)->width(40),            
+            Column::make('DT_RowIndex')->title('#')->searchable(false)->orderColumn(false)->width(40),
             Column::make('name')->data('name')->title('Name'),
+            Column::make('locationtype.name')->data('locationtype.name')->title('Location Type'),
             Column::computed('action')
-                  ->exportable(false)
-                  ->printable(false)
-                  ->width(100)
-                  ->addClass('text-center'),
+                ->exportable(false)
+                ->printable(false)
+                ->width(100)
+                ->addClass('text-center'),
         ];
     }
 
@@ -94,6 +95,6 @@ class LocationTypeDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'LocationType_' . date('YmdHis');
+        return 'Location_' . date('YmdHis');
     }
 }

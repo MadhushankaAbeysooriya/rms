@@ -6,7 +6,7 @@
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Location Type</h1>
+                <h1>Location</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
@@ -25,16 +25,29 @@
                 <div class="col-md-12">
                     <div class="card card-teal">
                         <div class="card-header">
-                            <h3 class="card-title">Create New Location Type</h3>
+                            <h3 class="card-title">Create New Location</h3>
                             {{-- <div class="card-tools">
                                 <a class="btn btn-primary" href="{{ route('roles.index') }}"> Back</a>
                             </div> --}}
                         </div>
 
-                        <form role="form" method="POST" action="{{route('location_types.store')}}"
+                        <form role="form" method="POST" action="{{route('locations.store')}}"
                               enctype="multipart/form-data">
                             @csrf
                             <div class="card-body">
+
+                                <div class="form-group row">
+                                    <label for="location_type" class="col-sm-2 col-form-label">Location Type</label>
+                                    <div class="col-sm-6">
+                                        <select class="form-control" name="location_type_id" id="location_type_id" autocomplete="off">
+                                            <option value="" selected>select one</option>
+                                            @foreach($locationTypes as $locationType)
+                                                <option value="{{$locationType->id}}">{{$locationType->name}}</option>
+                                            @endforeach
+                                        </select>
+                                        <span class="text-danger">@error('location_type_id') {{ $message }} @enderror</span>
+                                    </div>
+                                </div>
 
                                 <div class="form-group row">
                                     <label for="name" class="col-sm-2 col-form-label">Name</label>
@@ -47,7 +60,7 @@
                             </div>
 
                                 <div class="card-footer">
-                                    <a href="{{ route('location_types.index') }}" class="btn btn-sm bg-info"><i class="fa fa-arrow-circle-left"></i> Back</a>
+                                    <a href="{{ url()->previous() }}" class="btn btn-sm bg-info"><i class="fa fa-arrow-circle-left"></i> Back</a>
                                         <button type="reset" class="btn btn-sm btn-secondary">Cancel</button>
                                         <button type="submit" class="btn btn-sm btn-success" >Create</button>
                                 </div>

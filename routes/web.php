@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\master\AnnualDemand;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AjaxController;
@@ -11,18 +12,22 @@ use App\Http\Controllers\HospitalController;
 use App\Http\Controllers\ProvinceController;
 use App\Http\Controllers\DSDivisionController;
 use App\Http\Controllers\LoginDetailController;
+use App\Http\Controllers\master\ItemController;
 use App\Http\Controllers\master\MenuController;
+use App\Http\Controllers\AnnualDemandController;
 use App\Http\Controllers\master\BrandController;
 use App\Http\Controllers\SearchDetailController;
 use App\Http\Controllers\UserHospitalController;
 use App\Http\Controllers\ChangePasswordController;
 use App\Http\Controllers\master\QuarterController;
+use App\Http\Controllers\master\LocationController;
 use App\Http\Controllers\master\MenuItemController;
 use App\Http\Controllers\master\RationDateController;
 use App\Http\Controllers\master\RationTimeController;
 use App\Http\Controllers\master\RationTypeController;
 use App\Http\Controllers\master\MeasurementController;
 use App\Http\Controllers\master\ReceiptTypeController;
+use App\Http\Controllers\master\ItemCategoryController;
 use App\Http\Controllers\master\LocationTypeController;
 use App\Http\Controllers\master\RationCategoryController;
 
@@ -59,6 +64,12 @@ Route::group(['middleware' => ['auth']], function() {
     
     Route::prefix('master/')->group(function (){
         Route::resource('location_types',LocationTypeController::class);
+        Route::resource('locations',LocationController::class);
+        Route::resource('item_categories',ItemCategoryController::class);
+        Route::get('/items/add_alternative_items/{id}',[ItemController::class,'addAlternativeView'])->name('items.add_alternative_view');
+        Route::post('/items/save_alternative_items/{id}',[ItemController::class,'saveAlternative'])->name('items.save_alternative');
+        Route::delete('/items/delete_alternative_item/{id}',[ItemController::class,'deleteAlternative'])->name('items.delete_alternative');
+        Route::resource('items',ItemController::class);
         Route::resource('ration_dates',RationDateController::class);
         Route::resource('ration_types',RationTypeController::class);
         Route::resource('ration_times',RationTimeController::class);
@@ -70,6 +81,8 @@ Route::group(['middleware' => ['auth']], function() {
         Route::resource('receipt_types',ReceiptTypeController::class);
         Route::resource('menu_items',MenuItemController::class);
     });
+
+    Route::resource('annual_demands',AnnualDemandController::class);
 });
 
 Route::get('/ajax/getDistricts',[AjaxController::class,'getDistricts'])->name('ajax.getDistricts');

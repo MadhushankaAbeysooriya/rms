@@ -6,13 +6,13 @@
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Location Type</h1>
+                <h1>Item Categories</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                   <li class="breadcrumb-item"><a href="#">Home</a></li>
                   <li class="breadcrumb-item ">Master Data</li>
-                  <li class="breadcrumb-item ">Location Type Management</li>
+                  <li class="breadcrumb-item ">Item Category Management</li>
                   <li class="breadcrumb-item active">Create</li>
                 </ol>
             </div>
@@ -25,13 +25,13 @@
                 <div class="col-md-12">
                     <div class="card card-teal">
                         <div class="card-header">
-                            <h3 class="card-title">Create New Location Type</h3>
+                            <h3 class="card-title">Create New Item Category</h3>
                             {{-- <div class="card-tools">
                                 <a class="btn btn-primary" href="{{ route('roles.index') }}"> Back</a>
                             </div> --}}
                         </div>
 
-                        <form role="form" method="POST" action="{{route('location_types.store')}}"
+                        <form role="form" method="POST" action="{{route('item_categories.store')}}"
                               enctype="multipart/form-data">
                             @csrf
                             <div class="card-body">
@@ -47,7 +47,7 @@
                             </div>
 
                                 <div class="card-footer">
-                                    <a href="{{ route('location_types.index') }}" class="btn btn-sm bg-info"><i class="fa fa-arrow-circle-left"></i> Back</a>
+                                    <a href="{{ url()->previous() }}" class="btn btn-sm bg-info"><i class="fa fa-arrow-circle-left"></i> Back</a>
                                         <button type="reset" class="btn btn-sm btn-secondary">Cancel</button>
                                         <button type="submit" class="btn btn-sm btn-success" >Create</button>
                                 </div>
