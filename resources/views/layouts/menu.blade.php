@@ -101,6 +101,16 @@
                     </a>
                 </li>
             </ul>
+
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="{{route('menu_items.index')}}" class="nav-link
+                    {{ request()->routeIs('menu_items*')?'active':'' }}">
+                        <i class="far fa-circle nav-icon text-blue"></i>
+                        <p>Menu for Items</p>
+                    </a>
+                </li>
+            </ul>
         
     </li>
 
