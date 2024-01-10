@@ -16,6 +16,7 @@ use App\Http\Controllers\UserHospitalController;
 use App\Http\Controllers\ChangePasswordController;
 use App\Http\Controllers\master\LocationTypeController;
 use App\Http\Controllers\master\RationCategoryController;
+use App\Http\Controllers\master\BrandController;
 
 /*
 |--------------------------------------------------------------------------
@@ -51,6 +52,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::prefix('master/')->group(function (){
         Route::resource('location_types',LocationTypeController::class);
         Route::resource('ration_categories',RationCategoryController::class);
+        Route::resource('brands',BrandController::class);
     });
 });
 
