@@ -14,6 +14,9 @@ use App\Http\Controllers\LoginDetailController;
 use App\Http\Controllers\SearchDetailController;
 use App\Http\Controllers\UserHospitalController;
 use App\Http\Controllers\ChangePasswordController;
+use App\Http\Controllers\master\RationDateController;
+use App\Http\Controllers\master\RationTimeController;
+use App\Http\Controllers\master\RationTypeController;
 use App\Http\Controllers\master\LocationTypeController;
 
 /*
@@ -49,6 +52,9 @@ Route::group(['middleware' => ['auth']], function() {
     
     Route::prefix('master/')->group(function (){
         Route::resource('location_types',LocationTypeController::class);
+        Route::resource('ration_dates',RationDateController::class);
+        Route::resource('ration_types',RationTypeController::class);
+        Route::resource('ration_times',RationTimeController::class);
     });
 });
 
