@@ -18,7 +18,11 @@ use App\Http\Controllers\master\RationDateController;
 use App\Http\Controllers\master\RationTimeController;
 use App\Http\Controllers\master\RationTypeController;
 use App\Http\Controllers\master\LocationTypeController;
+use App\Http\Controllers\master\LocationController;
+use App\Http\Controllers\master\ItemCategoryController;
 use App\Http\Controllers\master\RationCategoryController;
+use App\Http\Controllers\master\ItemController;
+
 use App\Http\Controllers\master\BrandController;
 use App\Http\Controllers\master\QuarterController;
 use App\Http\Controllers\master\MeasurementController;
@@ -58,6 +62,14 @@ Route::group(['middleware' => ['auth']], function() {
     
     Route::prefix('master/')->group(function (){
         Route::resource('location_types',LocationTypeController::class);
+        Route::resource('locations',LocationController::class);
+        Route::resource('item_categories',ItemCategoryController::class);
+
+        Route::get('/items/add_alternative_items/{id}',[ItemController::class,'addAlternativeView'])->name('items.add_alternative_view');
+        Route::post('/items/save_alternative_items/{id}',[ItemController::class,'saveAlternative'])->name('items.save_alternative');
+        Route::delete('/items/delete_alternative_item/{id}',[ItemController::class,'deleteAlternative'])->name('items.delete_alternative');
+        Route::resource('items',ItemController::class);
+
         Route::resource('ration_dates',RationDateController::class);
         Route::resource('ration_types',RationTypeController::class);
         Route::resource('ration_times',RationTimeController::class);
