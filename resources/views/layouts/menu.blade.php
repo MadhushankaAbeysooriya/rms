@@ -8,7 +8,7 @@
 
 
 
-    <li class="nav-item {{ request()->routeIs('location_types*') || request()->routeIs('ration_categories*') || request()->routeIs('brands*')?'menu-open':'' }}">
+    <li class="nav-item {{ request()->routeIs('location_types*') || request()->routeIs('ration_categories*') || request()->routeIs('brands*') || request()->routeIs('quarters*')?'menu-open':'' }}">
         <a href="#" class="nav-link">
             <i class="nav-icon fas fa-cogs text-blue"></i>
             <p>
@@ -37,6 +37,13 @@
                     {{ request()->routeIs('brands*')?'active':'' }}">
                         <i class="far fa-circle nav-icon text-blue"></i>
                         <p>Brand</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route('quarters.index')}}" class="nav-link
+                    {{ request()->routeIs('quarters*')?'active':'' }}">
+                        <i class="far fa-circle nav-icon text-blue"></i>
+                        <p>Quarter</p>
                     </a>
                 </li>
             </ul>

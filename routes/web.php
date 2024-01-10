@@ -17,6 +17,7 @@ use App\Http\Controllers\ChangePasswordController;
 use App\Http\Controllers\master\LocationTypeController;
 use App\Http\Controllers\master\RationCategoryController;
 use App\Http\Controllers\master\BrandController;
+use App\Http\Controllers\master\QuarterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,6 +54,7 @@ Route::group(['middleware' => ['auth']], function() {
         Route::resource('location_types',LocationTypeController::class);
         Route::resource('ration_categories',RationCategoryController::class);
         Route::resource('brands',BrandController::class);
+        Route::resource('quarters',QuarterController::class);
     });
 });
 
