@@ -61,6 +61,36 @@
                     </a>
                 </li>
             </ul>
+
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="{{route('ration_dates.index')}}" class="nav-link
+                    {{ request()->routeIs('ration_dates*')?'active':'' }}">
+                        <i class="far fa-circle nav-icon text-blue"></i>
+                        <p>Ration Dates</p>
+                    </a>
+                </li>
+            </ul>
+
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="{{route('ration_types.index')}}" class="nav-link
+                    {{ request()->routeIs('ration_types*')?'active':'' }}">
+                        <i class="far fa-circle nav-icon text-blue"></i>
+                        <p>Ration Types</p>
+                    </a>
+                </li>
+            </ul>
+
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="{{route('ration_times.index')}}" class="nav-link
+                    {{ request()->routeIs('ration_times*')?'active':'' }}">
+                        <i class="far fa-circle nav-icon text-blue"></i>
+                        <p>Ration Times</p>
+                    </a>
+                </li>
+            </ul>
         
     </li>
 
