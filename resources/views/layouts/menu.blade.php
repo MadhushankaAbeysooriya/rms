@@ -8,7 +8,7 @@
 
 
 
-    <li class="nav-item {{ request()->routeIs('location_types*') || request()->routeIs('ration_categories*') || request()->routeIs('brands*') || request()->routeIs('quarters*') || request()->routeIs('measurements*')?'menu-open':'' }}">
+    <li class="nav-item {{ request()->routeIs('location_types*') || request()->routeIs('ration_categories*') || request()->routeIs('brands*') || request()->routeIs('quarters*') || request()->routeIs('measurements*') || request()->routeIs('receipt_types*')?'menu-open':'' }}">
         <a href="#" class="nav-link">
             <i class="nav-icon fas fa-cogs text-blue"></i>
             <p>
@@ -51,6 +51,13 @@
                     {{ request()->routeIs('measurements*')?'active':'' }}">
                         <i class="far fa-circle nav-icon text-blue"></i>
                         <p>Measurement</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route('receipt_types.index')}}" class="nav-link
+                    {{ request()->routeIs('receipt_types*')?'active':'' }}">
+                        <i class="far fa-circle nav-icon text-blue"></i>
+                        <p>Receipt Type</p>
                     </a>
                 </li>
             </ul>

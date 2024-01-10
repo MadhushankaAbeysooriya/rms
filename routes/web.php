@@ -19,6 +19,7 @@ use App\Http\Controllers\master\RationCategoryController;
 use App\Http\Controllers\master\BrandController;
 use App\Http\Controllers\master\QuarterController;
 use App\Http\Controllers\master\MeasurementController;
+use App\Http\Controllers\master\ReceiptTypeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -57,6 +58,7 @@ Route::group(['middleware' => ['auth']], function() {
         Route::resource('brands',BrandController::class);
         Route::resource('quarters',QuarterController::class);
         Route::resource('measurements',MeasurementController::class);
+        Route::resource('receipt_types',ReceiptTypeController::class);
     });
 });
 
