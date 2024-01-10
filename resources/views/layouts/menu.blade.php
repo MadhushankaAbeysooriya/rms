@@ -113,6 +113,16 @@
                     </a>
                 </li>
             </ul>
+
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="{{route('menus.index')}}" class="nav-link
+                    {{ request()->routeIs('menus*')?'active':'' }}">
+                        <i class="far fa-circle nav-icon text-blue"></i>
+                        <p>Menu</p>
+                    </a>
+                </li>
+            </ul>
         
     </li>
 
