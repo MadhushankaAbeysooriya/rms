@@ -18,6 +18,11 @@ use App\Http\Controllers\master\RationDateController;
 use App\Http\Controllers\master\RationTimeController;
 use App\Http\Controllers\master\RationTypeController;
 use App\Http\Controllers\master\LocationTypeController;
+use App\Http\Controllers\master\RationCategoryController;
+use App\Http\Controllers\master\BrandController;
+use App\Http\Controllers\master\QuarterController;
+use App\Http\Controllers\master\MeasurementController;
+use App\Http\Controllers\master\ReceiptTypeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -55,6 +60,11 @@ Route::group(['middleware' => ['auth']], function() {
         Route::resource('ration_dates',RationDateController::class);
         Route::resource('ration_types',RationTypeController::class);
         Route::resource('ration_times',RationTimeController::class);
+        Route::resource('ration_categories',RationCategoryController::class);
+        Route::resource('brands',BrandController::class);
+        Route::resource('quarters',QuarterController::class);
+        Route::resource('measurements',MeasurementController::class);
+        Route::resource('receipt_types',ReceiptTypeController::class);
     });
 });
 

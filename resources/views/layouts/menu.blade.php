@@ -8,7 +8,7 @@
 
 
 
-    <li class="nav-item {{ request()->routeIs('location_types*')?'menu-open':'' }}">
+    <li class="nav-item {{ request()->routeIs('location_types*') || request()->routeIs('ration_categories*') || request()->routeIs('brands*') || request()->routeIs('quarters*') || request()->routeIs('measurements*') || request()->routeIs('receipt_types*')?'menu-open':'' }}">
         <a href="#" class="nav-link">
             <i class="nav-icon fas fa-cogs text-blue"></i>
             <p>
@@ -23,6 +23,41 @@
                     {{ request()->routeIs('location_types*')?'active':'' }}">
                         <i class="far fa-circle nav-icon text-blue"></i>
                         <p>Location Type</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route('ration_categories.index')}}" class="nav-link
+                    {{ request()->routeIs('ration_categories*')?'active':'' }}">
+                        <i class="far fa-circle nav-icon text-blue"></i>
+                        <p>Ration Category</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route('brands.index')}}" class="nav-link
+                    {{ request()->routeIs('brands*')?'active':'' }}">
+                        <i class="far fa-circle nav-icon text-blue"></i>
+                        <p>Brand</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route('quarters.index')}}" class="nav-link
+                    {{ request()->routeIs('quarters*')?'active':'' }}">
+                        <i class="far fa-circle nav-icon text-blue"></i>
+                        <p>Quarter</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route('measurements.index')}}" class="nav-link
+                    {{ request()->routeIs('measurements*')?'active':'' }}">
+                        <i class="far fa-circle nav-icon text-blue"></i>
+                        <p>Measurement</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route('receipt_types.index')}}" class="nav-link
+                    {{ request()->routeIs('receipt_types*')?'active':'' }}">
+                        <i class="far fa-circle nav-icon text-blue"></i>
+                        <p>Receipt Type</p>
                     </a>
                 </li>
             </ul>
