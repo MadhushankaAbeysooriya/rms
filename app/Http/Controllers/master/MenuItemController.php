@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers\master;
 
+use App\Models\master\Item;
 use App\Models\master\Menu;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\DataTables\master\MenuItemDataTable;
+use App\Http\Requests\StoreMenuItemRequest;
+use App\Models\master\MenuItem;
 
 class MenuItemController extends Controller
 {
@@ -20,19 +23,24 @@ class MenuItemController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(menu $menu)
     {
-        $menu = Menu::all();
-        
-        return view('master.menu_items.create', compact('menu'));
+     //   $menu = Menu::find($id);
+        $itemList = Item::all();
+        return view('master.menu_items.create', compact('menu','itemList'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(menu $menu, StoreMenuItemRequest $request)
     {
-        //
+        $menu->menuitem()->create([
+            'item_id'=>$request->item_id,
+            'per_qty'=>$request->per_qty
+        ]);
+
+        return redirect(route('menu_items.create',$menu->id))->with('success', 'Menu items created');
     }
 
     /**
@@ -62,8 +70,10 @@ class MenuItemController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Menu $menu, MenuItem $menuItem)
     {
-        //
+        $menuItem->delete();
+
+        return redirect(route('menu_items.create',$menu->id))->with('danger', 'Menu items deleted created');
     }
 }

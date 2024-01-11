@@ -50,4 +50,14 @@ class Menu extends Model
         return $this->belongsTo(RationTime::class, 'ration_time_id', 'id');
     }
 
+    /**
+     * Get all of the comments for the Menu
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function menuitem()
+    {
+        return $this->hasMany(MenuItem::class, 'menu_id', 'id');
+    }
+
 }
