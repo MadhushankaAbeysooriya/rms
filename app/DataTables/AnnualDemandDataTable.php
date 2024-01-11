@@ -1,10 +1,10 @@
 <?php
 
-namespace App\DataTables\master;
+namespace App\DataTables;
 
+use App\Models\AnnualDemand;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
-use App\Models\master\LocationType;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
@@ -12,7 +12,7 @@ use Yajra\DataTables\Services\DataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 
-class LocationTypeDataTable extends DataTable
+class AnnualDemandDataTable extends DataTable
 {
     /**
      * Build the DataTable class.
@@ -23,15 +23,15 @@ class LocationTypeDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
             ->addIndexColumn()
-            ->addColumn('action', function ($locationType) {
-                $id = $locationType->id;
+            ->addColumn('action', function ($annualDemand) {
+                $id = $annualDemand->id;
                 $btn = '';
 
-                    $btn .= '<a href="'.route('location_types.edit',$id).'"
+                    $btn .= '<a href="'.route('annual_demands.edit',$id).'"
                     class="btn btn-xs btn-info" data-toggle="tooltip" title="Edit">
                     <i class="fa fa-pen-alt"></i> </a> ';
                     
-                    $btn .= '<form  action="' . route('location_types.destroy', $id) . '" method="POST" class="d-inline" >
+                    $btn .= '<form  action="' . route('annual_demands.destroy', $id) . '" method="POST" class="d-inline" >
                             ' . csrf_field() . '
                                 ' . method_field("DELETE") . '
                             <button type="submit"  class="btn bg-danger btn-xs  dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700" onclick="return confirm(\'Do you need to delete this\');">
@@ -40,15 +40,19 @@ class LocationTypeDataTable extends DataTable
 
                 return $btn;
             })
+            ->addColumn('qty', function ($annualDemand) {               
+    
+                return $annualDemand->qty.' '.$annualDemand->item->measurement->name;
+            })
             ->rawColumns(['action']);
     }
 
     /**
      * Get the query source of dataTable.
      */
-    public function query(LocationType $model): QueryBuilder
+    public function query(AnnualDemand $model): QueryBuilder
     {
-        return $model->newQuery();
+        return $model->newQuery()->with(['item','location','supplier']);
     }
 
     /**
@@ -57,7 +61,7 @@ class LocationTypeDataTable extends DataTable
     public function html(): HtmlBuilder
     {
         return $this->builder()
-                    ->setTableId('locationtype-table')
+                    ->setTableId('annualdemand-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     //->dom('Bfrtip')
@@ -80,7 +84,11 @@ class LocationTypeDataTable extends DataTable
     {
         return [
             Column::make('DT_RowIndex')->title('#')->searchable(false)->orderColumn(false)->width(40),            
-            Column::make('name')->data('name')->title('Name'),
+            Column::make('year')->data('year')->title('Year'),
+            Column::make('item.name')->data('item.name')->title('Item'),
+            Column::make('location.name')->data('location.name')->title('Location'),
+            Column::make('supplier.name')->data('supplier.name')->title('Supplier'),
+            Column::make('qty')->data('qty')->title('Qty'),
             Column::computed('action')
                   ->exportable(false)
                   ->printable(false)
@@ -94,6 +102,6 @@ class LocationTypeDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'LocationType_' . date('YmdHis');
+        return 'AnnualDemand_' . date('YmdHis');
     }
 }

@@ -2,17 +2,19 @@
 
 namespace App\Http\Controllers\master;
 
-use App\Http\Controllers\Controller;
+use App\Models\master\Menu;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\DataTables\master\MenuItemDataTable;
 
-class ReceiptFromLocationController extends Controller
+class MenuItemController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(MenuItemDataTable $dataTable)
     {
-        //
+        return $dataTable->render('master.menu_items.index');
     }
 
     /**
@@ -20,7 +22,9 @@ class ReceiptFromLocationController extends Controller
      */
     public function create()
     {
-        //
+        $menu = Menu::all();
+        
+        return view('master.menu_items.create', compact('menu'));
     }
 
     /**
