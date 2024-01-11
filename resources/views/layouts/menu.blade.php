@@ -9,7 +9,7 @@
 <li class="nav-item">
     <a href="{{route('annual_demands.index')}}" class="nav-link
     {{ request()->routeIs('annual_demands*')?'active':'' }}">
-        <i class="nav-icon fas fa-user-graduate"></i>
+        <i class="nav-icon fas fa-paper-plane"></i>
             <p>Annual Demand</p>
     </a>
 </li>
@@ -25,7 +25,7 @@
                 <i class="right fas fa-angle-left text-blue"></i>
             </p>
         </a>
-   
+
             <ul class="nav nav-treeview">
                 <li class="nav-item">
                     <a href="{{route('location_types.index')}}" class="nav-link
@@ -141,7 +141,7 @@
                     </a>
                 </li>
             </ul>
-        
+
     </li>
 
 
@@ -167,7 +167,7 @@
             </ul>
         @endcan
 
-        @can('user-list')    
+        @can('user-list')
             <ul class="nav nav-treeview">
                 <li class="nav-item">
                     <a href="{{route('users.index')}}" class="nav-link
@@ -179,7 +179,7 @@
             </ul>
         @endcan
 
-        @can('logindetail-list')    
+        @can('logindetail-list')
             <ul class="nav nav-treeview">
                 <li class="nav-item">
                     <a href="{{route('logindetails.index')}}" class="nav-link
@@ -191,7 +191,7 @@
             </ul>
         @endcan
 
-        @can('searchdetail-list')    
+        @can('searchdetail-list')
             <ul class="nav nav-treeview">
                 <li class="nav-item">
                     <a href="{{route('searchdetails.index')}}" class="nav-link
