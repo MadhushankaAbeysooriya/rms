@@ -15,5 +15,4 @@ class ItemCategory extends Model
         'name',
         'deleted_at'
     ];
-
 }

@@ -10,6 +10,8 @@
 
         <link rel="stylesheet" href="{{ asset('plugins/toastr/toastr.css') }}">
 
+        <link rel="stylesheet" href="{{ asset('select2/select2.min.css') }}">
+
         @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 
 
@@ -87,6 +89,8 @@
             <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
             {{-- <script src="{{ asset('plugins/jquery/jquery.js') }}" defer></script> --}}
             <script src="{{ asset('plugins/toastr/toastr.min.js') }}" defer></script>
+
+            <script src="{{ asset('select2/select2.min.js') }}" defer></script>
 
             @yield('third_party_scripts')
 

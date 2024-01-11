@@ -144,7 +144,7 @@ class ItemController extends Controller
             ->where('id', $request->item_id)
             ->select('id', 'name', 'item_category_id', 'measurement_id', 'ration_category_id')
             ->first();
-        $alternativeItems = AlternativeItem::with(['Item'])
+        $alternativeItems = AlternativeItem::with(['item'])
             ->where('item_id',$request->item_id)
             ->get();
 

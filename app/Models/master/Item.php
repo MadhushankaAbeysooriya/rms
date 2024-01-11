@@ -19,17 +19,17 @@ class Item extends Model
         'deleted_at'
     ];
 
-    public function ItemCategory()
+    public function itemcategory()
     {
         return $this->belongsTo(ItemCategory::class,'item_category_id','id');
     }
 
-    public function Measurement()
+    public function measurement()
     {
         return $this->belongsTo(Measurement::class,'measurement_id','id');
     }
 
-    public function RationCategory()
+    public function rationcategory()
     {
         return $this->belongsTo(RationCategory::class,'ration_category_id','id');
     }
