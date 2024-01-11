@@ -15,6 +15,7 @@ use App\Http\Controllers\LoginDetailController;
 use App\Http\Controllers\master\ItemController;
 use App\Http\Controllers\master\MenuController;
 use App\Http\Controllers\AnnualDemandController;
+use App\Http\Controllers\DemandFromLocationController;
 use App\Http\Controllers\master\BrandController;
 use App\Http\Controllers\SearchDetailController;
 use App\Http\Controllers\UserHospitalController;
@@ -90,6 +91,9 @@ Route::group(['middleware' => ['auth']], function() {
     });
 
     Route::resource('annual_demands',AnnualDemandController::class);
+
+    Route::resource('demand_from_locations',DemandFromLocationController::class);
+
 });
 
 Route::get('/ajax/getDistricts',[AjaxController::class,'getDistricts'])->name('ajax.getDistricts');
