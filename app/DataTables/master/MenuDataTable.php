@@ -27,6 +27,10 @@ class MenuDataTable extends DataTable
                 $id = $rationTime->id;
                 $btn = '';
 
+                    $btn .= '<a href="'.route('menu_items.create',$id).'"
+                    class="btn btn-xs btn-success" data-toggle="tooltip" title="Add">
+                    <i class="fa fa-plus"></i> </a> ';
+
                     $btn .= '<a href="'.route('menus.edit',$id).'"
                     class="btn btn-xs btn-info" data-toggle="tooltip" title="Edit">
                     <i class="fa fa-pen-alt"></i> </a> ';

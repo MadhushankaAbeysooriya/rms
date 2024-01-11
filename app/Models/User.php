@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\master\Location;
 use App\Models\Rank;
 use App\Models\Forces;
 use App\Models\Usertype;
@@ -28,7 +29,7 @@ class User extends Authenticatable
         'status',
         'last_login_ip',
         'suspend',
-        'phone',
+        'location',
         'attempts',
         'backlist',
         'last_login_date',
@@ -54,8 +55,15 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
+    public function userlocation()
+    {
+        return $this->belongsTo(Location::class,'location','id');
+    }
+
     public function userhospital()
     {
         return $this->hasOne(UserHospital::class);
     }
+
+
 }
