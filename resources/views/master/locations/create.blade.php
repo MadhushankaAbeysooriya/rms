@@ -39,7 +39,7 @@
                                 <div class="form-group row">
                                     <label for="location_type" class="col-sm-2 col-form-label">Location Type</label>
                                     <div class="col-sm-6">
-                                        <select class="form-control" name="location_type_id" id="location_type_id" autocomplete="off">
+                                        <select class="form-control select2" name="location_type_id" id="location_type_id" autocomplete="off">
                                             <option value="" selected>select one</option>
                                             @foreach($locationTypes as $locationType)
                                                 <option value="{{$locationType->id}}">{{$locationType->name}}</option>
@@ -73,3 +73,16 @@
             </div>
         </div>
 @endsection
+
+@push('page_scripts')
+
+    <script>
+
+        $(document).ready(function() {
+            $('.select2').select2();
+        });
+
+    </script>
+
+@endpush
+
