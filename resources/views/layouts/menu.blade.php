@@ -132,6 +132,16 @@
                 </li>
             </ul>
 
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="{{route('suppliers.index')}}" class="nav-link
+                    {{ request()->routeIs('suppliers*')?'active':'' }}">
+                        <i class="far fa-circle nav-icon text-blue"></i>
+                        <p>suppliers</p>
+                    </a>
+                </li>
+            </ul>
+
  
         
     </li>

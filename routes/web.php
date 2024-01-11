@@ -22,6 +22,7 @@ use App\Http\Controllers\ChangePasswordController;
 use App\Http\Controllers\master\QuarterController;
 use App\Http\Controllers\master\LocationController;
 use App\Http\Controllers\master\MenuItemController;
+use App\Http\Controllers\master\SupplierController;
 use App\Http\Controllers\master\RationDateController;
 use App\Http\Controllers\master\RationTimeController;
 use App\Http\Controllers\master\RationTypeController;
@@ -81,6 +82,7 @@ Route::group(['middleware' => ['auth']], function() {
         Route::resource('quarters',QuarterController::class);
         Route::resource('measurements',MeasurementController::class);
         Route::resource('receipt_types',ReceiptTypeController::class);
+        Route::resource('suppliers',SupplierController::class);
 
         Route::prefix('{menu}/')->group(function () {
             Route::resource('menu_items',MenuItemController::class);
