@@ -79,7 +79,12 @@ Route::group(['middleware' => ['auth']], function() {
         Route::resource('quarters',QuarterController::class);
         Route::resource('measurements',MeasurementController::class);
         Route::resource('receipt_types',ReceiptTypeController::class);
-        Route::resource('menu_items',MenuItemController::class);
+
+        Route::prefix('{menu}/')->group(function () {
+            Route::resource('menu_items',MenuItemController::class);
+        });
+
+       
     });
 
     Route::resource('annual_demands',AnnualDemandController::class);
