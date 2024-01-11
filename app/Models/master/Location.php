@@ -3,6 +3,7 @@
 namespace App\Models\master;
 
 use App\Models\master\LocationType;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -23,4 +24,5 @@ class Location extends Model
     {
         return $this->belongsTo(LocationType::class,'location_type_id','id');
     }
+
 }
