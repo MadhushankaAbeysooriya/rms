@@ -134,10 +134,10 @@
 
             <ul class="nav nav-treeview">
                 <li class="nav-item">
-                    <a href="{{route('menu_items.index')}}" class="nav-link
-                    {{ request()->routeIs('menu_items*')?'active':'' }}">
+                    <a href="{{route('suppliers.index')}}" class="nav-link
+                    {{ request()->routeIs('suppliers*')?'active':'' }}">
                         <i class="far fa-circle nav-icon text-blue"></i>
-                        <p>Menu for Items</p>
+                        <p>suppliers</p>
                     </a>
                 </li>
             </ul>
