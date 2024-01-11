@@ -6,6 +6,14 @@
     </a>
 </li>
 
+<li class="nav-item">
+    <a href="{{route('annual_demands.index')}}" class="nav-link
+    {{ request()->routeIs('annual_demands*')?'active':'' }}">
+        <i class="nav-icon fas fa-user-graduate"></i>
+            <p>Annual Demand</p>
+    </a>
+</li>
+
 
 
 <li class="nav-item {{ request()->routeIs('items*') || request()->routeIs('location_types*') || request()->routeIs('locations*') || request()->routeIs('item_categories*') || request()->routeIs('ration_categories*')?'menu-open':'' }}">
@@ -120,6 +128,16 @@
                     {{ request()->routeIs('menus*')?'active':'' }}">
                         <i class="far fa-circle nav-icon text-blue"></i>
                         <p>Menu</p>
+                    </a>
+                </li>
+            </ul>
+
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="{{route('menu_items.index')}}" class="nav-link
+                    {{ request()->routeIs('menu_items*')?'active':'' }}">
+                        <i class="far fa-circle nav-icon text-blue"></i>
+                        <p>Menu for Items</p>
                     </a>
                 </li>
             </ul>
