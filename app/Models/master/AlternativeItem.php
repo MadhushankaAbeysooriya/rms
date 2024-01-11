@@ -16,7 +16,7 @@ class AlternativeItem extends Model
         'deleted_at'
     ];
 
-    public function Item()
+    public function item()
     {
         return $this->belongsTo(Item::class,'alternative_item_id','id');
     }

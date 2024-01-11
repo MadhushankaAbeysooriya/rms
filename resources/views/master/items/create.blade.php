@@ -39,7 +39,7 @@
                                 <div class="form-group row">
                                     <label for="item_category_id" class="col-sm-2 col-form-label">Item Category</label>
                                     <div class="col-sm-6">
-                                        <select class="form-control" name="item_category_id" id="item_category_id" autocomplete="off">
+                                        <select class="form-control select2" name="item_category_id" id="item_category_id" autocomplete="off">
                                             <option value="" selected>select one</option>
                                             @foreach($itemCategorys as $itemCategory)
                                                 <option value="{{$itemCategory->id}}">{{$itemCategory->name}}</option>
@@ -61,7 +61,7 @@
                                 <div class="form-group row">
                                     <label for="measurement_id" class="col-sm-2 col-form-label">Measurement</label>
                                     <div class="col-sm-6">
-                                        <select class="form-control" name="measurement_id" id="measurement_id" autocomplete="off">
+                                        <select class="form-control select2" name="measurement_id" id="measurement_id" autocomplete="off">
                                             <option value="" selected>select one</option>
                                             @foreach($measurements as $measurement)
                                                 <option value="{{$measurement->id}}">{{$measurement->name}}</option>
@@ -74,7 +74,7 @@
                                 <div class="form-group row">
                                     <label for="ration_category_id" class="col-sm-2 col-form-label">Ration Category</label>
                                     <div class="col-sm-6">
-                                        <select class="form-control" name="ration_category_id" id="ration_category_id" autocomplete="off">
+                                        <select class="form-control select2" name="ration_category_id" id="ration_category_id" autocomplete="off">
                                             <option value="" selected>select one</option>
                                             @foreach($rationCategories as $rationCategory)
                                                 <option value="{{$rationCategory->id}}">{{$rationCategory->name}}</option>
@@ -100,3 +100,15 @@
             </div>
         </div>
 @endsection
+
+@push('page_scripts')
+
+    <script>
+
+        $(document).ready(function() {
+            $('.select2').select2();
+        });
+
+    </script>
+
+@endpush

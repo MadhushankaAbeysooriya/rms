@@ -20,6 +20,7 @@ class CreateAdminUserSeeder extends Seeder
             'name' => 'O/70239 Maj APL Madhushanka', 
             'email' => 'lahiru.slsc@gmail.com',
             'password' => bcrypt('123456'),
+            'location' => 0,
         ]);
     
         $role = Role::create(['name' => 'Admin']);
