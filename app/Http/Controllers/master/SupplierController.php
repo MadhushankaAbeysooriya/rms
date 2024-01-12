@@ -1,12 +1,12 @@
 <?php
 
 namespace App\Http\Controllers\master;
-
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use App\DataTables\master\SupplierDataTable;
-use App\Http\Requests\master\StoreSupplierRequest;
 use App\Models\master\Supplier;
+use App\Http\Requests\master\StoreSupplierRequest;
+use App\Http\Requests\master\UpdateSupplierRequest;
 
 class SupplierController extends Controller
 {
@@ -15,7 +15,7 @@ class SupplierController extends Controller
      */
     public function index(SupplierDataTable $dataTable)
     {
-        return $dataTable->render('master.supplier.index');
+        return $dataTable->render('master.suppliers.index');
     }
 
     /**
@@ -23,7 +23,7 @@ class SupplierController extends Controller
      */
     public function create()
     {
-        return view('master.supplier.create');
+        return view('master.suppliers.create');
     }
 
     /**
@@ -38,32 +38,38 @@ class SupplierController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($id)
     {
-        //
+        $supplier = Supplier::find($id);
+        return view('master.suppliers.show',compact('supplier'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($id)
     {
-        //
+        $supplier = Supplier::find($id);
+        return view('master.suppliers.edit',compact('supplier'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateSupplierRequest $request, Supplier $supplier)
     {
-        //
+        $supplier->update($request->toArray());
+        return redirect()->route('suppliers.index')->with('message', 'Supplier Updated');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        //
+        $supplier = Supplier::find($id);
+        $supplier->delete();
+        return redirect()->route('suppliers.index')
+            ->with('danger', 'Supplier Deleted successfully');
     }
 }
