@@ -63,7 +63,7 @@
                     </div>
 
                         <div class="card-footer">
-                            <a href="{{ url()->previous() }}" class="btn btn-sm bg-info"><i class="fa fa-arrow-circle-left"></i> Back</a>
+                            <a href="{{ route('locations.index') }}" class="btn btn-sm bg-info"><i class="fa fa-arrow-circle-left"></i> Back</a>
                                 <button type="reset" class="btn btn-sm btn-secondary">Cancel</button>
                                 <button type="submit" class="btn btn-sm btn-success" >Update</button>
                         </div>
