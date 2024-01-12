@@ -35,6 +35,8 @@ class PermissionTableSeeder extends Seeder
             'demand-from-location-edit',
             'demand-from-location-delete',
 
+            // completed
+
 //            'master-location-types-list',
 //            'master-location-types-create',
 //            'master-location-types-edit',
@@ -55,10 +57,14 @@ class PermissionTableSeeder extends Seeder
 //            'master-item-categories-edit',
 //            'master-item-categories-delete',
 
+            //end completed
+
             'master-item-list',
             'master-item-create',
             'master-item-edit',
             'master-item-delete',
+
+            // completed
 
 //            'master-brand-list',
 //            'master-brand-create',
@@ -79,6 +85,8 @@ class PermissionTableSeeder extends Seeder
 //            'master-receipt-type-create',
 //            'master-receipt-type-edit',
 //            'master-receipt-type-delete',
+
+        //end completed
 
             'master-ration-date-list',
             'master-ration-date-create',
