@@ -14,6 +14,13 @@
     </a>
 </li>
 
+<li class="nav-item">
+    <a href="{{route('demand_from_locations.index')}}" class="nav-link
+    {{ request()->routeIs('demand_from_locations*')?'active':'' }}">
+        <i class="fas fa-shipping-fast"></i>
+        <p>Demand from Loc</p>
+    </a>
+</li>
 
 
 <li class="nav-item {{ request()->routeIs('items*') || request()->routeIs('location_types*') || request()->routeIs('locations*') || request()->routeIs('item_categories*') || request()->routeIs('ration_categories*')?'menu-open':'' }}">

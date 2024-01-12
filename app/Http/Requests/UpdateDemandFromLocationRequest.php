@@ -22,7 +22,7 @@ class UpdateDemandFromLocationRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'year' => 'required|unique:demand_from_locations,year,'.$this->demandFormLocation->id,
+            'year' => 'required|unique:demand_from_locations,year,'.$this->demand_from_location->id,
             'demand_ref' => 'required',
             'item_id' => 'required',
             'supplier_id' => 'required',

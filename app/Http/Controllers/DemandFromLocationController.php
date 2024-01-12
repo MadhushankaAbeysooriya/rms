@@ -75,14 +75,18 @@ class DemandFromLocationController extends Controller
      */
     public function update(UpdateDemandFromLocationRequest $request, DemandFromLocation $demandFromLocation)
     {
-        //
+        $demandFromLocation->update($request->toArray());
+        return redirect()->route('demand_from_locations.index')->with('success', 'demand From Location Updated');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        //
+        $demandFromLocation = DemandFromLocation::find($id);
+        $demandFromLocation->delete();
+        return redirect()->route('demand_from_locations.index')
+            ->with('danger', 'Demand from location Deleted successfully');
     }
 }

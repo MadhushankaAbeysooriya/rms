@@ -29,6 +29,22 @@ class DemandFromLocationDataTable extends DataTable
                 $request_datee = ($dateObject->format('Y-m-d'));
                 return $request_datee;
             })
+            ->addColumn('status', function ($demandFormLocation) {
+
+                $rowstatus = $demandFormLocation->status;
+
+                switch ($rowstatus) {
+                    case 1:
+                        $badge = '<span class="badge bg-info text-dark">Processing</span>';
+                        break;
+                    case 2:
+                        $badge = '<span class="badge bg-success">Approved</span>';
+                        break;
+                    default:
+                        $badge = '<span class="badge bg-warning">Pending</span>';
+                }
+                return $badge;
+            })
             ->addColumn('action', function ($demandFormLocation) {
                 $id = $demandFormLocation->id;
                 $btn = '';
@@ -46,7 +62,7 @@ class DemandFromLocationDataTable extends DataTable
 
                 return $btn;
             })
-            ->rawColumns(['action']);
+            ->rawColumns(['action','status']);
     }
 
     /**
@@ -93,7 +109,7 @@ class DemandFromLocationDataTable extends DataTable
             Column::make('qty')->data('qty')->title('Qty'),
             Column::make('location.name')->data('location.name')->title('Location'),
             Column::make('request_date')->data('request_date')->title('Request Date'),
-            Column::make('status')->data('status')->title('Status'),
+            Column::computed('status'),
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)

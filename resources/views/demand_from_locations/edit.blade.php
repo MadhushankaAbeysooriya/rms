@@ -61,7 +61,7 @@
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label" for="item_id">Item</label>
                             <div class="col-sm-6">
-                                <select name="item_id" id="item_id" class="form-control">
+                                <select name="item_id" id="item_id" class="form-control select2">
                                     <option value="">Please Select</option>
                                     @foreach($items as $item)
                                         <option value="{{ $item->id }}" {{$demandFromLocation->item_id == $item->id ? 'selected':''}}>
@@ -84,43 +84,13 @@
                                 <select name="supplier_id" id="supplier_id" class="form-control select2">
                                     <option value="">Please Select</option>
                                     @foreach($suppliers as $supplier)
-                                        <option {{ $demandFromLocation->supplier_id == $item->id ? 'selected':'' }} value="{{ $supplier->id }}">
+                                        <option {{ $demandFromLocation->supplier_id == $supplier->id ? 'selected':'' }} value="{{ $supplier->id }}">
                                             {{ $supplier->name}}
                                         </option>
                                     @endforeach
                                 </select>
                                 @error('supplier_id')
                                 <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="qty" class="col-sm-2 col-form-label">Qty</label>
-                            <div class="col-sm-6">
-                                <input type="text" class="form-control @error('qty')
-                                        is-invalid @enderror" name="qty" value="{{ $demandFromLocation->qty }}" id="qty" autocomplete="off"
-                                       min="{{ date('Y') }}" max="3000">
-                                <span class="text-danger">@error('qty') {{ $message }} @enderror</span>
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label class="col-sm-2 col-form-label" for="supplier_id">Suppliers</label>
-                            <div class="col-sm-6">
-                                <select name="supplier_id" id="supplier_id" class="form-control">
-                                    <option value="">Please Select</option>
-                                    @foreach($suppliers as $item)
-                                        <option value="{{ $item->id }}" {{$demandFromLocation->supplier_id == $item->id ? 'selected':''}}>
-                                            {{ $item->name}}
-                                        </option>
-                                    @endforeach
-                                </select>
-
-                                @error('supplier_id')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
                                 @enderror
                             </div>
                         </div>
