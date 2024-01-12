@@ -16,14 +16,17 @@ return new class extends Migration
 
             $table->integer('year');
             $table->string('demand_ref');
+
             $table->unsignedBigInteger('item_id')->nullable();
             $table->foreign('item_id')->references('id')->on('items')->onDelete('cascade');
-            $table->unsignedBigInteger('supplier_id')->nullable();
-            $table->foreign('supplier_id')->references('id')->on('suppliers')->onDelete('cascade');
+
             $table->double('qty', 12, 2);
+
             $table->unsignedBigInteger('location_id')->nullable();
             $table->foreign('location_id')->references('id')->on('locations')->onDelete('cascade');
+
             $table->dateTime('request_date');
+
             $table->tinyInteger('status')->default(0);
             $table->softDeletes();
             $table->timestamps();
