@@ -69,7 +69,6 @@ class LoginDetailDataTable extends DataTable
                     ->buttons([                        
                         Button::make('pdf'),
                         Button::make('print'),
-                        Button::make('reset')
                     ]);
     }
 

@@ -23,8 +23,8 @@
 </li>
 
 
-<li class="nav-item {{ request()->routeIs('items*') || request()->routeIs('location_types*') || request()->routeIs('locations*') || request()->routeIs('item_categories*') || request()->routeIs('ration_categories*')?'menu-open':'' }}">
-    <li class="nav-item {{ request()->routeIs('items*') || request()->routeIs('location_types*') || request()->routeIs('locations*') || request()->routeIs('item_categories*') || request()->routeIs('ration_categories*') || request()->routeIs('brands*') || request()->routeIs('quarters*') || request()->routeIs('measurements*') || request()->routeIs('receipt_types*') || request()->routeIs('suppliers*')?'menu-open':'' }}">
+<li class="nav-item {{ request()->routeIs('menus*') || request()->routeIs('ration_times*') || request()->routeIs('ration_types*') || request()->routeIs('ration_dates*') || request()->routeIs('items*') || request()->routeIs('location_types*') || request()->routeIs('locations*') || request()->routeIs('item_categories*') || request()->routeIs('ration_categories*')?'menu-open':'' }}">
+    <li class="nav-item {{ request()->routeIs('menus*') || request()->routeIs('ration_times*') || request()->routeIs('ration_types*') || request()->routeIs('ration_dates*') || request()->routeIs('items*') || request()->routeIs('location_types*') || request()->routeIs('locations*') || request()->routeIs('item_categories*') || request()->routeIs('ration_categories*') || request()->routeIs('brands*') || request()->routeIs('quarters*') || request()->routeIs('measurements*') || request()->routeIs('receipt_types*') || request()->routeIs('suppliers*')?'menu-open':'' }}">
         <a href="#" class="nav-link">
             <i class="nav-icon fas fa-cogs text-blue"></i>
             <p>

@@ -68,7 +68,6 @@ class ItemCategoryDataTable extends DataTable
                         Button::make('csv'),
                         Button::make('pdf'),
                         Button::make('print'),
-                        Button::make('reset'),
                     ]);
     }
 

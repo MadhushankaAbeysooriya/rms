@@ -92,7 +92,6 @@ class DemandFromLocationDataTable extends DataTable
                         Button::make('pdf'),
                         Button::make('print'),
                         Button::make('reset'),
-                        Button::make('reload')
                     ]);
     }
 
