@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\master\Item;
 use App\Models\master\Location;
 use App\Models\master\Supplier;
+use App\Models\DemandFromLocation;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -40,5 +41,10 @@ class ReceiptFromLocation extends Model
     public function supplier()
     {
         return $this->belongsTo(Supplier::class,'supplier_id','id');
+    }
+
+    public function demandfromlocation()
+    {
+        return $this->belongsTo(DemandFromLocation::class,'demand_from_location_id','id');
     }
 }

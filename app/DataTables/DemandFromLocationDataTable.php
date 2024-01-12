@@ -53,6 +53,10 @@ class DemandFromLocationDataTable extends DataTable
                     class="btn btn-xs btn-info" data-toggle="tooltip" title="Edit">
                     <i class="fa fa-pen-alt"></i> </a> ';
 
+                $btn .= '<a href="'.route('receipt_from_locations.create',$id).'"
+                    class="btn btn-xs btn-warning" data-toggle="tooltip" title="Add Receipt">
+                    <i class="fa fa-plus"></i> </a> ';
+
                 $btn .= '<form  action="' . route('demand_from_locations.destroy', $id) . '" method="POST" class="d-inline" >
                             ' . csrf_field() . '
                                 ' . method_field("DELETE") . '

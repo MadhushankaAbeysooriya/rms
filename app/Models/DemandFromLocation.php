@@ -5,9 +5,10 @@ namespace App\Models;
 use App\Models\master\Item;
 use App\Models\master\Location;
 use App\Models\master\Supplier;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\ReceiptFromLocation;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class DemandFromLocation extends Model
 {
@@ -23,7 +24,6 @@ class DemandFromLocation extends Model
         'location_id',
         'request_date',
         'status',
-        'deleted_at'
     ];
 
 
@@ -41,4 +41,10 @@ class DemandFromLocation extends Model
     {
         return $this->belongsTo(Supplier::class,'supplier_id','id');
     }
+
+    public function receiptfromlocation()
+    {
+        return $this->hasOne(ReceiptFromLocation::class);
+    }
+
 }
