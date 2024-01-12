@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
 
             $table->integer('year');
-            $table->string('demand_ref');
 
             $table->unsignedBigInteger('item_id')->nullable();
             $table->foreign('item_id')->references('id')->on('items')->onDelete('cascade');
