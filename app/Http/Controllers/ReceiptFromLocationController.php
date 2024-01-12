@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
+use App\Models\master\Item;
 use Illuminate\Http\Request;
+use App\Models\master\Location;
+use App\Models\master\Supplier;
+use App\Models\DemandFromLocation;
+use App\Models\master\ReceiptType;
+use App\Http\Controllers\Controller;
 
 class ReceiptFromLocationController extends Controller
 {
@@ -18,9 +23,14 @@ class ReceiptFromLocationController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(DemandFromLocation $demand_from_location)
     {
+        $locations = Location::all();
+        $items = Item::all();
+        $suppliers = Supplier::all();
+        $receiptTypes = ReceiptType::all();
 
+        return view('receipt_from_locations.create', compact('demand_from_location','locations', 'items', 'suppliers','receiptTypes'));
     }
 
     /**
@@ -28,7 +38,7 @@ class ReceiptFromLocationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        dd($request);
     }
 
     /**
