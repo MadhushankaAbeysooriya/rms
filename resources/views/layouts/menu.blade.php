@@ -193,17 +193,7 @@
             </ul>
         @endcan
 
-        @can('searchdetail-list')
-            <ul class="nav nav-treeview">
-                <li class="nav-item">
-                    <a href="{{route('searchdetails.index')}}" class="nav-link
-                    {{ request()->routeIs('searchdetails.index')?'active':'' }}">
-                        <i class="far fa-circle nav-icon text-purple"></i>
-                        <p>Search Detail</p>
-                    </a>
-                </li>
-            </ul>
-        @endcan
+
     </li>
 @endcan
 
