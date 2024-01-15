@@ -15,6 +15,7 @@ class PermissionTableSeeder extends Seeder
     public function run()
     {
         $permissions = [
+
            'role-list',
            'role-create',
            'role-edit',
@@ -23,10 +24,97 @@ class PermissionTableSeeder extends Seeder
            'user-create',
            'user-edit',
            'user-delete',
+
+            'annual-demand-list',
+            'annual-demand-create',
+            'annual-demand-edit',
+            'annual-demand-delete',
+
+            'demand-from-location-list',
+            'demand-from-location-create',
+            'demand-from-location-edit',
+            'demand-from-location-delete',
+
+            // completed
+
+//            'master-location-types-list',
+//            'master-location-types-create',
+//            'master-location-types-edit',
+//            'master-location-types-delete',
+
+//            'master-location-list',
+//            'master-location-create',
+//            'master-location-edit',
+//            'master-location-delete',
+
+//            'master-ration-categories-list',
+//            'master-ration-categories-create',
+//            'master-ration-categories-edit',
+//            'master-ration-categories-delete',
+
+//            'master-item-categories-list',
+//            'master-item-categories-create',
+//            'master-item-categories-edit',
+//            'master-item-categories-delete',
+
+            //end completed
+
+            'master-item-list',
+            'master-item-create',
+            'master-item-edit',
+            'master-item-delete',
+
+            // completed
+
+//            'master-brand-list',
+//            'master-brand-create',
+//            'master-brand-edit',
+//            'master-brand-delete',
+
+//            'master-quarter-list',
+//            'master-quarter-create',
+//            'master-quarter-edit',
+//            'master-quarter-delete',
+
+//            'master-measurement-list',
+//            'master-measurement-create',
+//            'master-measurement-edit',
+//            'master-measurement-delete',
+
+//            'master-receipt-type-list',
+//            'master-receipt-type-create',
+//            'master-receipt-type-edit',
+//            'master-receipt-type-delete',
+
+        //end completed
+
+            'master-ration-date-list',
+            'master-ration-date-create',
+            'master-ration-date-edit',
+            'master-ration-date-delete',
+
+            'master-ration-time-list',
+            'master-ration-time-create',
+            'master-ration-time-edit',
+            'master-ration-time-delete',
+
+            'master-menu-list',
+            'master-menu-create',
+            'master-menu-edit',
+            'master-menu-delete',
+
+            'master-supplier-list',
+            'master-supplier-create',
+            'master-supplier-edit',
+            'master-supplier-delete',
+
+
         ];
      
         foreach ($permissions as $permission) {
-             Permission::create(['name' => $permission]);
+
+            Permission::firstOrCreate(['name' => $permission]);
+
         }
     }
 }

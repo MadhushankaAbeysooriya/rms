@@ -29,6 +29,22 @@ class DemandFromLocationDataTable extends DataTable
                 $request_datee = ($dateObject->format('Y-m-d'));
                 return $request_datee;
             })
+            ->addColumn('status', function ($demandFormLocation) {
+
+                $rowstatus = $demandFormLocation->status;
+
+                switch ($rowstatus) {
+                    case 1:
+                        $badge = '<span class="badge bg-info text-dark">Processing</span>';
+                        break;
+                    case 2:
+                        $badge = '<span class="badge bg-success">Approved</span>';
+                        break;
+                    default:
+                        $badge = '<span class="badge bg-warning">Pending</span>';
+                }
+                return $badge;
+            })
             ->addColumn('action', function ($demandFormLocation) {
                 $id = $demandFormLocation->id;
                 $btn = '';
@@ -36,6 +52,10 @@ class DemandFromLocationDataTable extends DataTable
                 $btn .= '<a href="'.route('demand_from_locations.edit',$id).'"
                     class="btn btn-xs btn-info" data-toggle="tooltip" title="Edit">
                     <i class="fa fa-pen-alt"></i> </a> ';
+
+                $btn .= '<a href="'.route('receipt_from_locations.create',$id).'"
+                    class="btn btn-xs btn-warning" data-toggle="tooltip" title="Add Receipt">
+                    <i class="fa fa-plus"></i> </a> ';
 
                 $btn .= '<form  action="' . route('demand_from_locations.destroy', $id) . '" method="POST" class="d-inline" >
                             ' . csrf_field() . '
@@ -46,7 +66,7 @@ class DemandFromLocationDataTable extends DataTable
 
                 return $btn;
             })
-            ->rawColumns(['action']);
+            ->rawColumns(['action','status']);
     }
 
     /**
@@ -76,7 +96,6 @@ class DemandFromLocationDataTable extends DataTable
                         Button::make('pdf'),
                         Button::make('print'),
                         Button::make('reset'),
-                        Button::make('reload')
                     ]);
     }
 
@@ -93,7 +112,7 @@ class DemandFromLocationDataTable extends DataTable
             Column::make('qty')->data('qty')->title('Qty'),
             Column::make('location.name')->data('location.name')->title('Location'),
             Column::make('request_date')->data('request_date')->title('Request Date'),
-            Column::make('status')->data('status')->title('Status'),
+            Column::computed('status'),
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)

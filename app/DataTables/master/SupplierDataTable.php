@@ -3,14 +3,14 @@
 namespace App\DataTables\master;
 
 use App\Models\master\Supplier;
+use Illuminate\Database\Eloquent\Builder as QueryBuilder;
+use Yajra\DataTables\EloquentDataTable;
+use Yajra\DataTables\Html\Builder as HtmlBuilder;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
-use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
-use Yajra\DataTables\Html\Builder as HtmlBuilder;
-use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 
 class SupplierDataTable extends DataTable
 {
@@ -27,10 +27,6 @@ class SupplierDataTable extends DataTable
                 $id = $supplier->id;
                 $btn = '';
 
-                    $btn .= '<a href="'.route('suppliers.create',$id).'"
-                    class="btn btn-xs btn-success" data-toggle="tooltip" title="Add">
-                    <i class="fa fa-plus"></i> </a> ';
-
                     $btn .= '<a href="'.route('suppliers.edit',$id).'"
                     class="btn btn-xs btn-info" data-toggle="tooltip" title="Edit">
                     <i class="fa fa-pen-alt"></i> </a> ';
@@ -44,7 +40,7 @@ class SupplierDataTable extends DataTable
 
                 return $btn;
             })
-        ->rawColumns(['action']);
+            ->rawColumns(['action']);
     }
 
     /**
@@ -73,7 +69,7 @@ class SupplierDataTable extends DataTable
                         Button::make('csv'),
                         Button::make('pdf'),
                         Button::make('print'),
-                        Button::make('reset')
+                        Button::make('reset'),
                     ]);
     }
 
@@ -83,16 +79,14 @@ class SupplierDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-            Column::make('name')->title('Supplier'),
-            Column::make('primary_contact')->title('Primary Contact'),
-            Column::make('secondary_contact')->title('Secondary Contact'),
-            Column::make('reg_no')->title('Reg No'),
-            Column::make('vat_no')->title('VAT No'),
+            Column::make('DT_RowIndex')->title('#')->searchable(false)->orderColumn(false)->width(40),            
+            Column::make('name')->data('name')->title('Name'),
             Column::computed('action')
                   ->exportable(false)
                   ->printable(false)
-                  ->width(100)
+                  ->width(60)
                   ->addClass('text-center'),
+            
         ];
     }
 

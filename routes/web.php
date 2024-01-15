@@ -15,7 +15,6 @@ use App\Http\Controllers\LoginDetailController;
 use App\Http\Controllers\master\ItemController;
 use App\Http\Controllers\master\MenuController;
 use App\Http\Controllers\AnnualDemandController;
-use App\Http\Controllers\DemandFromLocationController;
 use App\Http\Controllers\master\BrandController;
 use App\Http\Controllers\SearchDetailController;
 use App\Http\Controllers\UserHospitalController;
@@ -27,10 +26,12 @@ use App\Http\Controllers\master\SupplierController;
 use App\Http\Controllers\master\RationDateController;
 use App\Http\Controllers\master\RationTimeController;
 use App\Http\Controllers\master\RationTypeController;
+use App\Http\Controllers\DemandFromLocationController;
 use App\Http\Controllers\master\MeasurementController;
 use App\Http\Controllers\master\ReceiptTypeController;
 use App\Http\Controllers\master\ItemCategoryController;
 use App\Http\Controllers\master\LocationTypeController;
+use App\Http\Controllers\ReceiptFromLocationController;
 use App\Http\Controllers\master\RationCategoryController;
 
 /*
@@ -58,12 +59,12 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/users/activate/{id}',[UserController::class,'activate'])->name('users.activate');
     Route::get('/users/resetpass/{id}',[UserController::class,'resetpass'])->name('users.resetpass');
     Route::resource('users', UserController::class);
-    
+
     Route::get('/change-password',  [ChangePasswordController::class,'index'])->name('change.index');
-    Route::post('/change-password', [ChangePasswordController::class,'store'])->name('change.password');    
+    Route::post('/change-password', [ChangePasswordController::class,'store'])->name('change.password');
 
     Route::get('/logindetails',[LoginDetailController::class,'index'])->name('logindetails.index');
-    
+
     Route::prefix('master/')->group(function (){
         Route::resource('location_types',LocationTypeController::class);
         Route::resource('locations',LocationController::class);
@@ -89,12 +90,17 @@ Route::group(['middleware' => ['auth']], function() {
             Route::resource('menu_items',MenuItemController::class);
         });
 
-       
+
     });
 
     Route::resource('annual_demands',AnnualDemandController::class);
 
     Route::resource('demand_from_locations',DemandFromLocationController::class);
+
+    Route::prefix('{demand_from_location}/')->group(function () {
+        Route::resource('receipt_from_locations',ReceiptFromLocationController::class);
+    });
+
 
 });
 

@@ -22,22 +22,12 @@ class StoreSupplierRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required',
-            'primary_contact' => 'required|unique:suppliers,primary_contact|numeric',
-            'secondary_contact' => 'required|unique:suppliers,secondary_contact|numeric',
+            'name' => 'required|unique:suppliers',
+            'primary_contact' => 'required',
+            'secondary_contact' => 'required',
             'address' => 'required',
-            'reg_no' => 'required|unique:suppliers,reg_no',
-            'vat_no' => 'required',
-            'status' => 'required|numeric',
+            'reg_no' => 'required|unique:suppliers',
+            'vat_no' => 'required|unique:suppliers',
         ];
     }
-
-    public function messages()
-    {
-        return [
-            'name.required' => 'The Name field is required.',
-            'name.unique' => 'This Name is already exists',
-        ];
-    }
-
 }

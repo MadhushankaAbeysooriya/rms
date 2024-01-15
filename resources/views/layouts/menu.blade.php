@@ -10,141 +10,166 @@
     <a href="{{route('annual_demands.index')}}" class="nav-link
     {{ request()->routeIs('annual_demands*')?'active':'' }}">
         <i class="nav-icon fas fa-paper-plane"></i>
-            <p>Annual Demand</p>
+        <p>Annual Demand</p>
+    </a>
+</li>
+
+<li class="nav-item">
+    <a href="{{route('demand_from_locations.index')}}" class="nav-link
+    {{ request()->routeIs('demand_from_locations*')?'active':'' }}">
+        <i class="fas fa-shipping-fast text-olive"></i>
+        <p>Demand from Loc</p>
     </a>
 </li>
 
 
+<li class="nav-item {{ request()->routeIs('menus*') || request()->routeIs('ration_times*') || request()->routeIs('ration_types*') || request()->routeIs('ration_dates*') || request()->routeIs('items*') || request()->routeIs('location_types*') || request()->routeIs('locations*') || request()->routeIs('item_categories*') || request()->routeIs('ration_categories*')?'menu-open':'' }}">
+<li class="nav-item {{ request()->routeIs('menus*') || request()->routeIs('ration_times*') || request()->routeIs('ration_types*') || request()->routeIs('ration_dates*') || request()->routeIs('items*') || request()->routeIs('location_types*') || request()->routeIs('locations*') || request()->routeIs('item_categories*') || request()->routeIs('ration_categories*') || request()->routeIs('brands*') || request()->routeIs('quarters*') || request()->routeIs('measurements*') || request()->routeIs('receipt_types*') || request()->routeIs('suppliers*')?'menu-open':'' }}">
+    <a href="#" class="nav-link">
+        <i class="nav-icon fas fa-cogs text-blue"></i>
+        <p>
+            Master Data
+            <i class="right fas fa-angle-left text-blue"></i>
+        </p>
+    </a>
 
-<li class="nav-item {{ request()->routeIs('items*') || request()->routeIs('location_types*') || request()->routeIs('locations*') || request()->routeIs('item_categories*') || request()->routeIs('ration_categories*')?'menu-open':'' }}">
-    <li class="nav-item {{ request()->routeIs('items*') || request()->routeIs('location_types*') || request()->routeIs('locations*') || request()->routeIs('item_categories*') || request()->routeIs('ration_categories*') || request()->routeIs('brands*') || request()->routeIs('quarters*') || request()->routeIs('measurements*') || request()->routeIs('receipt_types*')?'menu-open':'' }}">
-        <a href="#" class="nav-link">
-            <i class="nav-icon fas fa-cogs text-blue"></i>
-            <p>
-                Master Data
-                <i class="right fas fa-angle-left text-blue"></i>
-            </p>
-        </a>
+    <ul class="nav nav-treeview">
 
-            <ul class="nav nav-treeview">
-                <li class="nav-item">
-                    <a href="{{route('location_types.index')}}" class="nav-link
+        @if(Auth::user()->can('master-location-types-list') )
+            <li class="nav-item">
+                <a href="{{route('location_types.index')}}" class="nav-link
                     {{ request()->routeIs('location_types*')?'active':'' }}">
-                        <i class="far fa-circle nav-icon text-blue"></i>
-                        <p>Location Type</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{route('locations.index')}}" class="nav-link
+                    <i class="far fa-circle nav-icon text-blue"></i>
+                    <p>Location Type</p>
+                </a>
+            </li>
+        @endif
+        @if(Auth::user()->can('master-location-list') )
+            <li class="nav-item">
+                <a href="{{route('locations.index')}}" class="nav-link
                     {{ request()->routeIs('locations*')?'active':'' }}">
-                        <i class="far fa-circle nav-icon text-blue"></i>
-                        <p>Location</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{route('ration_categories.index')}}" class="nav-link
+                    <i class="far fa-circle nav-icon text-blue"></i>
+                    <p>Location</p>
+                </a>
+            </li>
+        @endif
+        @if(Auth::user()->can('master-ration-categories-list') )
+            <li class="nav-item">
+                <a href="{{route('ration_categories.index')}}" class="nav-link
                     {{ request()->routeIs('ration_categories*')?'active':'' }}">
-                        <i class="far fa-circle nav-icon text-blue"></i>
-                        <p>Ration Category</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{route('item_categories.index')}}" class="nav-link
+                    <i class="far fa-circle nav-icon text-blue"></i>
+                    <p>Ration Category</p>
+                </a>
+            </li>
+        @endif
+        @if(Auth::user()->can('master-item-categories-list') )
+            <li class="nav-item">
+                <a href="{{route('item_categories.index')}}" class="nav-link
                     {{ request()->routeIs('item_categories*')?'active':'' }}">
-                        <i class="far fa-circle nav-icon text-blue"></i>
-                        <p>Item Category</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{route('items.index')}}" class="nav-link
+                    <i class="far fa-circle nav-icon text-blue"></i>
+                    <p>Item Category</p>
+                </a>
+            </li>
+        @endif
+        <li class="nav-item">
+            <a href="{{route('items.index')}}" class="nav-link
                     {{ request()->routeIs('items*')?'active':'' }}">
-                        <i class="far fa-circle nav-icon text-blue"></i>
-                        <p>Item</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{route('brands.index')}}" class="nav-link
+                <i class="far fa-circle nav-icon text-blue"></i>
+                <p>Item</p>
+            </a>
+        </li>
+        @if(Auth::user()->can('master-brand-list') )
+            <li class="nav-item">
+                <a href="{{route('brands.index')}}" class="nav-link
                     {{ request()->routeIs('brands*')?'active':'' }}">
-                        <i class="far fa-circle nav-icon text-blue"></i>
-                        <p>Brand</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{route('quarters.index')}}" class="nav-link
+                    <i class="far fa-circle nav-icon text-blue"></i>
+                    <p>Brand</p>
+                </a>
+            </li>
+        @endif
+        @if(Auth::user()->can('master-quarter-list') )
+            <li class="nav-item">
+                <a href="{{route('quarters.index')}}" class="nav-link
                     {{ request()->routeIs('quarters*')?'active':'' }}">
-                        <i class="far fa-circle nav-icon text-blue"></i>
-                        <p>Quarter</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{route('measurements.index')}}" class="nav-link
+                    <i class="far fa-circle nav-icon text-blue"></i>
+                    <p>Quarter</p>
+                </a>
+            </li>
+        @endif
+        @if(Auth::user()->can('master-measurement-list') )
+            <li class="nav-item">
+                <a href="{{route('measurements.index')}}" class="nav-link
                     {{ request()->routeIs('measurements*')?'active':'' }}">
-                        <i class="far fa-circle nav-icon text-blue"></i>
-                        <p>Measurement</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{route('receipt_types.index')}}" class="nav-link
+                    <i class="far fa-circle nav-icon text-blue"></i>
+                    <p>Measurement</p>
+                </a>
+            </li>
+        @endif
+        @if(Auth::user()->can('master-receipt-type-list') )
+            <li class="nav-item">
+                <a href="{{route('receipt_types.index')}}" class="nav-link
                     {{ request()->routeIs('receipt_types*')?'active':'' }}">
-                        <i class="far fa-circle nav-icon text-blue"></i>
-                        <p>Receipt Type</p>
-                    </a>
-                </li>
-            </ul>
+                    <i class="far fa-circle nav-icon text-blue"></i>
+                    <p>Receipt Type</p>
+                </a>
+            </li>
+        @endif
+    </ul>
 
-            <ul class="nav nav-treeview">
-                <li class="nav-item">
-                    <a href="{{route('ration_dates.index')}}" class="nav-link
+    @if(Auth::user()->can('master-ration-date-list') )
+        <ul class="nav nav-treeview">
+            <li class="nav-item">
+                <a href="{{route('ration_dates.index')}}" class="nav-link
                     {{ request()->routeIs('ration_dates*')?'active':'' }}">
-                        <i class="far fa-circle nav-icon text-blue"></i>
-                        <p>Ration Dates</p>
-                    </a>
-                </li>
-            </ul>
+                    <i class="far fa-circle nav-icon text-blue"></i>
+                    <p>Ration Dates</p>
+                </a>
+            </li>
+        </ul>
+    @endif
 
-            <ul class="nav nav-treeview">
-                <li class="nav-item">
-                    <a href="{{route('ration_types.index')}}" class="nav-link
+    <ul class="nav nav-treeview">
+        <li class="nav-item">
+            <a href="{{route('ration_types.index')}}" class="nav-link
                     {{ request()->routeIs('ration_types*')?'active':'' }}">
-                        <i class="far fa-circle nav-icon text-blue"></i>
-                        <p>Ration Types</p>
-                    </a>
-                </li>
-            </ul>
+                <i class="far fa-circle nav-icon text-blue"></i>
+                <p>Ration Types</p>
+            </a>
+        </li>
+    </ul>
 
-            <ul class="nav nav-treeview">
-                <li class="nav-item">
-                    <a href="{{route('ration_times.index')}}" class="nav-link
+    <ul class="nav nav-treeview">
+        <li class="nav-item">
+            <a href="{{route('ration_times.index')}}" class="nav-link
                     {{ request()->routeIs('ration_times*')?'active':'' }}">
-                        <i class="far fa-circle nav-icon text-blue"></i>
-                        <p>Ration Times</p>
-                    </a>
-                </li>
-            </ul>
+                <i class="far fa-circle nav-icon text-blue"></i>
+                <p>Ration Times</p>
+            </a>
+        </li>
+    </ul>
 
-            <ul class="nav nav-treeview">
-                <li class="nav-item">
-                    <a href="{{route('menus.index')}}" class="nav-link
+    <ul class="nav nav-treeview">
+        <li class="nav-item">
+            <a href="{{route('menus.index')}}" class="nav-link
                     {{ request()->routeIs('menus*')?'active':'' }}">
-                        <i class="far fa-circle nav-icon text-blue"></i>
-                        <p>Menu</p>
-                    </a>
-                </li>
-            </ul>
+                <i class="far fa-circle nav-icon text-blue"></i>
+                <p>Menu</p>
+            </a>
+        </li>
+    </ul>
 
-            <ul class="nav nav-treeview">
-                <li class="nav-item">
-                    <a href="{{route('suppliers.index')}}" class="nav-link
+    <ul class="nav nav-treeview">
+        <li class="nav-item">
+            <a href="{{route('suppliers.index')}}" class="nav-link
                     {{ request()->routeIs('suppliers*')?'active':'' }}">
-                        <i class="far fa-circle nav-icon text-blue"></i>
-                        <p>suppliers</p>
-                    </a>
-                </li>
-            </ul>
+                <i class="far fa-circle nav-icon text-blue"></i>
+                <p>Supplier</p>
+            </a>
+        </li>
+    </ul>
 
 
-
-    </li>
+</li>
 
 
 @can('role-list','user-list','logindetail-list','searchdetail-list')
@@ -193,17 +218,7 @@
             </ul>
         @endcan
 
-        @can('searchdetail-list')
-            <ul class="nav nav-treeview">
-                <li class="nav-item">
-                    <a href="{{route('searchdetails.index')}}" class="nav-link
-                    {{ request()->routeIs('searchdetails.index')?'active':'' }}">
-                        <i class="far fa-circle nav-icon text-purple"></i>
-                        <p>Search Detail</p>
-                    </a>
-                </li>
-            </ul>
-        @endcan
+
     </li>
 @endcan
 

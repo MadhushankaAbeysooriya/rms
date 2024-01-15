@@ -69,7 +69,6 @@ class RationTypeDataTable extends DataTable
                         Button::make('csv'),
                         Button::make('pdf'),
                         Button::make('print'),
-                        Button::make('reset')
                     ]);
     }
 
