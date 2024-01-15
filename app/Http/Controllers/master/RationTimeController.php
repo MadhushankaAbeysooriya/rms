@@ -14,6 +14,14 @@ class RationTimeController extends Controller
     /**
      * Display a listing of the resource.
      */
+    function __construct()
+    {
+        $this->middleware('permission:master-ration-time-list|master-ration-time-create|master-ration-time-edit|master-ration-time-delete', ['only' => ['index','store']]);
+        $this->middleware('permission:master-ration-time-create', ['only' => ['create','store']]);
+        $this->middleware('permission:master-ration-time-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:master-ration-time-delete', ['only' => ['destroy']]);
+    }
+
     public function index(RationTimeDataTable $dataTable)
     {
         return $dataTable->render('master.ration_time.index');

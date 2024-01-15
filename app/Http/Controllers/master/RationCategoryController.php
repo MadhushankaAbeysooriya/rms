@@ -14,6 +14,14 @@ class RationCategoryController extends Controller
     /**
      * Display a listing of the resource.
      */
+    function __construct()
+    {
+        $this->middleware('permission:master-ration-categories-list|master-ration-categories-create|master-ration-categories-edit|master-ration-categories-delete', ['only' => ['index','store']]);
+        $this->middleware('permission:master-ration-categories-create', ['only' => ['create','store']]);
+        $this->middleware('permission:master-ration-categories-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:master-ration-categories-delete', ['only' => ['destroy']]);
+    }
+
     public function index(RationCategoryDataTable $dataTable)
     {
         return $dataTable->render('master.ration_categories.index');

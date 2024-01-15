@@ -4,6 +4,7 @@ namespace App\DataTables;
 
 use App\Models\DemandFromLocation;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
+use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
 use Yajra\DataTables\Html\Button;
@@ -49,20 +50,26 @@ class DemandFromLocationDataTable extends DataTable
                 $id = $demandFormLocation->id;
                 $btn = '';
 
-                $btn .= '<a href="'.route('demand_from_locations.edit',$id).'"
+                if (Auth::user()->can('demand-from-location-edit')) {
+                    $btn .= '<a href="' . route('demand_from_locations.edit', $id) . '"
                     class="btn btn-xs btn-info" data-toggle="tooltip" title="Edit">
                     <i class="fa fa-pen-alt"></i> </a> ';
+                }
 
-                $btn .= '<a href="'.route('receipt_from_locations.create',$id).'"
+                if (Auth::user()->can('demand-from-location-create-reciept')) {
+                    $btn .= '<a href="' . route('receipt_from_locations.create', $id) . '"
                     class="btn btn-xs btn-warning" data-toggle="tooltip" title="Add Receipt">
                     <i class="fa fa-plus"></i> </a> ';
+                }
 
-                $btn .= '<form  action="' . route('demand_from_locations.destroy', $id) . '" method="POST" class="d-inline" >
+                if (Auth::user()->can('demand-from-location-delete') ) {
+                    $btn .= '<form  action="' . route('demand_from_locations.destroy', $id) . '" method="POST" class="d-inline" >
                             ' . csrf_field() . '
                                 ' . method_field("DELETE") . '
                             <button type="submit"  class="btn bg-danger btn-xs  dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700" onclick="return confirm(\'Do you need to delete this\');">
                             <i class="fa fa-trash-alt"></i></button>
                             </form> </div>';
+                }
 
                 return $btn;
             })

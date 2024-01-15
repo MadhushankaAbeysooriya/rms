@@ -14,6 +14,14 @@ class BrandController extends Controller
     /**
      * Display a listing of the resource.
      */
+    function __construct()
+    {
+        $this->middleware('permission:master-brand-list|master-brand-create|master-brand-edit|master-brand-delete', ['only' => ['index','store']]);
+        $this->middleware('permission:master-brand-create', ['only' => ['create','store']]);
+        $this->middleware('permission:master-brand-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:master-brand-delete', ['only' => ['destroy']]);
+    }
+
     public function index(BrandDataTable $dataTable)
     {
         return $dataTable->render('master.brands.index');

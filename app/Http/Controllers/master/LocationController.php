@@ -15,6 +15,14 @@ class LocationController extends Controller
     /**
      * Display a listing of the resource.
      */
+    function __construct()
+    {
+        $this->middleware('permission:master-location-list|master-location-create|master-location-edit|master-location-delete', ['only' => ['index','store']]);
+        $this->middleware('permission:master-location-create', ['only' => ['create','store']]);
+        $this->middleware('permission:master-location-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:master-location-delete', ['only' => ['destroy']]);
+    }
+
     public function index(LocationDataTable $dataTable)
     {
         return $dataTable->render('master.locations.index');

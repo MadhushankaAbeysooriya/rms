@@ -34,59 +34,53 @@ class PermissionTableSeeder extends Seeder
             'demand-from-location-create',
             'demand-from-location-edit',
             'demand-from-location-delete',
+            'demand-from-location-create-reciept',
 
-            // completed
+            'master-location-types-list',
+            'master-location-types-create',
+            'master-location-types-edit',
+            'master-location-types-delete',
 
-//            'master-location-types-list',
-//            'master-location-types-create',
-//            'master-location-types-edit',
-//            'master-location-types-delete',
+            'master-location-list',
+            'master-location-create',
+            'master-location-edit',
+            'master-location-delete',
 
-//            'master-location-list',
-//            'master-location-create',
-//            'master-location-edit',
-//            'master-location-delete',
+            'master-ration-categories-list',
+            'master-ration-categories-create',
+            'master-ration-categories-edit',
+            'master-ration-categories-delete',
 
-//            'master-ration-categories-list',
-//            'master-ration-categories-create',
-//            'master-ration-categories-edit',
-//            'master-ration-categories-delete',
-
-//            'master-item-categories-list',
-//            'master-item-categories-create',
-//            'master-item-categories-edit',
-//            'master-item-categories-delete',
-
-            //end completed
+            'master-item-categories-list',
+            'master-item-categories-create',
+            'master-item-categories-edit',
+            'master-item-categories-delete',
 
             'master-item-list',
             'master-item-create',
             'master-item-edit',
             'master-item-delete',
+            'master-item-add-alternative-item',
 
-            // completed
+            'master-brand-list',
+            'master-brand-create',
+            'master-brand-edit',
+            'master-brand-delete',
 
-//            'master-brand-list',
-//            'master-brand-create',
-//            'master-brand-edit',
-//            'master-brand-delete',
+            'master-quarter-list',
+            'master-quarter-create',
+            'master-quarter-edit',
+            'master-quarter-delete',
 
-//            'master-quarter-list',
-//            'master-quarter-create',
-//            'master-quarter-edit',
-//            'master-quarter-delete',
+            'master-measurement-list',
+            'master-measurement-create',
+            'master-measurement-edit',
+            'master-measurement-delete',
 
-//            'master-measurement-list',
-//            'master-measurement-create',
-//            'master-measurement-edit',
-//            'master-measurement-delete',
-
-//            'master-receipt-type-list',
-//            'master-receipt-type-create',
-//            'master-receipt-type-edit',
-//            'master-receipt-type-delete',
-
-        //end completed
+            'master-receipt-type-list',
+            'master-receipt-type-create',
+            'master-receipt-type-edit',
+            'master-receipt-type-delete',
 
             'master-ration-date-list',
             'master-ration-date-create',
@@ -107,6 +101,11 @@ class PermissionTableSeeder extends Seeder
             'master-supplier-create',
             'master-supplier-edit',
             'master-supplier-delete',
+
+            'master-ration-type-list',
+            'master-ration-type-create',
+            'master-ration-type-edit',
+            'master-ration-type-delete',
 
 
         ];

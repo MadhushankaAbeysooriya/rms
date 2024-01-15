@@ -13,6 +13,14 @@ class SupplierController extends Controller
     /**
      * Display a listing of the resource.
      */
+    function __construct()
+    {
+        $this->middleware('permission:master-supplier-list|master-supplier-create|master-supplier-edit|master-supplier-delete', ['only' => ['index','store']]);
+        $this->middleware('permission:master-supplier-create', ['only' => ['create','store']]);
+        $this->middleware('permission:master-supplier-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:master-supplier-delete', ['only' => ['destroy']]);
+    }
+
     public function index(SupplierDataTable $dataTable)
     {
         return $dataTable->render('master.suppliers.index');

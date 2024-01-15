@@ -14,6 +14,14 @@ class LocationTypeController extends Controller
     /**
      * Display a listing of the resource.
      */
+    function __construct()
+    {
+        $this->middleware('permission:master-location-types-list|master-location-types-create|master-location-types-edit|master-location-types-delete', ['only' => ['index','store']]);
+        $this->middleware('permission:master-location-types-create', ['only' => ['create','store']]);
+        $this->middleware('permission:master-location-types-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:master-location-types-delete', ['only' => ['destroy']]);
+    }
+
     public function index(LocationTypeDataTable $dataTable)
     {
         return $dataTable->render('master.location_types.index');

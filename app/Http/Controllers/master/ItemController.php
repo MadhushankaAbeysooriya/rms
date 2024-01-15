@@ -20,6 +20,15 @@ class ItemController extends Controller
     /**
      * Display a listing of the resource.
      */
+    function __construct()
+    {
+        $this->middleware('permission:master-item-list|master-item-create|master-item-edit|master-item-delete', ['only' => ['index','store']]);
+        $this->middleware('permission:master-item-create', ['only' => ['create','store']]);
+        $this->middleware('master-item-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:master-item-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:master-item-add-alternative-item', ['only' => ['addAlternativeView']]);
+    }
+
     public function index(ItemDataTable $dataTable)
     {
         return $dataTable->render('master.items.index');

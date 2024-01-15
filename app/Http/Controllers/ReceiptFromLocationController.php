@@ -20,6 +20,12 @@ class ReceiptFromLocationController extends Controller
     /**
      * Display a listing of the resource.
      */
+
+    function __construct()
+    {
+        $this->middleware('permission:demand-from-location-create-reciept', ['only' => ['create']]);
+    }
+
     public function index()
     {
 

@@ -14,6 +14,14 @@ class RationTypeController extends Controller
     /**
      * Display a listing of the resource.
      */
+    function __construct()
+    {
+        $this->middleware('permission:master-ration-type-list|master-ration-type-create|master-ration-type-edit|master-ration-type-delete', ['only' => ['index','store']]);
+        $this->middleware('permission:master-ration-type-create', ['only' => ['create','store']]);
+        $this->middleware('permission:master-ration-type-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:master-ration-type-delete', ['only' => ['destroy']]);
+    }
+
     public function index(RationTypeDataTable $dataTable)
     {
         return $dataTable->render('master.ration_type.index');

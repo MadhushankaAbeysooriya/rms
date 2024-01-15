@@ -27,16 +27,20 @@ class AnnualDemandDataTable extends DataTable
                 $id = $annualDemand->id;
                 $btn = '';
 
-                    $btn .= '<a href="'.route('annual_demands.edit',$id).'"
+                if (Auth::user()->can('annual-demand-edit') ) {
+                    $btn .= '<a href="' . route('annual_demands.edit', $id) . '"
                     class="btn btn-xs btn-info" data-toggle="tooltip" title="Edit">
                     <i class="fa fa-pen-alt"></i> </a> ';
-                    
+                }
+                if (Auth::user()->can('annual-demand-delete') ) {
+
                     $btn .= '<form  action="' . route('annual_demands.destroy', $id) . '" method="POST" class="d-inline" >
                             ' . csrf_field() . '
                                 ' . method_field("DELETE") . '
                             <button type="submit"  class="btn bg-danger btn-xs  dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700" onclick="return confirm(\'Do you need to delete this\');">
                             <i class="fa fa-trash-alt"></i></button>
                             </form> </div>';
+                }
 
                 return $btn;
             })

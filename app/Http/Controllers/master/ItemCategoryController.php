@@ -14,6 +14,14 @@ class ItemCategoryController extends Controller
     /**
      * Display a listing of the resource.
      */
+    function __construct()
+    {
+        $this->middleware('permission:master-item-categories-list|master-item-categories-create|master-item-categories-edit|master-item-categories-delete', ['only' => ['index','store']]);
+        $this->middleware('permission:master-item-categories-create', ['only' => ['create','store']]);
+        $this->middleware('permission:master-item-categories-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:master-item-categories-delete', ['only' => ['destroy']]);
+    }
+
     public function index(ItemCategoryDataTable $dataTable)
     {
         return $dataTable->render('master.Item_Categories.index');

@@ -18,6 +18,14 @@ class DemandFromLocationController extends Controller
     /**
      * Display a listing of the resource.
      */
+    function __construct()
+    {
+        $this->middleware('permission:demand-from-location-list|demand-from-location-create|demand-from-location-edit|demand-from-location-delete', ['only' => ['index','store']]);
+        $this->middleware('permission:demand-from-location-create', ['only' => ['create','store']]);
+        $this->middleware('permission:demand-from-location-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:demand-from-location-delete', ['only' => ['destroy']]);
+    }
+
     public function index(DemandFromLocationDataTable $dataTable)
     {
         return $dataTable->render('demand_from_locations.index');

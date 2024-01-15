@@ -15,6 +15,14 @@ class MenuItemController extends Controller
     /**
      * Display a listing of the resource.
      */
+    function __construct()
+    {
+        $this->middleware('permission:master-menu-list|master-menu-create|master-menu-edit|master-menu-delete', ['only' => ['index','store']]);
+        $this->middleware('permission:master-menu-create', ['only' => ['create','store']]);
+        $this->middleware('permission:master-menu-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:master-menu-delete', ['only' => ['destroy']]);
+    }
+
     public function index(MenuItemDataTable $dataTable)
     {
         return $dataTable->render('master.menu_items.index');

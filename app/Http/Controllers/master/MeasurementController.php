@@ -14,6 +14,14 @@ class MeasurementController extends Controller
     /**
      * Display a listing of the resource.
      */
+    function __construct()
+    {
+        $this->middleware('permission:master-measurement-list|master-measurement-create|master-measurement-edit|master-measurement-delete', ['only' => ['index','store']]);
+        $this->middleware('permission:master-measurement-create', ['only' => ['create','store']]);
+        $this->middleware('permission:master-measurement-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:master-measurement-delete', ['only' => ['destroy']]);
+    }
+
     public function index(MeasurementDataTable $dataTable)
     {
         return $dataTable->render('master.measurements.index');

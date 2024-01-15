@@ -3,6 +3,7 @@
 namespace App\DataTables\master;
 
 use App\Models\master\RationTime;
+use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\EloquentDataTable;
@@ -27,17 +28,19 @@ class RationTimeDataTable extends DataTable
                 $id = $rationTime->id;
                 $btn = '';
 
-                    $btn .= '<a href="'.route('ration_times.edit',$id).'"
+                if (Auth::user()->can('master-ration-time-edit') ) {
+                    $btn .= '<a href="' . route('ration_times.edit', $id) . '"
                     class="btn btn-xs btn-info" data-toggle="tooltip" title="Edit">
                     <i class="fa fa-pen-alt"></i> </a> ';
-                    
+                }
+                if (Auth::user()->can('master-ration-time-delete') ) {
                     $btn .= '<form  action="' . route('ration_times.destroy', $id) . '" method="POST" class="d-inline" >
                             ' . csrf_field() . '
                                 ' . method_field("DELETE") . '
                             <button type="submit"  class="btn bg-danger btn-xs  dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700" onclick="return confirm(\'Do you need to delete this\');">
                             <i class="fa fa-trash-alt"></i></button>
                             </form> </div>';
-
+                }
                 return $btn;
             })
         ->rawColumns(['action']);

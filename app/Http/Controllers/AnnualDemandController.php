@@ -15,6 +15,14 @@ class AnnualDemandController extends Controller
     /**
      * Display a listing of the resource.
      */
+    function __construct()
+    {
+        $this->middleware('permission:annual-demand-list|annual-demand-create|annual-demand-edit|annual-demand-delete', ['only' => ['index','store']]);
+        $this->middleware('permission:annual-demand-create', ['only' => ['create','store']]);
+        $this->middleware('permission:annual-demand-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:annual-demand-delete', ['only' => ['destroy']]);
+    }
+
     public function index(AnnualDemandDataTable $dataTable)
     {
         return $dataTable->render('annual_demands.index');

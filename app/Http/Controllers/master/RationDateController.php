@@ -14,6 +14,14 @@ class RationDateController extends Controller
     /**
      * Display a listing of the resource.
      */
+    function __construct()
+    {
+        $this->middleware('permission:master-ration-date-list|master-ration-date-create|master-ration-date-edit|master-ration-date-delete', ['only' => ['index','store']]);
+        $this->middleware('permission:master-ration-date-create', ['only' => ['create','store']]);
+        $this->middleware('permission:master-ration-date-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:master-ration-date-delete', ['only' => ['destroy']]);
+    }
+
     public function index(RationDateDataTable $dataTable)
     {
         return $dataTable->render('master.ration_date.index');

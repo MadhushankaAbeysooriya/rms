@@ -14,6 +14,14 @@ class QuarterController extends Controller
     /**
      * Display a listing of the resource.
      */
+    function __construct()
+    {
+        $this->middleware('permission:master-quarter-list|master-quarter-create|master-quarter-edit|master-quarter-delete', ['only' => ['index','store']]);
+        $this->middleware('permission:master-quarter-create', ['only' => ['create','store']]);
+        $this->middleware('permission:master-quarter-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:master-quarter-delete', ['only' => ['destroy']]);
+    }
+
     public function index(QuarterDataTable $dataTable)
     {
         return $dataTable->render('master.quarters.index');

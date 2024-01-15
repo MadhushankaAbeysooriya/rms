@@ -14,6 +14,14 @@ class ReceiptTypeController extends Controller
     /**
      * Display a listing of the resource.
      */
+
+    function __construct()
+    {
+        $this->middleware('permission:master-receipt-type-list|master-receipt-type-create|master-receipt-type-edit|master-receipt-type-delete', ['only' => ['index','store']]);
+        $this->middleware('permission:master-receipt-type-create', ['only' => ['create','store']]);
+        $this->middleware('permission:master-receipt-type-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:master-receipt-type-delete', ['only' => ['destroy']]);
+    }
     public function index(ReceiptTypeDataTable $dataTable)
     {
         return $dataTable->render('master.receipt_types.index');
