@@ -2,17 +2,20 @@
 
 namespace App\Http\Controllers\master;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\DataTables\master\SupplierDataTable;
+use App\Http\Requests\master\StoreSupplierRequest;
+use App\Models\master\Supplier;
 
 class SupplierController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(SupplierDataTable $dataTable)
     {
-        //
+        return $dataTable->render('master.supplier.index');
     }
 
     /**
@@ -20,15 +23,16 @@ class SupplierController extends Controller
      */
     public function create()
     {
-        //
+        return view('master.supplier.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreSupplierRequest $request)
     {
-        //
+        Supplier::create($request->all());
+        return redirect()->route('suppliers.index')->with('success','Supplier Created');
     }
 
     /**

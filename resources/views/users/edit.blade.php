@@ -56,14 +56,14 @@
                                     </div>
                                 </div>
                                 
-                                <div class="form-group row">
-                                    <label for="phone" class="col-sm-2 col-form-label">Phone</label>
-                                    <div class="col-sm-6">
-                                        <input type="text" class="form-control @error('phone')
-                                        is-invalid @enderror" name="phone" value="{{ $user->phone }}" id="phone" autocomplete="off">
-                                        <span class="text-danger">@error('phone') {{ $message }} @enderror</span>
-                                    </div>
-                                </div>
+                                {{--<div class="form-group row">--}}
+                                    {{--<label for="phone" class="col-sm-2 col-form-label">Phone</label>--}}
+                                    {{--<div class="col-sm-6">--}}
+                                        {{--<input type="text" class="form-control @error('phone')--}}
+                                        {{--is-invalid @enderror" name="phone" value="{{ $user->phone }}" id="phone" autocomplete="off">--}}
+                                        {{--<span class="text-danger">@error('phone') {{ $message }} @enderror</span>--}}
+                                    {{--</div>--}}
+                                {{--</div>--}}
 
                                 <div class="form-group row">
                                     <label class="col-sm-2" for="roles">Role</label>
@@ -83,7 +83,20 @@
                                             </span>
                                         @enderror
                                     </div>
-                                </div>                                
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="location" class="col-sm-2 col-form-label">Location</label>
+                                    <div class="col-sm-6">
+                                        <select class="form-control select2" name="location" id="location" autocomplete="off">
+                                            <option value="">select one</option>
+                                            @foreach($locations as $location)
+                                                <option {{ isset($user->location)?$user->location==$location->id?'selected':'':'' }} value="{{$location->id}}">{{$location->name}}</option>
+                                            @endforeach
+                                        </select>
+                                        <span class="text-danger">@error('location') {{ $message }} @enderror</span>
+                                    </div>
+                                </div>
 
                                 <div class="form-group row">
                                     <label for="password" class="col-sm-2 col-form-label">Password</label>
@@ -123,12 +136,27 @@
 
 @section('third_party_stylesheets')
     <link rel="stylesheet" href="{{ asset('plugins/select2/css/select2.css') }}">
+
+    <style>
+        .select2-selection--single
+        {
+            height: 38px!important;
+        }
+    </style>
+
 @endsection
 
 @section('third_party_scripts')
 
-    <script src="{{asset('plugins/select2/js/select2.js')}}" defer></script>    
-
     <script src="{{asset('plugins/select2/js/select2.js')}}" defer></script>
+    <script src="{{asset('plugins/select2/js/select2.js')}}" defer></script>
+
+    <script>
+
+        $(document).ready(function() {
+            $('.select2').select2();
+        });
+
+    </script>
 
 @endsection

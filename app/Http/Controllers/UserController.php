@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\master\Location;
 use App\Models\User;
 use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
@@ -42,8 +43,9 @@ class UserController extends Controller
     public function create()
     {
         $roles = Role::pluck('name','name')->all();
+        $locations = Location::all();
 
-        return view('users.create',compact('roles'));
+        return view('users.create',compact('roles','locations'));
     }
 
     /**
@@ -59,7 +61,7 @@ class UserController extends Controller
             'email' => 'required|email|unique:users,email',
             'password' => 'required|same:confirm-password',
             'roles' => 'required',
-            'phone' => 'required|unique:users,phone'
+            'location' => 'required'
         ]);
 
         $input = $request->all();
@@ -80,7 +82,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        $user = User::find($id);
+        $user = User::with(['userlocation'])->find($id);
         return view('users.show',compact('user'));
     }
 
@@ -92,11 +94,12 @@ class UserController extends Controller
      */
     public function edit($id)
     {
+        $locations = Location::all();
         $user = User::find($id);
         $roles = Role::pluck('name','name')->all();
-        $userRole = $user->roles->pluck('name','name')->toArray();        
+        $userRole = $user->roles->pluck('name','name')->toArray();
 
-        return view('users.edit',compact('user','roles','userRole'));
+        return view('users.edit',compact('user','roles','userRole','locations'));
     }
 
     /**
@@ -113,7 +116,7 @@ class UserController extends Controller
             'email' => 'required|email|unique:users,email,'.$id,
             'password' => 'same:confirm-password',
             'roles' => 'required',
-            'phone' => 'required|unique:users,phone,'.$id,
+            'location' => 'required'
         ]);
 
         $input = $request->all();

@@ -40,7 +40,7 @@ class LocationTypeDataTable extends DataTable
 
                 return $btn;
             })
-            ->rawColumns(['action']);;
+            ->rawColumns(['action']);
     }
 
     /**

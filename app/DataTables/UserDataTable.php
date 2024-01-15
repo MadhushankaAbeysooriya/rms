@@ -32,6 +32,14 @@ class UserDataTable extends DataTable
                     return Carbon::parse($user->last_login_date)->format('Y-m-d');
                 }                
             })
+            ->editColumn('last_login_ip', function ($user) {
+                if($user->last_login_ip == null)
+                {
+                    return 'N/A';
+                }else{
+                    return $user->last_login_ip;
+                }
+            })
             ->addColumn('status', function($status){
                 return ($status->status==1)?'<h5><span class="badge badge-primary">Active</span></h5>':
                 '<h5><span class="badge badge-warning">Inactive</span></h5>';
