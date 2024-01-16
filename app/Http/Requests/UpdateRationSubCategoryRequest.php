@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateRationTimeRequest extends FormRequest
+class UpdateRationSubCategoryRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,16 +22,17 @@ class UpdateRationTimeRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'required|unique:ration_sub_categories,name,'.$this->ration_sub_category->id,
+            'ration_category_id' => 'required',
+            'name' => 'required|unique:ration_sub_categories',
         ];
     }
 
     public function messages()
     {
         return [
+            'ration_category_id.required' => 'Ration Category field is required.',
             'name.required' => 'The Name field is required.',
             'name.unique' => 'This Name is already exists',
         ];
     }
-
 }

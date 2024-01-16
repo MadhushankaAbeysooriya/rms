@@ -175,6 +175,17 @@
             </li>
         </ul>
     @endif
+    {{-- @if(Auth::user()->can('master-supplier-list') ) --}}
+        <ul class="nav nav-treeview">
+            <li class="nav-item">
+                <a href="{{route('ration_sub_categories.index')}}" class="nav-link
+                    {{ request()->routeIs('ration_sub_categories*')?'active':'' }}">
+                    <i class="far fa-circle nav-icon text-blue"></i>
+                    <p>Ration Sub Category</p>
+                </a>
+            </li>
+        </ul>
+    {{-- @endif --}}
 
 </li>
 
