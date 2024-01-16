@@ -2,16 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\DataTables\DemandFromLocationDataTable;
+use Exception;
+use App\Models\master\Item;
+use App\Models\AnnualDemand;
+use Illuminate\Http\Request;
+use App\Models\master\Location;
+use App\Models\master\Supplier;
+use App\Models\DemandFromLocation;
+use Illuminate\Support\Facades\DB;
+use App\Models\master\LocationType;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use App\DataTables\DemandFromLocationDataTable;
 use App\Http\Requests\StoreDemandFromLocationRequest;
 use App\Http\Requests\UpdateDemandFromLocationRequest;
-use App\Models\DemandFromLocation;
-use App\Models\master\Item;
-use App\Models\master\Location;
-use App\Models\master\LocationType;
-use App\Models\master\Supplier;
-use Illuminate\Http\Request;
 
 class DemandFromLocationController extends Controller
 {
@@ -45,10 +49,100 @@ class DemandFromLocationController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreDemandFromLocationRequest $request)
+    // public function store(Request $request)
+    // {
+    //     $this->validate($request, [
+    //         'year' => 'required',
+    //         'demand_ref' => 'required',
+    //         'item_id' => 'required',
+    //         'supplier_id' => 'required',
+    //         'qty' => 'required',
+    //         //'location_id' => 'required',
+    //         'request_date' => 'required',
+    //     ]);
+
+    //     $annualDemand = AnnualDemand::where('year', $request->year)
+    //                                     ->where('location_id', Auth::user()->location)
+    //                                     ->where('supplier_id', $request->supplier_id)
+    //                                     ->where('item_id', $request->item_id)
+    //                                     ->first();
+
+
+    //     if ($annualDemand && $annualDemand->avl_qty >= $request->qty) {
+
+    //         DemandFromLocation::create([
+    //             'year' => $request->year,
+    //             'demand_ref' => $request->demand_ref,
+    //             'item_id' => $request->item_id,
+    //             'supplier_id' => $request->supplier_id,
+    //             'qty' => $request->qty,
+    //             'location_id' => Auth::user()->location,
+    //             'request_date' => $request->request_date,
+    //         ]);
+
+    //             return redirect()->route('demand_from_locations.index')->with('success','Demand From Location Created');
+
+    //     } else {
+    //             // If annual demand record not found or quantity not available, throw an exception
+    //             return redirect()->route('demand_from_locations.create')
+    //                             ->with('danger', 'Insufficient quantity available in annual demand.');
+    //     }
+    // }
+
+    public function store(Request $request)
     {
-        DemandFromLocation::create($request->all());
-        return redirect()->route('demand_from_locations.index')->with('success','Demand From Location Created');
+        // Wrap the entire function inside a database transaction
+        DB::beginTransaction();
+
+        try {
+            $this->validate($request, [
+                'year' => 'required',
+                'demand_ref' => 'required',
+                'item_id' => 'required',
+                'supplier_id' => 'required',
+                'qty' => 'required',
+                'request_date' => 'required',
+            ]);
+
+            $annualDemand = AnnualDemand::where('year', $request->year)
+                            ->where('location_id', Auth::user()->location)
+                            ->where('supplier_id', $request->supplier_id)
+                            ->where('item_id', $request->item_id)
+                            ->first();
+
+            if ($annualDemand && $annualDemand->avl_qty >= $request->qty) {
+
+                DemandFromLocation::create([
+                    'year' => $request->year,
+                    'demand_ref' => $request->demand_ref,
+                    'item_id' => $request->item_id,
+                    'supplier_id' => $request->supplier_id,
+                    'qty' => $request->qty,
+                    'location_id' => Auth::user()->location,
+                    'request_date' => $request->request_date,
+                ]);
+
+                // Commit the transaction if everything is successful
+                DB::commit();
+
+                return redirect()->route('demand_from_locations.index')->with('success', 'Demand From Location Created');
+
+            } else {
+                // Rollback the transaction if annual demand record not found or quantity not available
+                DB::rollBack();
+
+                // If you want to throw an exception, you can use ValidationException
+                return redirect()->route('demand_from_locations.create')
+                                 ->with('danger', 'Insufficient quantity available in annual demand.');
+            }
+        } catch (Exception $e) {
+            // Rollback the transaction in case of any exception
+            DB::rollBack();
+
+            // Log or handle the exception as needed
+            return redirect()->route('demand_from_locations.create')
+                            ->with('danger', 'An error occurred while processing your request.');
+        }
     }
 
     /**

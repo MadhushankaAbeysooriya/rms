@@ -5,6 +5,7 @@ namespace App\DataTables;
 use App\Models\AnnualDemand;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
+use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
@@ -44,11 +45,11 @@ class AnnualDemandDataTable extends DataTable
 
                 return $btn;
             })
-            ->addColumn('qty', function ($annualDemand) {               
-    
+            ->addColumn('qty', function ($annualDemand) {
+
                 return $annualDemand->qty.' '.$annualDemand->item->measurement->name;
             })
-            ->rawColumns(['action']);
+            ->rawColumns(['action', 'qty']);
     }
 
     /**
@@ -86,7 +87,7 @@ class AnnualDemandDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-            Column::make('DT_RowIndex')->title('#')->searchable(false)->orderColumn(false)->width(40),            
+            Column::make('DT_RowIndex')->title('#')->searchable(false)->orderColumn(false)->width(40),
             Column::make('year')->data('year')->title('Year'),
             Column::make('item.name')->data('item.name')->title('Item'),
             Column::make('location.name')->data('location.name')->title('Location'),

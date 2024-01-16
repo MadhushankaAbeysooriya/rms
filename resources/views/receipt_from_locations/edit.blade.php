@@ -78,7 +78,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
+                        {{-- <div class="form-group row">
                             <label class="col-sm-2 col-form-label" for="supplier_id">Supplier</label>
                             <div class="col-sm-6">
                                 <select name="supplier_id" id="supplier_id" class="form-control select2">
@@ -93,7 +93,7 @@
                                 <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
                                 @enderror
                             </div>
-                        </div>
+                        </div> --}}
 
                         <div class="form-group row">
                             <label for="qty" class="col-sm-2 col-form-label">Qty</label>

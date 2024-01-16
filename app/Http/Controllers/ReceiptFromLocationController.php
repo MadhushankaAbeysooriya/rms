@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\ReceiptFromLocation;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use App\Models\master\AlternativeItem;
 
 class ReceiptFromLocationController extends Controller
 {
@@ -37,7 +38,17 @@ class ReceiptFromLocationController extends Controller
     public function create(DemandFromLocation $demand_from_location)
     {
         $locations = Location::all();
-        $items = Item::all();
+
+        // Fetch all alternative items
+        $alternativeItems = AlternativeItem::all();
+
+        // Extract unique item IDs from both item_id and alternative_item_id columns
+        $itemIds = $alternativeItems->pluck('item_id')->merge($alternativeItems->pluck('alternative_item_id'))->unique()->values();
+        //dd($itemIds);
+
+        // Fetch items based on the extracted IDs
+        $items = Item::whereIn('id', $itemIds)->get();
+
         $suppliers = Supplier::all();
         $receiptTypes = ReceiptType::all();
 
@@ -75,7 +86,7 @@ class ReceiptFromLocationController extends Controller
         try {
             $this->validate($request, [
                 'item_id' => 'required|exists:items,id',
-                'supplier_id' => 'required|exists:suppliers,id',
+                //'supplier_id' => 'required|exists:suppliers,id',
                 'qty' => 'required|numeric|min:1',
                 'receipt_type_id' => 'required|exists:receipt_types,id',
                 'receipt_date' => 'required',
@@ -86,7 +97,7 @@ class ReceiptFromLocationController extends Controller
 
             $annualDemand = AnnualDemand::where('year', $demand_from_location->year)
                                         ->where('location_id', Auth::user()->location)
-                                        ->where('supplier_id', $request->supplier_id)
+                                        ->where('supplier_id', $demand_from_location->supplier_id)
                                         ->where('item_id', $request->item_id)
                                         ->first();
 
@@ -101,7 +112,7 @@ class ReceiptFromLocationController extends Controller
                     'receipt_type_id' => $request->receipt_type_id,
                     'item_id' => $request->item_id,
                     'location_id' => Auth::user()->location,
-                    'supplier_id' => $request->supplier_id,
+                    'supplier_id' => $demand_from_location->supplier_id,
                     'qty' => $request->qty,
                     'receipt_date' => $request->receipt_date,
                 ]);
