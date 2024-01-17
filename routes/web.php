@@ -33,6 +33,7 @@ use App\Http\Controllers\master\ItemCategoryController;
 use App\Http\Controllers\master\LocationTypeController;
 use App\Http\Controllers\ReceiptFromLocationController;
 use App\Http\Controllers\master\RationCategoryController;
+use App\Http\Controllers\master\RationSubCategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -85,6 +86,7 @@ Route::group(['middleware' => ['auth']], function() {
         Route::resource('measurements',MeasurementController::class);
         Route::resource('receipt_types',ReceiptTypeController::class);
         Route::resource('suppliers',SupplierController::class);
+        Route::resource('ration_sub_categories',RationSubCategoryController::class);
 
         Route::prefix('{menu}/')->group(function () {
             Route::resource('menu_items',MenuItemController::class);

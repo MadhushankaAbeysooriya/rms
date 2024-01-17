@@ -25,8 +25,13 @@
     </li>
 @endif
 
-<li class="nav-item {{ request()->routeIs('menus*') || request()->routeIs('ration_times*') || request()->routeIs('ration_types*') || request()->routeIs('ration_dates*') || request()->routeIs('items*') || request()->routeIs('location_types*') || request()->routeIs('locations*') || request()->routeIs('item_categories*') || request()->routeIs('ration_categories*')?'menu-open':'' }}">
-<li class="nav-item {{ request()->routeIs('menus*') || request()->routeIs('ration_times*') || request()->routeIs('ration_types*') || request()->routeIs('ration_dates*') || request()->routeIs('items*') || request()->routeIs('location_types*') || request()->routeIs('locations*') || request()->routeIs('item_categories*') || request()->routeIs('ration_categories*') || request()->routeIs('brands*') || request()->routeIs('quarters*') || request()->routeIs('measurements*') || request()->routeIs('receipt_types*') || request()->routeIs('suppliers*')?'menu-open':'' }}">
+<li class="nav-item {{ request()->routeIs('menus*') || request()->routeIs('ration_times*') || request()->routeIs('ration_types*') || request()->routeIs('ration_dates*') ||
+                        request()->routeIs('items*') || request()->routeIs('location_types*') || request()->routeIs('locations*') || request()->routeIs('item_categories*') ||
+                        request()->routeIs('ration_categories*')?'menu-open':'' }}">
+<li class="nav-item {{ request()->routeIs('menus*') || request()->routeIs('ration_times*') || request()->routeIs('ration_types*') || request()->routeIs('ration_dates*') || request()->routeIs('items*') ||
+                    request()->routeIs('location_types*') || request()->routeIs('locations*') || request()->routeIs('item_categories*') || request()->routeIs('ration_categories*') || request()->routeIs('brands*') ||
+                    request()->routeIs('quarters*') || request()->routeIs('measurements*') || request()->routeIs('receipt_types*') || request()->routeIs('suppliers*')||
+                    request()->routeIs('ration_sub_categories*')?'menu-open':'' }}">
     <a href="#" class="nav-link">
         <i class="nav-icon fas fa-cogs text-blue"></i>
         <p>
@@ -64,6 +69,19 @@
                 </a>
             </li>
         @endif
+
+        {{-- @if(Auth::user()->can('master-supplier-list') ) --}}
+
+            <li class="nav-item">
+                <a href="{{route('ration_sub_categories.index')}}" class="nav-link
+                    {{ request()->routeIs('ration_sub_categories*')?'active':'' }}">
+                    <i class="far fa-circle nav-icon text-blue"></i>
+                    <p>Ration Sub Category</p>
+                </a>
+            </li>
+
+        {{-- @endif --}}
+
         @if(Auth::user()->can('master-item-categories-list') )
             <li class="nav-item">
                 <a href="{{route('item_categories.index')}}" class="nav-link
@@ -175,6 +193,8 @@
             </li>
         </ul>
     @endif
+
+
 
 </li>
 
