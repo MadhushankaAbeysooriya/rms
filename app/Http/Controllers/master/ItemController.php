@@ -25,7 +25,7 @@ class ItemController extends Controller
     {
         $this->middleware('permission:master-item-list|master-item-create|master-item-edit|master-item-delete', ['only' => ['index','store']]);
         $this->middleware('permission:master-item-create', ['only' => ['create','store']]);
-        $this->middleware('master-item-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:master-item-edit', ['only' => ['edit','update']]);
         $this->middleware('permission:master-item-delete', ['only' => ['destroy']]);
         $this->middleware('permission:master-item-add-alternative-item', ['only' => ['addAlternativeView']]);
     }
@@ -77,16 +77,14 @@ class ItemController extends Controller
      */
     public function edit($id)
     {
+        //dd($id);
         $measurements = Measurement::get();
-        $rationCategories = RationCategory::get();
+        $rationSubCategories = RationCategory::get();
         $itemCategorys = ItemCategory::get();
 
-        $item =  Item::with(['itemCategory', 'measurement', 'rationCategory'])
-            ->where('id', $id)
-            ->select('id', 'name', 'item_category_id', 'measurement_id', 'ration_category_id')
-            ->first();
+        $item =  Item::find($id);
 
-        return view('master.items.edit',compact('item','measurements','rationCategories','itemCategorys'));
+        return view('master.items.edit',compact('item','measurements','rationSubCategories','itemCategorys'));
     }
 
     /**
