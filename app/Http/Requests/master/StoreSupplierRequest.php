@@ -28,6 +28,7 @@ class StoreSupplierRequest extends FormRequest
             'address' => 'required',
             'reg_no' => 'required|unique:suppliers',
             'vat_no' => 'required|unique:suppliers',
+            'account_no' => 'required|unique:suppliers',
         ];
     }
 }

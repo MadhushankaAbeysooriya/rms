@@ -7,15 +7,7 @@
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Ration Times</h1>
-            </div>
-            <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
-                  <li class="breadcrumb-item"><a href="#">Home</a></li>
-                  <li class="breadcrumb-item ">Master Data</li>
-                  <li class="breadcrumb-item ">Ration Times Management</li>
-                  <li class="breadcrumb-item active">Update</li>
-                </ol>
+                <h1>Meal Type</h1>
             </div>
           </div>
     </section>
@@ -26,7 +18,7 @@
         <div class="col-md-12">
             <div class="card card-teal">
                 <div class="card-header">
-                    <h3 class="card-title">Update Ration Times</h3>
+                    <h3 class="card-title">Update Meal Type</h3>
                     {{-- <div class="card-tools">
                         <a class="btn btn-primary" href="{{ route('roles.index') }}"> Back</a>
                     </div> --}}
@@ -40,7 +32,7 @@
                     <div class="card-body">
 
                         <div class="form-group row">
-                            <label for="name" class="col-sm-2 col-form-label">Name</label>
+                            <label for="name" class="col-sm-2 col-form-label">Meal Type</label>
                             <div class="col-sm-6">
                                 <input type="text" class="form-control @error('name')
                                 is-invalid @enderror" name="name" value="{{ $rationTime->name }}" id="name" autocomplete="off">
