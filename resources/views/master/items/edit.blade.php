@@ -74,7 +74,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
+                        {{-- <div class="form-group row">
                             <label for="ration_category_id" class="col-sm-2 col-form-label">Ration Category</label>
                             <div class="col-sm-6">
                                 <select class="form-control" name="ration_category_id" id="ration_category_id" autocomplete="off">
@@ -84,6 +84,19 @@
                                     @endforeach
                                 </select>
                                 <span class="text-danger">@error('ration_category_id') {{ $message }} @enderror</span>
+                            </div>
+                        </div> --}}
+
+                        <div class="form-group row">
+                            <label for="ration_sub_category_id" class="col-sm-2 col-form-label">Ration Sub Category</label>
+                            <div class="col-sm-6">
+                                <select class="form-control" name="ration_sub_category_id" id="ration_sub_category_id" autocomplete="off">
+                                    <option value="" selected>select one</option>
+                                    @foreach($rationSubCategories as $rationCategory)
+                                        <option {{isset($item->ration_sub_category_id)?$item->ration_sub_category_id==$rationCategory->id?'selected':'':''}} value="{{$rationCategory->id}}">{{$rationCategory->name}}</option>
+                                    @endforeach
+                                </select>
+                                <span class="text-danger">@error('ration_sub_category_id') {{ $message }} @enderror</span>
                             </div>
                         </div>
 

@@ -2,18 +2,19 @@
 
 namespace App\Http\Controllers\master;
 
-use App\DataTables\master\ItemDataTable;
-use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreAlternativeItemRequest;
-use App\Http\Requests\StoreItemRequest;
-use App\Http\Requests\UpdateItemRequest;
-use App\Models\master\AlternativeItem;
 use App\Models\master\Item;
-use App\Models\master\ItemCategory;
-use App\Models\master\Measurement;
-use App\Models\master\RationCategory;
-use App\Models\master\RationType;
 use Illuminate\Http\Request;
+use App\Models\master\RationType;
+use App\Models\master\Measurement;
+use App\Models\master\ItemCategory;
+use App\Http\Controllers\Controller;
+use App\Models\master\RationCategory;
+use App\Models\master\AlternativeItem;
+use App\Http\Requests\StoreItemRequest;
+use App\DataTables\master\ItemDataTable;
+use App\Http\Requests\UpdateItemRequest;
+use App\Models\master\RationSubCategory;
+use App\Http\Requests\StoreAlternativeItemRequest;
 
 class ItemController extends Controller
 {
@@ -40,9 +41,9 @@ class ItemController extends Controller
     public function create()
     {
         $measurements = Measurement::get();
-        $rationCategories = RationCategory::get();
+        $rationSubCategories = RationSubCategory::get();
         $itemCategorys = ItemCategory::get();
-        return view('master.items.create', compact('measurements','rationCategories','itemCategorys'));
+        return view('master.items.create', compact('measurements','rationSubCategories','itemCategorys'));
     }
 
     /**
@@ -60,7 +61,7 @@ class ItemController extends Controller
     public function show($id)
     {
         $measurements = Measurement::get();
-        $rationCategories = RationCategory::get();
+        $rationSubCategories = RationSubCategory::get();
         $itemCategorys = ItemCategory::get();
 
         $item =  Item::with(['itemCategory', 'measurement', 'rationCategory'])
@@ -68,7 +69,7 @@ class ItemController extends Controller
             ->select('id', 'name', 'item_category_id', 'measurement_id', 'ration_category_id')
             ->first();
 
-        return view('master.items.show',compact('item','measurements','rationCategories','itemCategorys'));
+        return view('master.items.show',compact('item','measurements','rationSubCategories','itemCategorys'));
     }
 
     /**

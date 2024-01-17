@@ -24,7 +24,7 @@ class UpdateItemRequest extends FormRequest
         return [
             'name' => 'required|unique:items,name,'.$this->item->id,
             'measurement_id' => 'required:items',
-            'ration_category_id' => 'required:items',
+            'ration_sub_category_id' => 'required:items',
             'item_category_id' => 'required:items',
         ];
 
@@ -35,7 +35,7 @@ class UpdateItemRequest extends FormRequest
         return [
             'name.required' => 'The Name field is required.',
             'measurement_id.required' => 'The measurement field is required.',
-            'ration_category_id.unique' => 'This ration category field is required.',
+            'ration_sub_category_id.unique' => 'This ration category field is required.',
             'item_category_id.unique' => 'This item category field is required.',
         ];
     }

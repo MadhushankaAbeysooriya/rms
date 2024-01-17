@@ -58,7 +58,7 @@ class ItemDataTable extends DataTable
      */
     public function query(Item $model): QueryBuilder
     {
-        return $model->newQuery()->with(['itemcategory','measurement','rationcategory']);
+        return $model->newQuery()->with(['itemcategory','measurement','rationsubcategory']);
     }
 
     /**
@@ -92,7 +92,7 @@ class ItemDataTable extends DataTable
             Column::make('name')->data('name')->title('Name'),
             Column::make('itemcategory.name')->data('itemcategory.name')->title('Category'),
             Column::make('measurement.name')->data('measurement.name')->title('Measurement'),
-            Column::make('rationcategory.name')->data('rationcategory.name')->title('Ration Category'),
+            Column::make('rationsubcategory.name')->data('rationsubcategory.name')->title('Ration Category'),
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)
