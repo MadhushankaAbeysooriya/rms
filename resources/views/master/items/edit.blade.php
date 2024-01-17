@@ -62,7 +62,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="measurement_id" class="col-sm-2 col-form-label">Measurement</label>
+                            <label for="measurement_id" class="col-sm-2 col-form-label">Demomination</label>
                             <div class="col-sm-6">
                                 <select class="form-control" name="measurement_id" id="measurement_id" autocomplete="off">
                                     <option value="" selected>select one</option>
@@ -92,8 +92,8 @@
                             <div class="col-sm-6">
                                 <select class="form-control" name="ration_sub_category_id" id="ration_sub_category_id" autocomplete="off">
                                     <option value="" selected>select one</option>
-                                    @foreach($rationSubCategories as $rationCategory)
-                                        <option {{isset($item->ration_sub_category_id)?$item->ration_sub_category_id==$rationCategory->id?'selected':'':''}} value="{{$rationCategory->id}}">{{$rationCategory->name}}</option>
+                                    @foreach($rationSubCategories as $rationsubcat)
+                                        <option {{isset($item->ration_sub_category_id)?$item->ration_sub_category_id==$rationsubcat->id?'selected':'':''}} value="{{$rationsubcat->id}}">{{$rationsubcat->name}}</option>
                                     @endforeach
                                 </select>
                                 <span class="text-danger">@error('ration_sub_category_id') {{ $message }} @enderror</span>

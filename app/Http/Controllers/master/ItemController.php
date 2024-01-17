@@ -80,7 +80,7 @@ class ItemController extends Controller
     {
         //dd($id);
         $measurements = Measurement::get();
-        $rationSubCategories = RationCategory::get();
+        $rationSubCategories = RationSubCategory::get();
         $itemCategorys = ItemCategory::get();
 
         $item =  Item::find($id);
