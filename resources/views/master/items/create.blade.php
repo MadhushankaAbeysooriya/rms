@@ -94,8 +94,8 @@
                                     <select class="form-control select2" name="ration_sub_category_id"
                                             id="ration_sub_category_id" autocomplete="off">
                                         <option value="" selected>select one</option>
-                                        @foreach($rationSubCategories as $rationCategory)
-                                            <option value="{{$rationCategory->id}}">{{$rationCategory->name}}</option>
+                                        @foreach($rationSubCategories as $item)
+                                            <option value="{{$item->id}}">{{$item->name}}</option>
                                         @endforeach
                                     </select>
                                     <span class="text-danger">@error('ration_sub_category_id') {{ $message }} @enderror</span>

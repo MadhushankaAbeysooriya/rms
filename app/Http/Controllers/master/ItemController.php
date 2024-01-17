@@ -43,6 +43,7 @@ class ItemController extends Controller
         $measurements = Measurement::get();
         $rationSubCategories = RationSubCategory::get();
         $itemCategorys = ItemCategory::get();
+        //dd($rationSubCategories);
         return view('master.items.create', compact('measurements','rationSubCategories','itemCategorys'));
     }
 
