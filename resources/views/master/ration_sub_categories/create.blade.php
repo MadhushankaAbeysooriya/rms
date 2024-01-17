@@ -63,7 +63,7 @@
                         </div>
 
                         <div class="card-footer">
-                            <a href="{{ route('brands.index') }}" class="btn btn-sm bg-info"><i
+                            <a href="{{ route('ration_sub_categories.index') }}" class="btn btn-sm bg-info"><i
                                         class="fa fa-arrow-circle-left"></i> Back</a>
                             <button type="reset" class="btn btn-sm btn-secondary">Cancel</button>
                             @can('master-brand-create')

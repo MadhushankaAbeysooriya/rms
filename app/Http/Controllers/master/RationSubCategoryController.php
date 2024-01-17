@@ -36,7 +36,7 @@ class RationSubCategoryController extends Controller
     public function store(StoreRationSubCategoryRequest $request)
     {
         RationSubCategory::create($request->all());
-        return redirect()->route('master.ration_sub_categories.index')->with('success','Ration Sub Category Created');
+        return redirect()->route('ration_sub_categories.index')->with('success','Ration Sub Category Created');
     }
 
     /**
@@ -54,16 +54,18 @@ class RationSubCategoryController extends Controller
     public function edit($id)
     {
         $rationSubCategory = RationSubCategory::find($id);
-        return view('master.ration_sub_categories.edit',compact('rationSubCategory'));
+        $rationCategories = RationCategory::all();
+
+        return view('master.ration_sub_categories.edit',compact('rationSubCategory','rationCategories'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateRationSubCategoryRequest $request, RationType $rationSubCategory)
+    public function update(UpdateRationSubCategoryRequest $request, RationSubCategory $rationSubCategory)
     {
         $rationSubCategory->update($request->toArray());
-        return redirect()->route('master.ration_sub_categories.index')->with('message', 'Ration Sub Category Updated');
+        return redirect()->route('ration_sub_categories.index')->with('message', 'Ration Sub Category Updated');
     }
 
     /**

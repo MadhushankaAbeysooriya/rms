@@ -32,7 +32,7 @@
                     </div> --}}
                 </div>
 
-                <form role="form" action="{{ route('ration_sub_categories.update',$brand->id) }}" method="post"
+                <form role="form" action="{{ route('ration_sub_categories.update',$rationSubCategory->id) }}" method="post"
                     enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
@@ -46,7 +46,9 @@
                                         autocomplete="off">
                                     <option value="" selected>Please Select</option>
                                     @foreach($rationCategories as $item)
-                                        <option value="{{$item->id}}">{{$item->name}}</option>
+                                        <option value="{{$item->id}}" {{$rationSubCategory->ration_category_id == $item->id ? 'selected':''}}>
+                                            {{$item->name}}
+                                        </option>
                                     @endforeach
                                 </select>
                                 <span class="text-danger">@error('ration_category_id') {{ $message }} @enderror</span>
@@ -57,7 +59,7 @@
                             <label for="name" class="col-sm-2 col-form-label">Name</label>
                             <div class="col-sm-6">
                                 <input type="text" class="form-control @error('name')
-                                is-invalid @enderror" name="name" value="{{ $brand->name }}" id="name" autocomplete="off">
+                                is-invalid @enderror" name="name" value="{{ $rationSubCategory->name }}" id="name" autocomplete="off">
                                 <span class="text-danger">@error('name') {{ $message }} @enderror</span>
                             </div>
                         </div>
@@ -65,7 +67,7 @@
                     </div>
 
                         <div class="card-footer">
-                            <a href="{{ route('brands.index') }}" class="btn btn-sm bg-info"><i class="fa fa-arrow-circle-left"></i> Back</a>
+                            <a href="{{ route('ration_sub_categories.index') }}" class="btn btn-sm bg-info"><i class="fa fa-arrow-circle-left"></i> Back</a>
                                 <button type="reset" class="btn btn-sm btn-secondary">Cancel</button>
                                 <button type="submit" class="btn btn-sm btn-success" >Update</button>
                         </div>

@@ -23,7 +23,7 @@ class UpdateRationSubCategoryRequest extends FormRequest
     {
         return [
             'ration_category_id' => 'required',
-            'name' => 'required|unique:ration_sub_categories',
+            'name' => 'required|unique:ration_sub_categories,name,'.$this->ration_sub_category->id,
         ];
     }
 
