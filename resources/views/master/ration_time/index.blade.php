@@ -8,15 +8,7 @@
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-              <h1>Ration Times</h1>
-            </div>
-            <div class="col-sm-6">
-              <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item ">Master Data</li>
-                <li class="breadcrumb-item ">Ration Times Management</li>
-                <li class="breadcrumb-item active">All</li>
-              </ol>
+              <h1>Meal Type</h1>
             </div>
         </div>
     </section>
@@ -26,7 +18,7 @@
 
             <h3 class="card-title">
                 <i class="fas fa-user-circle"></i>
-                All Ration Times
+                All Meal Type
             </h3>
 
             <div class="card-tools">

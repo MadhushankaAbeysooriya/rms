@@ -9,14 +9,6 @@
             <div class="col-sm-6">
                 <h1>Supplier</h1>
             </div>
-            <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
-                  <li class="breadcrumb-item"><a href="#">Home</a></li>
-                  <li class="breadcrumb-item ">Master Data</li>
-                  <li class="breadcrumb-item ">Supplier Management</li>
-                  <li class="breadcrumb-item active">View</li>
-                </ol>
-            </div>
           </div>
     </section>
 </div>

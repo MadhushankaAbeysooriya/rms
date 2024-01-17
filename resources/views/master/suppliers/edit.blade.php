@@ -9,14 +9,6 @@
             <div class="col-sm-6">
                 <h1>Supplier</h1>
             </div>
-            <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
-                  <li class="breadcrumb-item"><a href="#">Home</a></li>
-                  <li class="breadcrumb-item ">Master Data</li>
-                  <li class="breadcrumb-item ">Supplier Management</li>
-                  <li class="breadcrumb-item active">Update</li>
-                </ol>
-            </div>
           </div>
     </section>
   </div>
@@ -40,53 +32,62 @@
                     <div class="card-body">
 
                         <div class="form-group row">
-                            <label for="name" class="col-sm-2 col-form-label">Name</label>
-                            <div class="col-sm-6">
+                            <label for="name" class="col-sm-3 col-form-label">Name</label>
+                            <div class="col-sm-5">
                                 <input type="text" class="form-control @error('name')
                                 is-invalid @enderror" name="name" value="{{ $supplier->name }}" id="name" autocomplete="off">
                                 <span class="text-danger">@error('name') {{ $message }} @enderror</span>
                             </div>
                         </div>
                         <div class="form-group row">
-                                    <label for="primary_contact" class="col-sm-2 col-form-label">Primary Contact Number</label>
-                                    <div class="col-sm-6">
-                                        <input type="text" class="form-control @error('primary_contact')
-                                        is-invalid @enderror" name="primary_contact" value="{{  $supplier->primary_contact }}" id="primary_contact" autocomplete="off">
-                                        <span class="text-danger">@error('primary_contact') {{ $message }} @enderror</span>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="secondary_contact" class="col-sm-2 col-form-label">Secondary Contact Number</label>
-                                    <div class="col-sm-6">
-                                        <input type="text" class="form-control @error('secondary_contact')
-                                        is-invalid @enderror" name="secondary_contact" value="{{ $supplier->secondary_contact }}" id="secondary_contact" autocomplete="off">
-                                        <span class="text-danger">@error('secondary_contact') {{ $message }} @enderror</span>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="address" class="col-sm-2 col-form-label">Address</label>
-                                    <div class="col-sm-6">
-                                        <input type="text" class="form-control @error('address')
-                                        is-invalid @enderror" name="address" value="{{ $supplier->address }}" id="address" autocomplete="off">
-                                        <span class="text-danger">@error('address') {{ $message }} @enderror</span>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="reg_no" class="col-sm-2 col-form-label">Registered Number</label>
-                                    <div class="col-sm-6">
-                                        <input type="text" class="form-control @error('reg_no')
-                                        is-invalid @enderror" name="reg_no" value="{{ $supplier->reg_no }}" id="reg_no" autocomplete="off">
-                                        <span class="text-danger">@error('reg_no') {{ $message }} @enderror</span>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="vat_no" class="col-sm-2 col-form-label">VAT Number</label>
-                                    <div class="col-sm-6">
-                                        <input type="text" class="form-control @error('vat_no')
-                                        is-invalid @enderror" name="vat_no" value="{{ $supplier->vat_no }}" id="vat_no" autocomplete="off">
-                                        <span class="text-danger">@error('vat_no') {{ $message }} @enderror</span>
-                                    </div>
-                                </div>
+                            <label for="primary_contact" class="col-sm-3 col-form-label">Primary Contact Number</label>
+                            <div class="col-sm-5">
+                                <input type="text" class="form-control @error('primary_contact')
+                                is-invalid @enderror" name="primary_contact" value="{{  $supplier->primary_contact }}" id="primary_contact" autocomplete="off">
+                                <span class="text-danger">@error('primary_contact') {{ $message }} @enderror</span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="secondary_contact" class="col-sm-3 col-form-label">Secondary Contact Number</label>
+                            <div class="col-sm-5">
+                                <input type="text" class="form-control @error('secondary_contact')
+                                is-invalid @enderror" name="secondary_contact" value="{{ $supplier->secondary_contact }}" id="secondary_contact" autocomplete="off">
+                                <span class="text-danger">@error('secondary_contact') {{ $message }} @enderror</span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="address" class="col-sm-3 col-form-label">Address</label>
+                            <div class="col-sm-5">
+                                <input type="text" class="form-control @error('address')
+                                is-invalid @enderror" name="address" value="{{ $supplier->address }}" id="address" autocomplete="off">
+                                <span class="text-danger">@error('address') {{ $message }} @enderror</span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="reg_no" class="col-sm-3 col-form-label">Registered Number</label>
+                            <div class="col-sm-5">
+                                <input type="text" class="form-control @error('reg_no')
+                                is-invalid @enderror" name="reg_no" value="{{ $supplier->reg_no }}" id="reg_no" autocomplete="off">
+                                <span class="text-danger">@error('reg_no') {{ $message }} @enderror</span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="vat_no" class="col-sm-3 col-form-label">VAT Number</label>
+                            <div class="col-sm-5">
+                                <input type="text" class="form-control @error('vat_no')
+                                is-invalid @enderror" name="vat_no" value="{{ $supplier->vat_no }}" id="vat_no" autocomplete="off">
+                                <span class="text-danger">@error('vat_no') {{ $message }} @enderror</span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="account_no" class="col-sm-3 col-form-label">Account Number</label>
+                            <div class="col-sm-5">
+                                <input type="text" class="form-control @error('account_no')
+                                    is-invalid @enderror" name="account_no" value="{{ $supplier->account_no }}" id="account_no"
+                                        autocomplete="off">
+                                <span class="text-danger">@error('account_no') {{ $message }} @enderror</span>
+                            </div>
+                        </div>
                     </div>
 
                         <div class="card-footer">

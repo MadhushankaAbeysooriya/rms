@@ -3,14 +3,15 @@
 namespace App\DataTables\master;
 
 use App\Models\master\Supplier;
-use Illuminate\Database\Eloquent\Builder as QueryBuilder;
-use Yajra\DataTables\EloquentDataTable;
-use Yajra\DataTables\Html\Builder as HtmlBuilder;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
+use Illuminate\Support\Facades\Auth;
+use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
+use Yajra\DataTables\Html\Builder as HtmlBuilder;
+use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 
 class SupplierDataTable extends DataTable
 {
@@ -83,8 +84,13 @@ class SupplierDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-            Column::make('DT_RowIndex')->title('#')->searchable(false)->orderColumn(false)->width(40),            
-            Column::make('name')->data('name')->title('Name'),
+            Column::make('DT_RowIndex')->title('#')->searchable(false)->orderColumn(false)->width(40),  
+            Column::make('reg_no')->title('Reg No'),          
+            Column::make('name')->title('Supplier Name'), 
+            Column::make('primary_contact')->title('Primary Contact'),
+            Column::make('secondary_contact')->title('Secondary Contact'),
+            Column::make('vat_no')->title('VAT No'), 
+            Column::make('account_no')->title('Account No'), 
             Column::computed('action')
                   ->exportable(false)
                   ->printable(false)

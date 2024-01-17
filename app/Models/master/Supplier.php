@@ -19,6 +19,7 @@ class Supplier extends Model
         'reg_no',      
         'vat_no',      
         'status',      
+        'account_no',      
     ];
 
 }

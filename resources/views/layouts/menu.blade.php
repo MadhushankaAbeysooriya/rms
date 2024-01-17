@@ -105,7 +105,7 @@
                 <a href="{{route('measurements.index')}}" class="nav-link
                     {{ request()->routeIs('measurements*')?'active':'' }}">
                     <i class="far fa-circle nav-icon text-blue"></i>
-                    <p>Measurement</p>
+                    <p>Denomination</p>
                 </a>
             </li>
         @endif
@@ -148,7 +148,7 @@
                 <a href="{{route('ration_times.index')}}" class="nav-link
                     {{ request()->routeIs('ration_times*')?'active':'' }}">
                     <i class="far fa-circle nav-icon text-blue"></i>
-                    <p>Ration Times</p>
+                    <p>Meal Type</p>
                 </a>
             </li>
         </ul>
@@ -170,7 +170,7 @@
                 <a href="{{route('suppliers.index')}}" class="nav-link
                     {{ request()->routeIs('suppliers*')?'active':'' }}">
                     <i class="far fa-circle nav-icon text-blue"></i>
-                    <p>Supplier</p>
+                    <p>Suppliers</p>
                 </a>
             </li>
         </ul>
