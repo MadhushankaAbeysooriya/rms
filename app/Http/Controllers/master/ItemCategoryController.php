@@ -24,7 +24,7 @@ class ItemCategoryController extends Controller
 
     public function index(ItemCategoryDataTable $dataTable)
     {
-        return $dataTable->render('master.Item_Categories.index');
+        return $dataTable->render('master.item_categories.index');
     }
 
     /**
@@ -32,7 +32,7 @@ class ItemCategoryController extends Controller
      */
     public function create()
     {
-        return view('master.Item_Categories.create');
+        return view('master.item_categories.create');
     }
 
     /**

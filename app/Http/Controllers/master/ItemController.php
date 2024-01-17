@@ -111,13 +111,10 @@ class ItemController extends Controller
     public function addAlternativeView($id)
     {
         $items = Item::get();
-        $item =  Item::with(['itemCategory', 'measurement', 'rationCategory'])
-            ->where('id', $id)
-            ->select('id', 'name', 'item_category_id', 'measurement_id', 'ration_category_id')
-            ->first();
+        $item =  Item::find($id);
         $alternativeItems = AlternativeItem::with(['Item'])
-            ->where('item_id',$id)
-            ->get();
+                            ->where('item_id',$id)
+                            ->get();
 
         return view('master.items.create_alternative_items',compact('item','items','alternativeItems'));
     }
@@ -129,14 +126,11 @@ class ItemController extends Controller
         AlternativeItem::create($request->all());
 
         $items = Item::get();
-        $item =  Item::with(['itemCategory', 'measurement', 'rationCategory'])
-            ->where('id', $id)
-            ->select('id', 'name', 'item_category_id', 'measurement_id', 'ration_category_id')
-            ->first();
+        $item =  Item::find($id);
 
         $alternativeItems = AlternativeItem::with(['Item'])
-            ->where('item_id',$id)
-            ->get();
+                            ->where('item_id',$id)
+                            ->get();
 
         return view('master.items.create_alternative_items',compact('item','items','alternativeItems'))->with('message', 'Alternative');
 
@@ -149,13 +143,11 @@ class ItemController extends Controller
         AlternativeItem::where('id', $id)->forceDelete();
 
         $items = Item::get();
-        $item =  Item::with(['itemCategory', 'measurement', 'rationCategory'])
-            ->where('id', $request->item_id)
-            ->select('id', 'name', 'item_category_id', 'measurement_id', 'ration_category_id')
-            ->first();
+        $item =  Item::find($id);
+
         $alternativeItems = AlternativeItem::with(['item'])
-            ->where('item_id',$request->item_id)
-            ->get();
+                            ->where('item_id',$request->item_id)
+                            ->get();
 
         return view('master.items.create_alternative_items',compact('item','items','alternativeItems'));
     }
