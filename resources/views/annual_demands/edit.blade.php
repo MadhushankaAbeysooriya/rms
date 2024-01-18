@@ -110,6 +110,26 @@
                         </div>
 
                         <div class="form-group row">
+                            <label class="col-sm-2 col-form-label" for="brand_id">Brands</label>
+                            <div class="col-sm-6">
+                                <select name="brand_id" id="brand_id" class="form-control">
+                                    <option value="">Please Select</option>
+                                    @foreach($brands as $item)
+                                        <option value="{{ $item->id }}" {{$annualDemand->brand_id == $item->id ? 'selected':''}}>
+                                            {{ $item->name}}
+                                        </option>
+                                    @endforeach
+                                </select>
+
+                                @error('brand_id')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
                             <label for="qty" class="col-sm-2 col-form-label">Qty</label>
                             <div class="col-sm-6">
                                 <input type="number" class="form-control @error('qty')
