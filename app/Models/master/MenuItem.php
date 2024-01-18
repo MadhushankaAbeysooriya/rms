@@ -2,7 +2,9 @@
 
 namespace App\Models\master;
 
- 
+
+use App\Models\master\Item;
+use App\Models\master\Menu;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -12,10 +14,12 @@ class MenuItem extends Pivot
 
     protected $table = 'menu_items';
     protected $fillable = [
-        'menu_id',        
-        'item_id',        
-        'per_qty',       
+        'menu_id',
+        'item_id',
+        'per_qty',
     ];
+
+    public $timestamps = false;
 
 
     /**

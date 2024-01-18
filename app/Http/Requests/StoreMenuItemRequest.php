@@ -37,8 +37,9 @@ class StoreMenuItemRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.required' => 'The Name field is required.',
-            'name.unique' => 'This Name is already exists',
+            'item_id.required' => 'Item must be selected.',
+            'per_qty.required' => 'Quantity is Required.',
+            'per_qty.numeric' => 'Quantity feild must be numeric.',
         ];
     }
 }
