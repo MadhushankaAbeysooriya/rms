@@ -107,6 +107,11 @@ class PermissionTableSeeder extends Seeder
             'master-ration-type-edit',
             'master-ration-type-delete',
 
+            'master-approved-unit-price-list',
+            'master-approved-unit-price-create',
+            'master-approved-unit-price-edit',
+            'master-approved-unit-price-delete',
+
 
         ];
      

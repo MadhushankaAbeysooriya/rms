@@ -27,6 +27,7 @@ use App\Http\Controllers\master\RationDateController;
 use App\Http\Controllers\master\RationTimeController;
 use App\Http\Controllers\master\RationTypeController;
 use App\Http\Controllers\DemandFromLocationController;
+use App\Http\Controllers\master\ApprovedUnitPriceController;
 use App\Http\Controllers\master\MeasurementController;
 use App\Http\Controllers\master\ReceiptTypeController;
 use App\Http\Controllers\master\ItemCategoryController;
@@ -87,6 +88,7 @@ Route::group(['middleware' => ['auth']], function() {
         Route::resource('receipt_types',ReceiptTypeController::class);
         Route::resource('suppliers',SupplierController::class);
         Route::resource('ration_sub_categories',RationSubCategoryController::class);
+        Route::resource('approved_unit_price',ApprovedUnitPriceController::class);
 
         Route::prefix('{menu}/')->group(function () {
             Route::resource('menu_items',MenuItemController::class);
