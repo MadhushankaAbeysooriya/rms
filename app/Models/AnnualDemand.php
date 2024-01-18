@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\master\Item;
+use App\Models\master\Brand;
 use App\Models\master\Location;
 use App\Models\master\Supplier;
 use Illuminate\Database\Eloquent\Model;
@@ -15,12 +16,13 @@ class AnnualDemand extends Model
 
     protected $table = 'annual_demands';
     protected $fillable = [
-        'year', 
+        'year',
         'item_id',
         'location_id',
         'qty',
         'supplier_id',
         'avl_qty',
+        'brand_id',
     ];
 
     public function item()
@@ -36,5 +38,10 @@ class AnnualDemand extends Model
     public function supplier()
     {
         return $this->belongsTo(Supplier::class,'supplier_id','id');
+    }
+
+    public function brand()
+    {
+        return $this->belongsTo(Brand::class,'brand_id','id');
     }
 }

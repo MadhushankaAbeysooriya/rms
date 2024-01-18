@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\master\Item;
 use App\Models\AnnualDemand;
+use App\Models\master\Brand;
 use Illuminate\Http\Request;
 use App\Models\master\Location;
 use App\Models\master\Supplier;
@@ -36,8 +37,9 @@ class AnnualDemandController extends Controller
         $locations = Location::all();
         $items = Item::all();
         $suppliers = Supplier::all();
+        $brands = Brand::all();
 
-        return view('annual_demands.create',compact('locations','items', 'suppliers'));
+        return view('annual_demands.create',compact('locations','items', 'suppliers', 'brands'));
     }
 
     /**
@@ -51,6 +53,7 @@ class AnnualDemandController extends Controller
             'location_id' => 'required|exists:locations,id',
             'supplier_id' => 'required|exists:suppliers,id',
             'qty' => 'required|numeric|min:1',
+            'brand_id' => 'required|exists:brands,id',
         ]);
 
         AnnualDemand::create([
@@ -60,6 +63,7 @@ class AnnualDemandController extends Controller
             'supplier_id' => $request->supplier_id,
             'qty' => $request->qty,
             'avl_qty' => $request->qty,
+            'brand_id' => $request->brand_id,
         ]);
 
         return redirect()->route('annual_demands.index')->with('success','Annual Demand successfully');
@@ -86,8 +90,9 @@ class AnnualDemandController extends Controller
         $locations = Location::all();
         $items = Item::all();
         $suppliers = Supplier::all();
+        $brands = Brand::all();
 
-        return view('annual_demands.edit',compact('annualDemand','locations','items', 'suppliers'));
+        return view('annual_demands.edit',compact('annualDemand','locations','items', 'suppliers', 'brands'));
     }
 
     /**
@@ -101,6 +106,7 @@ class AnnualDemandController extends Controller
             'location_id' => 'required|exists:locations,id',
             'supplier_id' => 'required|exists:suppliers,id',
             'qty' => 'required|numeric|min:1',
+            'brand_id' => 'required|exists:brands,id',
         ]);
 
         $annualDemand->update([
@@ -110,6 +116,7 @@ class AnnualDemandController extends Controller
             'supplier_id' => $request->supplier_id,
             'qty' => $request->qty,
             'avl_qty' => $request->qty,
+            'brand_id' => $request->brand_id,
         ]);
 
         return redirect()->route('annual_demands.index')->with('message', 'Annual demand Updated');
