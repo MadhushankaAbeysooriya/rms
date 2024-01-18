@@ -24,6 +24,10 @@ class ItemDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
             ->addIndexColumn()
+            ->addColumn('is_vat', function($item){
+                return ($item->is_vat==1)?'<h5><span class="badge badge-primary">VAT</span></h5>':
+                '<h5><span class="badge badge-warning">Non - VAT</span></h5>';
+            })
             ->addColumn('action', function ($item) {
                 $id = $item->id;
                 $btn = '';
@@ -50,7 +54,7 @@ class ItemDataTable extends DataTable
 
                 return $btn;
             })
-            ->rawColumns(['action']);
+            ->rawColumns(['action','is_vat']);
     }
 
     /**
@@ -93,6 +97,7 @@ class ItemDataTable extends DataTable
             Column::make('itemcategory.name')->data('itemcategory.name')->title('Category'),
             Column::make('measurement.name')->data('measurement.name')->title('Measurement'),
             Column::make('rationsubcategory.name')->data('rationsubcategory.name')->title('Ration Category'),
+            Column::make('is_vat')->data('is_vat')->title('VAT'),
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)
