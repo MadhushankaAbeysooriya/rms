@@ -118,6 +118,17 @@
                 </a>
             </li>
         @endif
+
+        @if (Auth::user()->can('master-approved-unit-price-list'))
+            <li class="nav-item">
+                <a href="{{route('approved_unit_price.index')}}" class="nav-link
+                    {{ request()->routeIs('approved_unit_price*')?'active':'' }}">
+                    <i class="far fa-circle nav-icon text-blue"></i>
+                    <p>Approved Price</p>
+                </a>
+            </li>
+        @endif
+        
         @if(Auth::user()->can('master-measurement-list') )
             <li class="nav-item">
                 <a href="{{route('measurements.index')}}" class="nav-link
