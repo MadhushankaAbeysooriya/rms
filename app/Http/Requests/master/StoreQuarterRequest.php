@@ -23,6 +23,9 @@ class StoreQuarterRequest extends FormRequest
     {
         return [
             'name' => 'required|unique:quarters',
+            'year' => 'required',
+            'from_date' => 'required',
+            'to_date' => 'required',
         ];
     }
 }

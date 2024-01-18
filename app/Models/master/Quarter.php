@@ -13,5 +13,8 @@ class Quarter extends Model
     protected $table = 'quarters';
     protected $fillable = [
         'name',        
+        'year',        
+        'from_date',        
+        'to_date',        
     ];
 }
