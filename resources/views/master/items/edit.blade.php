@@ -100,6 +100,25 @@
                             </div>
                         </div>
 
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label" for="is_vat">VAT Number Available..? </label>
+                            <div class="col-sm-9">
+                                <div class="custom-control custom-switch">
+                                    <input type="checkbox" class="custom-control-input" id="customSwitch1" name="is_vat" {{ $item->is_vat ? 'checked' : '' }}>
+                                    <label class="custom-control-label" for="customSwitch1" id="isVatLabel">
+                                        {{ $item->is_vat ? 'Yes' : 'No' }}
+                                    </label>
+                                    <input type="hidden" name="is_vat" value="0"> <!-- Hidden field for unchecked state -->
+                                </div>
+
+                                @error('is_vat')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                        </div>
+
                     </div>
 
                         <div class="card-footer">
@@ -116,3 +135,37 @@
     </div>
   </div>
 @endsection
+
+@push('page_scripts')
+
+    <script>
+
+        $(document).ready(function () {
+            $('.select2').select2();
+
+            function updateValue() {
+                if ($('#customSwitch1').prop('checked')) {
+                    $('#isVatLabel').text('Yes');
+                    $('input[name="is_vat"]').val(1);
+                } else {
+                    $('#isVatLabel').text('No');
+                    $('input[name="is_vat"]').val(0);
+                }
+            }
+
+            // Set initial value on page load
+            updateValue();
+
+            // Handle change event
+            $('#customSwitch1').change(updateValue);
+
+            // Submit form event
+            $('form').submit(function() {
+                // Ensure that the hidden input value is set based on the checkbox state
+                updateValue();
+            });
+        });
+
+    </script>
+
+@endpush

@@ -27,6 +27,7 @@ class StoreItemRequest extends FormRequest
             //'ration_category_id' => 'required:items',
             'ration_sub_category_id' => 'required:items',
             'item_category_id' => 'required:items',
+            'is_vat' => 'required',
         ];
     }
 
@@ -35,8 +36,9 @@ class StoreItemRequest extends FormRequest
         return [
             'name.required' => 'The Name field is required.',
             'measurement_id.required' => 'The measurement field is required.',
-            'ration_sub_category_id.unique' => 'This ration category field is required.',
-            'item_category_id.unique' => 'This item category field is required.',
+            'ration_sub_category_id.required' => 'This ration category field is required.',
+            'item_category_id.required' => 'This item category field is required.',
+            'is_vat.required' => 'VAT Available is required.',
         ];
     }
 }

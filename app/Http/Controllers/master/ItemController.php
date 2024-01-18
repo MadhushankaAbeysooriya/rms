@@ -51,6 +51,7 @@ class ItemController extends Controller
      */
     public function store(StoreItemRequest $request)
     {
+
         Item::create($request->all());
         return redirect()->route('items.index')->with('success','Item Created');
     }

@@ -20,7 +20,8 @@ class Item extends Model
         'item_category_id',
         'ration_sub_category_id',
         'measurement_id',
-        'deleted_at'
+        'deleted_at',
+        'is_vat',
     ];
 
     public function itemcategory()
