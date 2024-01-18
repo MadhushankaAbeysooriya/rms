@@ -84,7 +84,10 @@ class QuarterDataTable extends DataTable
     {
         return [
             Column::make('DT_RowIndex')->title('#')->searchable(false)->orderColumn(false)->width(40),            
+            Column::make('year')->data('year')->title('Year'),
             Column::make('name')->data('name')->title('Name'),
+            Column::make('from_date')->data('from_date')->title('From'),
+            Column::make('to_date')->data('to_date')->title('To'),
             Column::computed('action')
                   ->exportable(false)
                   ->printable(false)

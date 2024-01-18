@@ -8,14 +8,6 @@
                     <div class="col-sm-6">
                         <h1>Quarter</h1>
                     </div>
-                    <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item ">Master Data</li>
-                            <li class="breadcrumb-item ">Quarter Management</li>
-                            <li class="breadcrumb-item active">Create</li>
-                        </ol>
-                    </div>
                 </div>
         </section>
     </div>
@@ -26,15 +18,23 @@
                 <div class="card card-teal">
                     <div class="card-header">
                         <h3 class="card-title">Create New Quarter</h3>
-                        {{-- <div class="card-tools">
-                            <a class="btn btn-primary" href="{{ URL::previous() }}"> Back</a>
-                        </div> --}}
                     </div>
 
                     <form role="form" method="POST" action="{{route('quarters.store')}}"
                           enctype="multipart/form-data">
                         @csrf
                         <div class="card-body">
+
+                            <div class="form-group row">
+                                <label for="year" class="col-sm-2 col-form-label">Year</label>
+                                <div class="col-sm-6">
+                                    <input type="number" class="form-control @error('year')
+                                        is-invalid @enderror" name="year" value="{{ old('year') }}" id="year"
+                                           autocomplete="off"
+                                           min="{{ date('Y') }}" max="3000">
+                                    <span class="text-danger">@error('year') {{ $message }} @enderror</span>
+                                </div>
+                            </div>
 
                             <div class="form-group row">
                                 <label for="name" class="col-sm-2 col-form-label">Name</label>
@@ -45,6 +45,27 @@
                                     <span class="text-danger">@error('name') {{ $message }} @enderror</span>
                                 </div>
                             </div>
+
+                            <div class="form-group row">
+                                <label for="from_date" class="col-sm-2 col-form-label">From Date</label>
+                                <div class="col-sm-6">
+                                    <input type="date" class="form-control @error('from_date')
+                                    is-invalid @enderror" name="from_date" value="{{ old('from_date') }}" id="from_date" autocomplete="off"
+                                           min="{{ date('YYY-mm-dd') }}" max="3000">
+                                    <span class="text-danger">@error('from_date') {{ $message }} @enderror</span>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="to_date" class="col-sm-2 col-form-label">To Date</label>
+                                <div class="col-sm-6">
+                                    <input type="date" class="form-control @error('to_date')
+                                    is-invalid @enderror" name="to_date" value="{{ old('to_date') }}" id="to_date" autocomplete="off"
+                                           min="{{ date('YYY-mm-dd') }}" max="3000">
+                                    <span class="text-danger">@error('to_date') {{ $message }} @enderror</span>
+                                </div>
+                            </div>
+
                         </div>
 
                         <div class="card-footer">
