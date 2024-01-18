@@ -58,8 +58,8 @@ class MenuDataTable extends DataTable
     public function query(Menu $model): QueryBuilder
     {
         return $model
-        ->select('menus.*',
-         'ration_dates.name as rationdate')    
+        // ->select('menus.*',
+        //  'ration_dates.name as rationdate')
         ->newQuery()
         ->with('rationdate','rationtype','rationtime');
     }
@@ -91,15 +91,12 @@ class MenuDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-           // Column::make('DT_RowIndex')->title('#'),
+            Column::make('DT_RowIndex')->title('#')->searchable(false)->orderColumn(false)->width(40),
             Column::make('name')->data('name')->title('Menu Name'),
             Column::make('rationdate.name')->data('rationdate.name')->title('Ration Date'),
             Column::make('rationtype.name')->data('rationtype.name')->title('Ration Type'),
             Column::make('rationtime.name')->data('rationtime.name')->title('Ration Time'),
 
-            // Column::make('rationdate.name')->title('Ration Date'),
-            // Column::make('rationtype.name')->title('Ration Type'),
-            // Column::make('rationtime.name')->title('Ration Time'),
             Column::make('year')->title('Year'),
             Column::computed('action')
                   ->exportable(false)
