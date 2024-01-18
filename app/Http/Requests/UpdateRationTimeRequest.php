@@ -22,7 +22,7 @@ class UpdateRationTimeRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'required|unique:ration_sub_categories,name,'.$this->ration_sub_category->id,
+            'name' => 'required|unique:ration_times,name,'.$this->ration_time->id,
         ];
     }
 

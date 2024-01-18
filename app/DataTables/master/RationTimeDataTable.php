@@ -81,7 +81,7 @@ class RationTimeDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-            Column::make('id'),
+            Column::make('DT_RowIndex')->title('#')->searchable(false)->orderColumn(false)->width(40),
             Column::make('name'),
             Column::computed('action')
                   ->exportable(false)

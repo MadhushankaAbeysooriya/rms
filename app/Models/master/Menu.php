@@ -2,6 +2,7 @@
 
 namespace App\Models\master;
 
+use App\Models\master\MenuItem;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -12,11 +13,11 @@ class Menu extends Model
 
     protected $table = 'menus';
     protected $fillable = [
-        'name',        
-        'ration_date_id',        
-        'ration_type_id',        
-        'ration_time_id',        
-        'year',        
+        'name',
+        'ration_date_id',
+        'ration_type_id',
+        'ration_time_id',
+        'year',
     ];
 
 
