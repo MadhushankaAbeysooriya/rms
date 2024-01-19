@@ -103,6 +103,8 @@ Route::group(['middleware' => ['auth']], function() {
 
     Route::prefix('{demand_from_location}/')->group(function () {
         Route::resource('receipt_from_locations',ReceiptFromLocationController::class);
+
+        Route::get('/add_items',[DemandFromLocationController::class,'storedemandfromlocationview'])->name('demand_from_locations.add_items');
     });
 
 

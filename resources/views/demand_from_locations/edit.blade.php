@@ -58,7 +58,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
+                        {{-- <div class="form-group row">
                             <label class="col-sm-2 col-form-label" for="item_id">Item</label>
                             <div class="col-sm-6">
                                 <select name="item_id" id="item_id" class="form-control select2">
@@ -76,7 +76,7 @@
                                 </span>
                                 @enderror
                             </div>
-                        </div>
+                        </div> --}}
 
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label" for="supplier_id">Supplier</label>
@@ -95,7 +95,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
+                        {{-- <div class="form-group row">
                             <label for="qty" class="col-sm-2 col-form-label">Qty</label>
                             <div class="col-sm-6">
                                 <input type="number" class="form-control @error('qty')
@@ -103,7 +103,7 @@
                                 min="0">
                                 <span class="text-danger">@error('qty') {{ $message }} @enderror</span>
                             </div>
-                        </div>
+                        </div> --}}
 
                         {{-- <div class="form-group row">
                             <label class="col-sm-2 col-form-label" for="location_id">Location</label>

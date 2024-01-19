@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Exception;
 use App\Models\master\Item;
 use App\Models\AnnualDemand;
+use App\Models\master\Brand;
 use Illuminate\Http\Request;
 use App\Models\master\Location;
 use App\Models\master\Supplier;
@@ -89,6 +90,62 @@ class DemandFromLocationController extends Controller
     //     }
     // }
 
+    // public function store(Request $request)
+    // {
+    //     // Wrap the entire function inside a database transaction
+    //     DB::beginTransaction();
+
+    //     try {
+    //         $this->validate($request, [
+    //             'year' => 'required',
+    //             'demand_ref' => 'required',
+    //             'item_id' => 'required',
+    //             'supplier_id' => 'required',
+    //             'qty' => 'required',
+    //             'request_date' => 'required',
+    //         ]);
+
+    //         $annualDemand = AnnualDemand::where('year', $request->year)
+    //                         ->where('location_id', Auth::user()->location)
+    //                         ->where('supplier_id', $request->supplier_id)
+    //                         ->where('item_id', $request->item_id)
+    //                         ->first();
+
+    //         if ($annualDemand && $annualDemand->avl_qty >= $request->qty) {
+
+    //             DemandFromLocation::create([
+    //                 'year' => $request->year,
+    //                 'demand_ref' => $request->demand_ref,
+    //                 'item_id' => $request->item_id,
+    //                 'supplier_id' => $request->supplier_id,
+    //                 'qty' => $request->qty,
+    //                 'location_id' => Auth::user()->location,
+    //                 'request_date' => $request->request_date,
+    //             ]);
+
+    //             // Commit the transaction if everything is successful
+    //             DB::commit();
+
+    //             return redirect()->route('demand_from_locations.index')->with('success', 'Demand From Location Created');
+
+    //         } else {
+    //             // Rollback the transaction if annual demand record not found or quantity not available
+    //             DB::rollBack();
+
+    //             // If you want to throw an exception, you can use ValidationException
+    //             return redirect()->route('demand_from_locations.create')
+    //                              ->with('danger', 'Insufficient quantity available in annual demand.');
+    //         }
+    //     } catch (Exception $e) {
+    //         // Rollback the transaction in case of any exception
+    //         DB::rollBack();
+
+    //         // Log or handle the exception as needed
+    //         return redirect()->route('demand_from_locations.create')
+    //                         ->with('danger', 'An error occurred while processing your request.');
+    //     }
+    // }
+
     public function store(Request $request)
     {
         // Wrap the entire function inside a database transaction
@@ -98,43 +155,24 @@ class DemandFromLocationController extends Controller
             $this->validate($request, [
                 'year' => 'required',
                 'demand_ref' => 'required',
-                'item_id' => 'required',
                 'supplier_id' => 'required',
-                'qty' => 'required',
                 'request_date' => 'required',
             ]);
 
-            $annualDemand = AnnualDemand::where('year', $request->year)
-                            ->where('location_id', Auth::user()->location)
-                            ->where('supplier_id', $request->supplier_id)
-                            ->where('item_id', $request->item_id)
-                            ->first();
+            DemandFromLocation::create([
+                'year' => $request->year,
+                'demand_ref' => $request->demand_ref,
+                'supplier_id' => $request->supplier_id,
+                'location_id' => Auth::user()->location,
+                'request_date' => $request->request_date,
+            ]);
 
-            if ($annualDemand && $annualDemand->avl_qty >= $request->qty) {
+            // Commit the transaction if everything is successful
+            DB::commit();
 
-                DemandFromLocation::create([
-                    'year' => $request->year,
-                    'demand_ref' => $request->demand_ref,
-                    'item_id' => $request->item_id,
-                    'supplier_id' => $request->supplier_id,
-                    'qty' => $request->qty,
-                    'location_id' => Auth::user()->location,
-                    'request_date' => $request->request_date,
-                ]);
+            return redirect()->route('demand_from_locations.index')->with('success', 'Demand From Location Created');
 
-                // Commit the transaction if everything is successful
-                DB::commit();
 
-                return redirect()->route('demand_from_locations.index')->with('success', 'Demand From Location Created');
-
-            } else {
-                // Rollback the transaction if annual demand record not found or quantity not available
-                DB::rollBack();
-
-                // If you want to throw an exception, you can use ValidationException
-                return redirect()->route('demand_from_locations.create')
-                                 ->with('danger', 'Insufficient quantity available in annual demand.');
-            }
         } catch (Exception $e) {
             // Rollback the transaction in case of any exception
             DB::rollBack();
@@ -190,5 +228,66 @@ class DemandFromLocationController extends Controller
         $demandFromLocation->delete();
         return redirect()->route('demand_from_locations.index')
             ->with('danger', 'Demand from location Deleted successfully');
+    }
+
+    public function storedemandfromlocationview($id)
+    {
+        $demandfromlocation = DemandFromLocation::findOrFail($id);
+        $brands = Brand::all();
+        $items = Item::get();
+
+        return view('demand_from_locations.create_demand_from_location_item',compact('demandfromlocation','brands','items'));
+    }
+
+    public function storedemandfromlocation(Request $request, Issue $issue)
+    {
+        DB::beginTransaction();
+
+        try {
+            $this->validate($request, [
+                'item_id' => 'required',
+                'qty' => 'required',
+                'brand_id' => 'required',
+            ]);
+
+            $annualDemand = AnnualDemand::where('year', $request->year)
+                            ->where('location_id', Auth::user()->location)
+                            ->where('supplier_id', $request->supplier_id)
+                            ->where('item_id', $request->item_id)
+                            ->first();
+
+            if ($annualDemand && $annualDemand->avl_qty >= $request->qty) {
+
+                DemandFromLocation::create([
+                    'year' => $request->year,
+                    'demand_ref' => $request->demand_ref,
+                    'item_id' => $request->item_id,
+                    'supplier_id' => $request->supplier_id,
+                    'qty' => $request->qty,
+                    'location_id' => Auth::user()->location,
+                    'request_date' => $request->request_date,
+                ]);
+
+                // Commit the transaction if everything is successful
+                DB::commit();
+
+                return redirect()->route('demand_from_locations.index')->with('success', 'Demand From Location Created');
+
+            } else {
+                // Rollback the transaction if annual demand record not found or quantity not available
+                DB::rollBack();
+
+                // If you want to throw an exception, you can use ValidationException
+                return redirect()->route('demand_from_locations.create')
+                                 ->with('danger', 'Insufficient quantity available in annual demand.');
+            }
+        } catch (Exception $e) {
+            // Rollback the transaction in case of any exception
+            DB::rollBack();
+
+            // Log or handle the exception as needed
+            return redirect()->route('demand_from_locations.create')
+                            ->with('danger', 'An error occurred while processing your request.');
+        }
     }
 }

@@ -6,6 +6,7 @@ use App\Models\master\Item;
 use App\Models\master\Location;
 use App\Models\master\Supplier;
 use App\Models\ReceiptFromLocation;
+use App\Models\DemandFromLocationItem;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -45,6 +46,11 @@ class DemandFromLocation extends Model
     public function receiptfromlocation()
     {
         return $this->hasOne(ReceiptFromLocation::class);
+    }
+
+    public function demandfromlocationitems()
+    {
+        return $this->hasMany(DemandFromLocationItem::class);
     }
 
 }

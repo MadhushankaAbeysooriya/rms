@@ -58,9 +58,13 @@ class DemandFromLocationDataTable extends DataTable
 
                 if (Auth::user()->can('demand-from-location-create-reciept')) {
                     $btn .= '<a href="' . route('receipt_from_locations.create', $id) . '"
-                    class="btn btn-xs btn-warning" data-toggle="tooltip" title="Add Receipt">
-                    <i class="fa fa-plus"></i> </a> ';
+                    class="btn btn-xs btn-warning" data-toggle="tooltip" title="Create Receipt">
+                    <i class="fa fa-receipt"></i> </a> ';
                 }
+
+                $btn .= '<a href="' . route('demand_from_locations.add_items', $id) . '"
+                    class="btn btn-xs btn-success" data-toggle="tooltip" title="Add Items">
+                    <i class="fa fa-plus"></i> </a> ';
 
                 if (Auth::user()->can('demand-from-location-delete') ) {
                     $btn .= '<form  action="' . route('demand_from_locations.destroy', $id) . '" method="POST" class="d-inline" >
@@ -114,9 +118,7 @@ class DemandFromLocationDataTable extends DataTable
         return [
             Column::make('DT_RowIndex')->title('#')->searchable(false)->orderColumn(false)->width(40),
             Column::make('year')->data('year')->title('Year'),
-            Column::make('item.name')->data('item.name')->title('Item'),
             Column::make('supplier.name')->data('supplier.name')->title('Supplier'),
-            Column::make('qty')->data('qty')->title('Qty'),
             Column::make('location.name')->data('location.name')->title('Location'),
             Column::make('request_date')->data('request_date')->title('Request Date'),
             Column::computed('status'),

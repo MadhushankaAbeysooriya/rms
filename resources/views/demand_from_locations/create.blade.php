@@ -52,7 +52,7 @@
                                     </div>
                                 </div>
 
-                                <div class="form-group row">
+                                {{-- <div class="form-group row">
                                     <label class="col-sm-2 col-form-label" for="item_id">Item</label>
                                     <div class="col-sm-6">
                                         <select name="item_id" id="item_id" class="form-control select2">
@@ -67,7 +67,7 @@
                                         <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
                                         @enderror
                                     </div>
-                                </div>
+                                </div> --}}
 
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label" for="supplier_id">Supplier</label>
@@ -86,7 +86,7 @@
                                     </div>
                                 </div>
 
-                                <div class="form-group row">
+                                {{-- <div class="form-group row">
                                     <label for="qty" class="col-sm-2 col-form-label">Qty</label>
                                     <div class="col-sm-6">
                                         <input type="text" class="form-control @error('qty')
@@ -94,7 +94,7 @@
                                                min="{{ date('Y') }}" max="3000">
                                         <span class="text-danger">@error('qty') {{ $message }} @enderror</span>
                                     </div>
-                                </div>
+                                </div> --}}
 
                                 {{-- <div class="form-group row">
                                     <label class="col-sm-2 col-form-label" for="location_id">Location</label>
@@ -127,7 +127,7 @@
                             </div>
 
                                 <div class="card-footer">
-                                    <a href="{{ route('demand_from_locations.store') }}" class="btn btn-sm bg-info"><i class="fa fa-arrow-circle-left"></i> Back</a>
+                                    <a href="{{ route('demand_from_locations.index') }}" class="btn btn-sm bg-info"><i class="fa fa-arrow-circle-left"></i> Back</a>
                                         <button type="reset" class="btn btn-sm btn-secondary">Cancel</button>
                                         <button type="submit" class="btn btn-sm btn-success" >Create</button>
                                 </div>
