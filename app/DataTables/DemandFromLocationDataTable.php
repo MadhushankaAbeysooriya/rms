@@ -62,7 +62,7 @@ class DemandFromLocationDataTable extends DataTable
                     <i class="fa fa-receipt"></i> </a> ';
                 }
 
-                $btn .= '<a href="' . route('demand_from_locations.add_items', $id) . '"
+                $btn .= '<a href="' . route('demand_from_locations.add_items_view', $id) . '"
                     class="btn btn-xs btn-success" data-toggle="tooltip" title="Add Items">
                     <i class="fa fa-plus"></i> </a> ';
 

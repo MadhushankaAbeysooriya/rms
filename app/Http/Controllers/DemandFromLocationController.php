@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\master\LocationType;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use App\Models\DemandFromLocationItem;
 use App\DataTables\DemandFromLocationDataTable;
 use App\Http\Requests\StoreDemandFromLocationRequest;
 use App\Http\Requests\UpdateDemandFromLocationRequest;
@@ -239,7 +240,7 @@ class DemandFromLocationController extends Controller
         return view('demand_from_locations.create_demand_from_location_item',compact('demandfromlocation','brands','items'));
     }
 
-    public function storedemandfromlocation(Request $request, Issue $issue)
+    public function storedemandfromlocation(Request $request, DemandFromLocation $demandFromLocation)
     {
         DB::beginTransaction();
 
@@ -250,35 +251,32 @@ class DemandFromLocationController extends Controller
                 'brand_id' => 'required',
             ]);
 
-            $annualDemand = AnnualDemand::where('year', $request->year)
+            $annualDemand = AnnualDemand::where('year', $demandFromLocation->year)
                             ->where('location_id', Auth::user()->location)
-                            ->where('supplier_id', $request->supplier_id)
                             ->where('item_id', $request->item_id)
+                            ->where('brand_id', $request->brand_id)
                             ->first();
 
             if ($annualDemand && $annualDemand->avl_qty >= $request->qty) {
 
-                DemandFromLocation::create([
-                    'year' => $request->year,
-                    'demand_ref' => $request->demand_ref,
+                $demandFromLocation->demandfromlocationitems()->create([
                     'item_id' => $request->item_id,
-                    'supplier_id' => $request->supplier_id,
+                    'brand_id' => $request->brand_id,
                     'qty' => $request->qty,
-                    'location_id' => Auth::user()->location,
-                    'request_date' => $request->request_date,
                 ]);
 
                 // Commit the transaction if everything is successful
                 DB::commit();
 
-                return redirect()->route('demand_from_locations.index')->with('success', 'Demand From Location Created');
+                return redirect()->route('demand_from_locations.add_items_view',$demandFromLocation->id)->with('success', 'Item Added');
 
             } else {
+
                 // Rollback the transaction if annual demand record not found or quantity not available
                 DB::rollBack();
 
                 // If you want to throw an exception, you can use ValidationException
-                return redirect()->route('demand_from_locations.create')
+                return redirect()->route('demand_from_locations.add_items_view',$demandFromLocation->id)
                                  ->with('danger', 'Insufficient quantity available in annual demand.');
             }
         } catch (Exception $e) {
@@ -286,8 +284,24 @@ class DemandFromLocationController extends Controller
             DB::rollBack();
 
             // Log or handle the exception as needed
-            return redirect()->route('demand_from_locations.create')
+            return redirect()->route('demand_from_locations.add_items_view',$demandFromLocation->id)
                             ->with('danger', 'An error occurred while processing your request.');
         }
+    }
+
+    public function deletedemandfromlocationitem(DemandFromLocation $demandFromLocation, $id)
+    {
+        // Assuming you have an 'id' field in your IssueItem model
+        $demandFromlocationitem = DemandFromLocationItem::find($id);
+
+        if (!$demandFromlocationitem) {
+
+            return redirect()->back()->with('error', 'Issue Item not found.');
+        }
+
+        $demandFromlocationitem->delete();
+
+        // Redirect back with a success message or as needed
+        return redirect()->back()->with('success', 'Issue Item deleted successfully.');
     }
 }

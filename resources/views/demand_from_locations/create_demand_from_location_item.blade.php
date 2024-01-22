@@ -28,7 +28,7 @@
                     </div>
 
                     <form role="form" method="POST"
-                          action="{{route('receipt_from_locations.store',$demandfromlocation->id)}}"
+                          action="{{route('demand_from_locations.add_items_store',$demandfromlocation->id)}}"
                           enctype="multipart/form-data">
                         @csrf
                         <div class="card-body">
@@ -69,12 +69,13 @@
 
                             <div class="form-group row">
                                 <label for="qty" class="col-sm-2 col-form-label">Qty</label>
-                                <div class="col-sm-6">
+                                <div class="col-sm-4">
                                     <input type="text" class="form-control @error('qty')
                                     is-invalid @enderror" name="qty" value="{{ old('qty') }}" id="qty" autocomplete="off"
                                            min="0">
                                     <span class="text-danger">@error('qty') {{ $message }} @enderror</span>
                                 </div>
+                                {{-- <div id="measurementName" class="col-sm-2 col-form-label"></div> --}}
                             </div>
 
                             <div class="form-group row">
@@ -106,6 +107,39 @@
 
                 </form>
 
+                <table class="table table-striped table-hover">
+                    <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Item</th>
+                        <th scope="col">Qty</th>
+                        <th scope="col">Brand</th>
+                        <th scope="col">Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($demandfromlocation->demandfromlocationitems as $index => $item)
+
+                            <tr>
+                                <th scope="row">{{ $index + 1 }}</th>
+                                <td>{{ $item->item->name }}</td>
+                                <td>{{ $item->qty  }}</td>
+                                <td>{{ $item->brand->name  }}</td>
+                                <td>
+                                    <form action="{{ route('demand_from_locations.add_items_delete', ['id' => $item->id, 'demand_from_location'=>$demandfromlocation->id]) }}" method="post">
+                                        @csrf
+                                        @method('delete')
+                                        <button type="submit" class="btn bg-danger">Delete</button>
+                                    </form>
+                                </td>
+                            </tr>
+
+                        @endforeach
+
+
+                    </tbody>
+                  </table>
+
             </div>
         </div>
     </div>
@@ -123,27 +157,22 @@
         $(document).ready(function () {
             $('.select2').select2();
 
-            // Store the initial values
-            var initialItemId = $('#item_id').val();
-            var initialQty = $('#qty').val();
-            console.log('ïnitial' + initialItemId);
-            $('#receipt_type_id').val(2).trigger('change');
 
-            // Add an event listener to the item_id and qty inputs
-            $('#item_id, #qty').on('change', function () {
-                // Get the current values
-                var currentItemId = $('#item_id').val();
-                var currentQty = $('#qty').val();
-                console.log(currentItemId);
+            // // Event listener for item selection change
+            // $('#item_id').on('change', function () {
+            //     var selectedItem = $('#item_id').val();
+            //     console.log(selectedItem);
 
-                // Check if values have changed
-                if (currentItemId !== initialItemId || currentQty !== initialQty) {
-                    // Handle the update demand logic here
-                    $('#receipt_type_id').val(1).trigger('change');
-                } else {
-                    $('#receipt_type_id').val(2).trigger('change');
-                }
-            });
+            //     // Check if the selected item has details
+            //     if (selectedItem) {
+            //         // Update the measurement name
+            //         document.getElementById('measurementName').textContent = {{ $items->find(selectedItem)->measurement->name }};
+            //     } else {
+            //         // Clear the measurement name if no details found
+            //         document.getElementById('measurementName').textContent = '';
+            //     }
+            // });
+
         });
 
 

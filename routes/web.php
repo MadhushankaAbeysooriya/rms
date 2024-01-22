@@ -104,9 +104,10 @@ Route::group(['middleware' => ['auth']], function() {
     Route::prefix('{demand_from_location}/')->group(function () {
         Route::resource('receipt_from_locations',ReceiptFromLocationController::class);
 
-        Route::get('/add_items',[DemandFromLocationController::class,'storedemandfromlocationview'])->name('demand_from_locations.add_items');
+        Route::get('/add_items_view',[DemandFromLocationController::class,'storedemandfromlocationview'])->name('demand_from_locations.add_items_view');
+        Route::post('/add_items_store',[DemandFromLocationController::class,'storedemandfromlocation'])->name('demand_from_locations.add_items_store');
+        Route::delete('/add_items_delete/{id}', [DemandFromLocationController::class, 'deletedemandfromlocationitem'])->name('demand_from_locations.add_items_delete');
     });
-
 
 });
 
