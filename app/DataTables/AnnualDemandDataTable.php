@@ -47,7 +47,17 @@ class AnnualDemandDataTable extends DataTable
             })
             ->addColumn('qty', function ($annualDemand) {
 
-                return $annualDemand->qty.' '.$annualDemand->item->measurement->name;
+                $qty = $annualDemand->qty;
+
+                // Check if $annualDemand->item and $annualDemand->item->measurement are not null
+                if ($annualDemand->item && $annualDemand->item->measurement) {
+                    $measurementName = $annualDemand->item->measurement->name;
+                } else {
+                    // Set a default value or handle the case where measurement is null
+                    $measurementName = ''; // You can change this to your desired default value
+                }
+
+                return $qty . ' ' . $measurementName;
             })
             ->rawColumns(['action', 'qty']);
     }

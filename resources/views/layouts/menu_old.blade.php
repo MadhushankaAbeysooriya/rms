@@ -20,7 +20,7 @@
     <li class="nav-item">
         <a href="{{route('demand_from_locations.index')}}" class="nav-link
                     {{ request()->routeIs('demand_from_locations*')?'active':'' }}">
-            <i class="nav-icon fas fa-shipping-fast text-olive"></i>
+            <i class="fas fa-shipping-fast text-olive"></i>
             <p>Demand from Loc</p>
         </a>
     </li>

@@ -22,9 +22,8 @@ class StoreItemRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|unique:items',
+            'name' => 'required|unique:items,name,NULL,id,item_category_id,' . request('item_category_id'),
             'measurement_id' => 'required:items',
-            //'ration_category_id' => 'required:items',
             'ration_sub_category_id' => 'required:items',
             'item_category_id' => 'required:items',
             'is_vat' => 'required',

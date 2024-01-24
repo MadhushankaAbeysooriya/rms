@@ -6,6 +6,7 @@ use App\Models\master\Item;
 use App\Models\master\Location;
 use App\Models\master\Supplier;
 use App\Models\DemandFromLocation;
+use App\Models\ReceiptFromLocationItem;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -18,20 +19,12 @@ class ReceiptFromLocation extends Model
     protected $fillable = [
         'year',
         'demand_from_location_id',
-        'receipt_type_id',
-        'item_id',
         'location_id',
         'supplier_id',
-        'qty',
         'receipt_date',
         'status',
 
     ];
-
-    public function item()
-    {
-        return $this->belongsTo(Item::class,'item_id','id');
-    }
 
     public function location()
     {
@@ -46,5 +39,10 @@ class ReceiptFromLocation extends Model
     public function demandfromlocation()
     {
         return $this->belongsTo(DemandFromLocation::class,'demand_from_location_id','id');
+    }
+
+    public function receiptfromlocationitems()
+    {
+        return $this->hasMany(ReceiptFromLocationItem::class);
     }
 }

@@ -36,7 +36,7 @@
                               @csrf
                               @method('PUT')
 
-                            <div class="card-body">                                
+                            <div class="card-body">
 
                                 <div class="form-group row">
                                     <label for="name" class="col-sm-2 col-form-label">Name</label>
@@ -55,7 +55,7 @@
                                         <span class="text-danger">@error('email') {{ $message }} @enderror</span>
                                     </div>
                                 </div>
-                                
+
                                 {{--<div class="form-group row">--}}
                                     {{--<label for="phone" class="col-sm-2 col-form-label">Phone</label>--}}
                                     {{--<div class="col-sm-6">--}}
@@ -86,15 +86,15 @@
                                 </div>
 
                                 <div class="form-group row">
-                                    <label for="location" class="col-sm-2 col-form-label">Location</label>
+                                    <label for="location_id" class="col-sm-2 col-form-label">Location</label>
                                     <div class="col-sm-6">
-                                        <select class="form-control select2" name="location" id="location" autocomplete="off">
+                                        <select class="form-control select2" name="location_id" id="location_id" autocomplete="off">
                                             <option value="">select one</option>
                                             @foreach($locations as $location)
-                                                <option {{ isset($user->location)?$user->location==$location->id?'selected':'':'' }} value="{{$location->id}}">{{$location->name}}</option>
+                                                <option {{ isset($user->location_id)?$user->location_id==$location->id?'selected':'':'' }} value="{{$location->id}}">{{$location->name}}</option>
                                             @endforeach
                                         </select>
-                                        <span class="text-danger">@error('location') {{ $message }} @enderror</span>
+                                        <span class="text-danger">@error('location_id') {{ $message }} @enderror</span>
                                     </div>
                                 </div>
 
@@ -131,7 +131,7 @@
         </div>
 
         {{--  --}}
-        
+
 @endsection
 
 @section('third_party_stylesheets')

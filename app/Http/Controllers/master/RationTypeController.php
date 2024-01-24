@@ -41,7 +41,7 @@ class RationTypeController extends Controller
     public function store(StoreRationTypeRequest $request)
     {
         RationType::create($request->all());
-        return redirect()->route('ration_type.index')->with('success','Ration Type Created');
+        return redirect()->route('ration_types.index')->with('success','Ration Type Created');
     }
 
     /**

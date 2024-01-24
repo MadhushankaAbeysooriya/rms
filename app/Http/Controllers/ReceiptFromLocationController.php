@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Exception;
 use App\Models\master\Item;
 use App\Models\AnnualDemand;
+use App\Models\master\Brand;
 use Illuminate\Http\Request;
 use App\Models\master\Location;
 use App\Models\master\Supplier;
@@ -51,8 +52,9 @@ class ReceiptFromLocationController extends Controller
 
         $suppliers = Supplier::all();
         $receiptTypes = ReceiptType::all();
+        $brands = Brand::all();
 
-        return view('receipt_from_locations.create', compact('demand_from_location','locations', 'items', 'suppliers','receiptTypes'));
+        return view('receipt_from_locations.create', compact('demand_from_location','locations', 'items', 'suppliers','receiptTypes','brands'));
     }
 
     /**
@@ -84,49 +86,68 @@ class ReceiptFromLocationController extends Controller
     public function store(Request $request, DemandFromLocation $demand_from_location)
     {
         try {
+
             $this->validate($request, [
-                'item_id' => 'required|exists:items,id',
-                //'supplier_id' => 'required|exists:suppliers,id',
-                'qty' => 'required|numeric|min:1',
+                'item_id.*' => 'required|exists:items,id',
+                'qty.*' => 'required|numeric|min:1',
+                'brand_id.*' => 'required|exists:brands,id',
                 'receipt_type_id' => 'required|exists:receipt_types,id',
                 'receipt_date' => 'required',
+            ], [
+                'item_id.*.required' => 'Item is required.',
+                'item_id.*.exists' => 'Selected item is invalid.',
+                'qty.*.required' => 'Quantity is required.',
+                'qty.*.numeric' => 'Quantity must be a number.',
+                'qty.*.min' => 'Quantity must be at least :min.',
+                'brand_id.*.required' => 'Brand is required.',
+                'brand_id.*.exists' => 'Selected brand is invalid.',
+                'receipt_type_id.required' => 'Receipt Type is required.',
+                'receipt_type_id.exists' => 'Selected Receipt Type is invalid.',
+                'receipt_date.required' => 'Receipt Date is required.',
             ]);
 
             // Start a database transaction
             DB::beginTransaction();
 
-            $annualDemand = AnnualDemand::where('year', $demand_from_location->year)
-                                        ->where('location_id', Auth::user()->location)
-                                        ->where('supplier_id', $demand_from_location->supplier_id)
-                                        ->where('item_id', $request->item_id)
-                                        ->first();
+            // Create or update the receipt
+            $receiptfromlocation = $demand_from_location->receiptfromlocation()->create([
+                'year' => $demand_from_location->year,
+                // 'receipt_type_id' => $request->receipt_type_id,
+                // 'item_id' => $request->item_id,
+                'location_id' => Auth::user()->location,
+                'supplier_id' => $demand_from_location->supplier_id,
+                // 'qty' => $request->qty,
+                'receipt_date' => $request->receipt_date,
+            ]);
 
-            if ($annualDemand && $annualDemand->avl_qty >= $request->qty) {
-                $annualDemand->update([
-                    'avl_qty' => $annualDemand->avl_qty - $request->qty,
-                ]);
+            foreach($request->item_id as $index=>$item_id){
 
-                // Create or update the receipt
-                $demand_from_location->receiptfromlocation()->create([
-                    'year' => $demand_from_location->year,
-                    'receipt_type_id' => $request->receipt_type_id,
-                    'item_id' => $request->item_id,
-                    'location_id' => Auth::user()->location,
-                    'supplier_id' => $demand_from_location->supplier_id,
-                    'qty' => $request->qty,
-                    'receipt_date' => $request->receipt_date,
-                ]);
+                $annualDemand = AnnualDemand::where('year', $demand_from_location->year)
+                                            ->where('location_id', Auth::user()->location)
+                                            ->where('supplier_id', $demand_from_location->supplier_id)
+                                            ->where('item_id', $request->item_id)
+                                            ->where('brand_id', $request->brand_id)
+                                            ->first();
 
-                // Commit the transaction
-                DB::commit();
+                if ($annualDemand && $annualDemand->avl_qty >= $request->qty) {
+                    $annualDemand->update([
+                        'avl_qty' => $annualDemand->avl_qty - $request->qty,
+                    ]);
 
-                return redirect()->route('demand_from_locations.index')->with('success', 'Receipt Created');
-            } else {
-                // If annual demand record not found or quantity not available, throw an exception
-                return redirect()->route('receipt_from_locations.create',$demand_from_location->id)
-                                ->with('danger', 'Insufficient quantity available in annual demand.');
 
+
+                    // Commit the transaction
+                    DB::commit();
+
+                    return redirect()->route('demand_from_locations.index')->with('success', 'Receipt Created');
+                } else {
+                    // If annual demand record not found or quantity not available, throw an exception
+                    return redirect()->route('receipt_from_locations.create',$demand_from_location->id)
+                                    ->with('danger', 'Insufficient quantity available in annual demand.');
+
+                }
             }
+
         } catch (Exception $e) {
             // An error occurred, rollback the transaction
             DB::rollBack();

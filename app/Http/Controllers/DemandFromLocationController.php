@@ -252,7 +252,7 @@ class DemandFromLocationController extends Controller
             ]);
 
             $annualDemand = AnnualDemand::where('year', $demandFromLocation->year)
-                            ->where('location_id', Auth::user()->location)
+                            ->where('location_id', Auth::user()->location_id)
                             ->where('item_id', $request->item_id)
                             ->where('brand_id', $request->brand_id)
                             ->first();

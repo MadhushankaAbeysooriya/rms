@@ -69,7 +69,7 @@
 
                             <div class="form-group row">
                                 <label for="qty" class="col-sm-2 col-form-label">Qty</label>
-                                <div class="col-sm-4">
+                                <div class="col-sm-6">
                                     <input type="text" class="form-control @error('qty')
                                     is-invalid @enderror" name="qty" value="{{ old('qty') }}" id="qty" autocomplete="off"
                                            min="0">
@@ -101,7 +101,7 @@
                             <a href="{{ route('demand_from_locations.index') }}" class="btn btn-sm bg-info"><i
                                         class="fa fa-arrow-circle-left"></i> Back</a>
                             <button type="reset" class="btn btn-sm btn-secondary">Cancel</button>
-                                <button type="submit" class="btn btn-sm btn-success">Create</button>
+                                <button type="submit" class="btn btn-sm btn-success">Add</button>
                         </div>
                 </div>
 
@@ -166,7 +166,7 @@
             //     // Check if the selected item has details
             //     if (selectedItem) {
             //         // Update the measurement name
-            //         document.getElementById('measurementName').textContent = {{ $items->find(selectedItem)->measurement->name }};
+            //
             //     } else {
             //         // Clear the measurement name if no details found
             //         document.getElementById('measurementName').textContent = '';

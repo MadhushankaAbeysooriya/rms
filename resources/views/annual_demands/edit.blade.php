@@ -52,7 +52,7 @@
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label" for="item_id">Item</label>
                             <div class="col-sm-6">
-                                <select name="item_id" id="item_id" class="form-control">
+                                <select name="item_id" id="item_id" class="form-control select2">
                                     <option value="">Please Select</option>
                                     @foreach($items as $item)
                                         <option value="{{ $item->id }}" {{$annualDemand->item_id == $item->id ? 'selected':''}}>
@@ -72,7 +72,7 @@
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label" for="location_id">Location</label>
                             <div class="col-sm-6">
-                                <select name="location_id" id="location_id" class="form-control">
+                                <select name="location_id" id="location_id" class="form-control select2">
                                     <option value="">Please Select</option>
                                     @foreach($locations as $item)
                                         <option value="{{ $item->id }}" {{$annualDemand->location_id == $item->id ? 'selected':''}}>
@@ -92,7 +92,7 @@
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label" for="supplier_id">Suppliers</label>
                             <div class="col-sm-6">
-                                <select name="supplier_id" id="supplier_id" class="form-control">
+                                <select name="supplier_id" id="supplier_id" class="form-control select2">
                                     <option value="">Please Select</option>
                                     @foreach($suppliers as $item)
                                         <option value="{{ $item->id }}" {{$annualDemand->supplier_id == $item->id ? 'selected':''}}>
@@ -112,7 +112,7 @@
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label" for="brand_id">Brands</label>
                             <div class="col-sm-6">
-                                <select name="brand_id" id="brand_id" class="form-control">
+                                <select name="brand_id" id="brand_id" class="form-control select2">
                                     <option value="">Please Select</option>
                                     @foreach($brands as $item)
                                         <option value="{{ $item->id }}" {{$annualDemand->brand_id == $item->id ? 'selected':''}}>

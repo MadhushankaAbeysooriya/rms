@@ -29,9 +29,7 @@ class User extends Authenticatable
         'status',
         'last_login_ip',
         'suspend',
-        'location',
-        'attempts',
-        'backlist',
+        'location_id',
         'last_login_date',
     ];
 
@@ -57,7 +55,7 @@ class User extends Authenticatable
 
     public function userlocation()
     {
-        return $this->belongsTo(Location::class,'location','id');
+        return $this->belongsTo(Location::class,'location_id','id');
     }
 
     public function userhospital()

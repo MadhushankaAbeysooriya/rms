@@ -28,7 +28,7 @@
                 <ul class="navbar-nav">
                     <li class="nav-item">
                         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i
-                                class="fas fa-bars"></i></a>                        
+                                class="fas fa-bars"></i></a>
                     </li>
                 </ul>
                 <b>{{ config('app.name') }}</b>
@@ -80,9 +80,9 @@
                 <div class="float-right d-none d-sm-block">
                     <b>Version </b> 1.0.0
                 </div>
-                <strong>Copyright &copy; <?= date('Y') ?> Software Solution by Directorate of Information Technology.</strong> -
+                <strong>Copyright &copy; <?= date('Y') ?> Software Solution by Directorate of Information Technology.</strong>
                 SRI LANKA ARMY
-        
+
             </footer>
         </div>
 

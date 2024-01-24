@@ -42,110 +42,72 @@
                                 <label for="year"
                                        class="col-sm-3 col-form-label">{{ \Carbon\Carbon::parse($demand_from_location->request_date)->format('Y-m-d') }}</label>
 
-                                <label for="year" class="col-sm-1 col-form-label">Item</label>
-                                <label for="year"
-                                       class="col-sm-3 col-form-label">{{ $demand_from_location->item->name }}</label>
-
-
-                            </div>
-
-
-                            <div class="form-group row">
-
                                 <label for="year" class="col-sm-1 col-form-label">Supplier</label>
                                 <label for="year"
-                                       class="col-sm-3 col-form-label">{{ $demand_from_location->supplier->name }}</label>
-
-                                <label for="year" class="col-sm-1 col-form-label">Qty</label>
-                                <label for="year"
-                                       class="col-sm-3 col-form-label">{{ $demand_from_location->qty }} {{ $demand_from_location->item->measurement->name }}</label>
-
-                                <label for="year" class="col-sm-1 col-form-label"></label>
-                                <label for="year" class="col-sm-3 col-form-label"></label>
+                                              class="col-sm-3 col-form-label">{{ $demand_from_location->supplier->name }}</label>
 
                             </div>
 
-
-                            <div class="form-group row">
-                                <label class="col-sm-2 col-form-label" for="item_id">Item</label>
-                                <div class="col-sm-6">
-                                    <select name="item_id" id="item_id" class="form-control select2">
+                            @foreach ($demand_from_location->demandfromlocationitems as $demandfromlocationitem)
+                            <div class="form-group row mt-4">
+                                <label class="col-sm-1 col-form-label" for="item_id[]">Item</label>
+                                <div class="col-sm-3">
+                                    <select name="item_id[]" id="item_id" class="form-control select2">
                                         <option value="">Please Select</option>
                                         @foreach($items as $item)
-                                            <option value="{{ $item->id }}" {{$demand_from_location->item_id == $item->id ? 'selected':''}}>
-                                                {{ $item->name}}
+                                            <option value="{{ $item->id }}" {{ $demandfromlocationitem->item_id == $item->id ? 'selected' : '' }}>
+                                                {{ $item->name }}
                                             </option>
                                         @endforeach
                                     </select>
-                                    @error('item_id')
-                                    <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
+                                    @error('item_id.*')
+                                        <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
                                     @enderror
                                 </div>
-                            </div>
 
-                            {{-- <div class="form-group row">
-                                <label class="col-sm-2 col-form-label" for="supplier_id">Supplier</label>
-                                <div class="col-sm-6">
-                                    <select name="supplier_id" id="supplier_id" class="form-control select2">
+                                <label for="qty" class="col-sm-1 col-form-label">Qty</label>
+                                <div class="col-sm-3">
+                                    <input type="text" class="form-control @error('qty.*') is-invalid @enderror" name="qty[]" value="{{ $demandfromlocationitem->qty }}" id="qty" autocomplete="off" min="{{ date('Y') }}" max="3000">
+                                    <span class="text-danger">@error('qty.*') {{ $message }} @enderror</span>
+                                </div>
+
+                                <label class="col-sm-1 col-form-label" for="brand_id">Brand</label>
+                                <div class="col-sm-3">
+                                    <select name="brand_id[]" id="brand_id" class="form-control select2">
                                         <option value="">Please Select</option>
-                                        @foreach($suppliers as $item)
-                                            <option value="{{ $item->id }}" {{$demand_from_location->supplier_id == $item->id ? 'selected':''}}>
-                                                {{ $item->name}}
+                                        @foreach($brands as $item)
+                                            <option value="{{ $item->id }}" {{ $demandfromlocationitem->brand_id == $item->id ? 'selected' : '' }}>
+                                                {{ $item->name }}
                                             </option>
                                         @endforeach
                                     </select>
-                                    @error('supplier_id')
-                                    <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
+                                    @error('brand_id.*')
+                                        <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
                                     @enderror
                                 </div>
-                            </div> --}}
 
-                            <div class="form-group row" style="display: none;">
-                                <label class="col-sm-2 col-form-label" for="receipt_type_id">Receipt Type</label>
-                                <div class="col-sm-6">
-                                    <select name="receipt_type_id" id="receipt_type_id" class="form-control select2">
-                                        <option value="">Please Select</option>
-                                        @foreach($receiptTypes as $item)
-                                            <option value="{{ $item->id }}">
-                                                {{ $item->name}}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                    @error('supplier_id')
-                                    <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
-                                    @enderror
+                                <div class="form-group row" style="display: none;">
+                                    <label class="col-sm-2 col-form-label" for="receipt_type_id">Receipt Type</label>
+                                    <div class="col-sm-6">
+                                        <select name="receipt_type_id[]" id="receipt_type_id" class="form-control select2">
+                                            <option value="">Please Select</option>
+                                            @foreach($receiptTypes as $item)
+                                                <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('receipt_type_id.*')
+                                            <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
+                                        @enderror
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="form-group row">
-                                <label for="qty" class="col-sm-2 col-form-label">Qty</label>
-                                <div class="col-sm-4">
-                                    <input type="text" class="form-control @error('qty')
-                                        is-invalid @enderror" name="qty" value="{{ $demand_from_location->qty }}"
-                                           id="qty" autocomplete="off"
-                                           min="{{ date('Y') }}" max="3000">
-                                    <span class="text-danger">@error('qty') {{ $message }} @enderror</span>
-                                </div>
-                                <label for="year"
-                                       class="col-sm-2 col-form-label">{{ $demand_from_location->item->measurement->name }}</label>
                             </div>
-
-
-                            <div class="form-group row">
-                                <label for="receipt_date" class="col-sm-2 col-form-label">Date</label>
-                                <div class="col-sm-6">
-                                    <input type="date" class="form-control @error('receipt_date')
-                                        is-invalid @enderror" name="receipt_date" value="{{ old('receipt_date') }}"
-                                           id="receipt_date" autocomplete="off"
-                                           min="{{ date('YYY-mm-dd') }}" max="3000">
-                                    <span class="text-danger">@error('receipt_date') {{ $message }} @enderror</span>
-                                </div>
-                            </div>
+                        @endforeach
 
                         </div>
 
                         <div class="card-footer">
-                            <a href="{{ route('annual_demands.store') }}" class="btn btn-sm bg-info"><i
+                            <a href="{{ route('demand_from_locations.index') }}" class="btn btn-sm bg-info"><i
                                         class="fa fa-arrow-circle-left"></i> Back</a>
                             <button type="reset" class="btn btn-sm btn-secondary">Cancel</button>
                                 <button type="submit" class="btn btn-sm btn-success">Create</button>
@@ -163,10 +125,6 @@
 @push('page_scripts')
 
     <script>
-
-        // $(document).ready(function() {
-        //     $('.select2').select2();
-        // });
 
         $(document).ready(function () {
             $('.select2').select2();

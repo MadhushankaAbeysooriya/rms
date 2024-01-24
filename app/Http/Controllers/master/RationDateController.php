@@ -41,7 +41,7 @@ class RationDateController extends Controller
     public function store(StoreRationDateRequest $request)
     {
         RationDate::create($request->all());
-        return redirect()->route('ration_date.index')->with('success','Ration date Created');
+        return redirect()->route('ration_dates.index')->with('success','Ration date Created');
     }
 
     /**
