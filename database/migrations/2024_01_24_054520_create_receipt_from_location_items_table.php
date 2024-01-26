@@ -22,6 +22,9 @@ return new class extends Migration
             $table->unsignedBigInteger('brand_id')->nullable();
             $table->foreign('brand_id')->references('id')->on('brands')->onDelete('cascade');
 
+            $table->unsignedBigInteger('receipt_type_id')->nullable();
+            $table->foreign('receipt_type_id')->references('id')->on('receipt_types')->onDelete('cascade');
+
             $table->double('qty', 12, 2);
             $table->timestamps();
         });
